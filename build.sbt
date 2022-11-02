@@ -29,6 +29,7 @@ lazy val root = (project in file("."))
       "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle" % tapirVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-json-zio" % tapirVersion,
       "ch.qos.logback" % "logback-classic" % "1.4.4",
+      "org.flywaydb" % "flyway-core" % "9.6.0",
 
       // Test
       "com.softwaremill.sttp.tapir" %% "tapir-sttp-stub-server" % tapirVersion % Test,

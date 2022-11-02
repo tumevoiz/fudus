@@ -8,6 +8,8 @@ object FudusApplication extends ZIOAppDefault {
     ZIO.serviceWithZIO[FudusServer](_.start)
       .provide(
         FudusServer.layer,
+//        Database.dataSourceLayer,
+//        Database.layer,
         InmemoryRestaurantRepository.layerWithMockData
       ).exitCode
 }
