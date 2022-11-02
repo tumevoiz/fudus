@@ -23,7 +23,7 @@ case class Database(dataSource: DataSource) extends PostgresZioJdbcContext(Snake
 object Database {
   import scala.jdk.CollectionConverters._
 
-  val dataSourceLayer = ZLayer {
+  val dataSourceLayer: ZLayer[Any, Nothing, DataSource] = ZLayer {
     for {
       envUrl <- System.env("DATABASE_URL").orDie
       dbConfig = Map(
@@ -35,7 +35,7 @@ object Database {
         dbConfig.updated("dataSourceClassName", "org.postgresql.ds.PGSimpleDataSource").asJava
       )
     } yield DataSourceLayer.fromConfig(config).orDie
-  }
+  }.flatten
 
   val layer: ZLayer[DataSource, FudusDatabaseError, Database] =
     ZLayer.fromFunction(Database.apply _)
