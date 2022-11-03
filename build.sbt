@@ -20,16 +20,17 @@ lazy val root = (project in file("."))
     ),
     libraryDependencies ++= Seq(
       "dev.zio" %% "zio" % "2.0.2",
-      "io.d11" %% "zhttp"      % "2.0.0-RC7",
-      "io.getquill" %% "quill-zio" % "3.9.0",
-      "io.getquill" %% "quill-jdbc-zio" % "3.9.0",
+      "io.d11" %% "zhttp" % "2.0.0-RC7",
+      "io.getquill" %% "quill-jdbc-zio" % "4.6.0",
       "com.softwaremill.sttp.tapir" %% "tapir-zio" % tapirVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-zio-http-server" % tapirVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-prometheus-metrics" % tapirVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle" % tapirVersion,
       "com.softwaremill.sttp.tapir" %% "tapir-json-zio" % tapirVersion,
-      "ch.qos.logback" % "logback-classic" % "1.4.4",
+      "ch.qos.logback" % "logback-core" % "1.4.4",
       "org.flywaydb" % "flyway-core" % "9.6.0",
+      "org.postgresql" % "postgresql" % "42.3.1",
+      "org.slf4j" % "slf4j-api" % "2.0.3",
 
       // Test
       "com.softwaremill.sttp.tapir" %% "tapir-sttp-stub-server" % tapirVersion % Test,

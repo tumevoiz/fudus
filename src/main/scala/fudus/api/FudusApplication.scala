@@ -1,15 +1,20 @@
 package fudus.api
 
-import fudus.api.repository.{InmemoryRestaurantRepository, RestaurantRepository}
+import fudus.api.errors.FudusError
+import fudus.api.services.{DatabaseService, RestaurantService}
+import io.getquill.SnakeCase
+import io.getquill.jdbczio.Quill
 import zio._
 
 object FudusApplication extends ZIOAppDefault {
-  override def run: Task[ExitCode] =
-    ZIO.serviceWithZIO[FudusServer](_.start)
+  override def run: IO[Throwable, Unit] =
+    ZIO
+      .serviceWithZIO[FudusServer](_.start)
       .provide(
         FudusServer.layer,
-//        Database.dataSourceLayer,
-//        Database.layer,
-        InmemoryRestaurantRepository.layerWithMockData
-      ).exitCode
+        Quill.DataSource.fromPrefix("db.default"),
+        Quill.Postgres.fromNamingStrategy(SnakeCase),
+        DatabaseService.layer,
+        RestaurantService.layer
+      )
 }

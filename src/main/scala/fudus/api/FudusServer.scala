@@ -2,7 +2,7 @@ package fudus.api
 
 import fudus.api.endpoints.RestaurantEndpoints
 import fudus.api.errors.{FudusError, FudusServerError}
-import fudus.api.repository.RestaurantRepository
+import fudus.api.services.{DatabaseService, RestaurantService}
 import sttp.tapir.server.ziohttp.ZioHttpInterpreter
 import sttp.tapir.swagger.bundle.SwaggerInterpreter
 import sttp.tapir.ztapir._
@@ -10,9 +10,9 @@ import zhttp.http.HttpApp
 import zhttp.service.Server
 import zio._
 
-final case class FudusServer(restaurantRepository: RestaurantRepository) {
+final case class FudusServer(databaseService: DatabaseService, restaurantService: RestaurantService) {
   val apiEndpoints: List[ZServerEndpoint[Any, Any]] = List(
-    RestaurantEndpoints.listRestaurants.zServerLogic(_ => restaurantRepository.listRestaurants)
+    RestaurantEndpoints.listRestaurants.zServerLogic(_ => restaurantService.listRestaurants)
   )
 
   val docEndpoints: List[ZServerEndpoint[Any, Any]] = SwaggerInterpreter()
@@ -20,17 +20,19 @@ final case class FudusServer(restaurantRepository: RestaurantRepository) {
 
   val all: List[ZServerEndpoint[Any, Any]] = apiEndpoints ++ docEndpoints
 
-  val httpApp: HttpApp[Any, FudusError] = ZioHttpInterpreter().toHttp(all)
-    .refineOrDie(t => FudusServerError(t.getMessage))
+  val httpApp: HttpApp[Any, Throwable] = ZioHttpInterpreter()
+    .toHttp(all)
 
-  def start: ZIO[Any, FudusServerError, Unit] = (for {
+  def start: ZIO[Any, Throwable, Unit] = (for {
     port <- System.envOrElse("PORT", "8080").map(_.toInt)
-    _ <- ZIO.logInfo("Server starting.")
-    _ <- Server.start(port, httpApp)
-  } yield ()).refineToOrDie[FudusServerError]
+    _ <- ZIO.logInfo("Starting migrations") *> databaseService.migrate
+    _ <- ZIO.logInfo("Starting HTTP server") *> Server.start(port, httpApp)
+  } yield ())
 }
 
 object FudusServer {
-  val layer: ZLayer[RestaurantRepository, FudusServerError, FudusServer] =
+  type FudusEnv = RestaurantService with DatabaseService
+
+  val layer: ZLayer[FudusEnv, Throwable, FudusServer] =
     ZLayer.fromFunction(FudusServer.apply _)
 }
