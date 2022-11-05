@@ -3,7 +3,7 @@ ThisBuild / scalaVersion := "2.13.10"
 
 val tapirVersion = "1.1.4"
 
-lazy val root = (project in file("."))
+lazy val api = (project in file("api"))
   .settings(
     name := "fudus-api",
     scalacOptions ++= Seq(
