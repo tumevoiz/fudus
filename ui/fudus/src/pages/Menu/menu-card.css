@@ -10,3 +10,8 @@ img.menuCardImg{
     border-radius: 1em;
     margin-top: 0.2em;
 }
+
+h2 {
+    font-weight: 600;
+    font-size: 24px;
+}
