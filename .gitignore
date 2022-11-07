@@ -41,3 +41,6 @@ bin/
 
 # general
 *.class
+
+# node
+ui/fudus/node_modules

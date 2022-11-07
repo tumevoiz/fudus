@@ -1,5 +1,5 @@
 import './App.css';
-import MenuCard from './pages/Menu/menu-card';
+import MenuCard from './pages/Menu/MenuCard';
 
 let items=['Item 1','Item 2','Item 3','Item 4','Item 5'];
 let itemList=[];
@@ -14,6 +14,9 @@ function App() {
       <header className="App-header">
           {itemList}
       </header>
+    <div className={"container"}>
+
+    </div>
     </div>
   );
 }

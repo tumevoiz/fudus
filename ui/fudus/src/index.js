@@ -5,12 +5,13 @@ import store from './store'
 import './index.css';
 import './assets/fonts/Martel_Sans/MartelSans-Regular.ttf';
 import App from './App';
+import Menu from './pages/Menu/Menu';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
-        <App />
+        <Menu />
     </Provider>
 );
 
