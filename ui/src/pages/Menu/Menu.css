@@ -1,0 +1,15 @@
+.Menu {
+    text-align: center;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.searchTop {
+    display: block;
+    padding: 10px;
+}

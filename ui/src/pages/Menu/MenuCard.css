@@ -1,0 +1,29 @@
+.menuCardStyle {
+    margin: 5px;
+    background-color: ghostwhite;
+    border-radius: 1em;
+    color: #323141;
+    width: 15em;
+}
+
+img.menuCardImg {
+    width: 14.6em;
+    border-radius: 1em;
+    margin-top: 0.2em;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.lowerPart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.lowerPart p {
+    font-weight: 600;
+    font-size: 20px;
+}
