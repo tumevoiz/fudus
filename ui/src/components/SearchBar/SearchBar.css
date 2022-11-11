@@ -1,6 +1,13 @@
 .searchBox {
     width: 50%;
     height: 40px;
-    border-radius: 10px;
     font-size: 16px;
+    background: #FFFFFF;
+    border: 0.25px solid #D3D3D3;
+    box-shadow: 0 1px 0.5px -0.25px rgba(37, 37, 37, 0.25);
+    border-radius: 15px;
+}
+
+input[type=text] {
+    padding-left: 30px;
 }

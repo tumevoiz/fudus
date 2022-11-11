@@ -41,11 +41,12 @@
 }
 
 body {
-  margin: 0;
   font-family: Martel_Sans;
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  justify-content: center;
 }
 
 code {
