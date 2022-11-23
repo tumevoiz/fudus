@@ -1,8 +1,14 @@
 package fudus.api
 
-import fudus.api.endpoints.RestaurantEndpoints
-import fudus.api.errors.{FudusError, FudusServerError}
-import fudus.api.services.{DatabaseService, RestaurantService}
+import fudus.api.endpoints._
+import fudus.api.errors.{FudusApiError, FudusError, FudusServerError}
+import fudus.api.services.{
+  CategoryService,
+  DatabaseService,
+  FoodService,
+  RestaurantFoodService,
+  RestaurantService
+}
 import sttp.tapir.server.ziohttp.ZioHttpInterpreter
 import sttp.tapir.swagger.bundle.SwaggerInterpreter
 import sttp.tapir.ztapir._
@@ -10,9 +16,25 @@ import zhttp.http.HttpApp
 import zhttp.service.Server
 import zio._
 
-final case class FudusServer(databaseService: DatabaseService, restaurantService: RestaurantService) {
+final case class FudusServer(
+    databaseService: DatabaseService,
+    categoryService: CategoryService,
+    restaurantService: RestaurantService,
+    restaurantFoodService: RestaurantFoodService
+) {
   val apiEndpoints: List[ZServerEndpoint[Any, Any]] = List(
-    RestaurantEndpoints.listRestaurants.zServerLogic(_ => restaurantService.listRestaurants)
+    CategoryEndpoints.listCategories.zServerLogic(_ =>
+      categoryService.getAll().mapError(e => FudusApiError(e.getMessage))
+    ),
+    RestaurantEndpoints.listRestaurants.zServerLogic(_ =>
+      restaurantService.listRestaurants.mapError(e => FudusApiError(e.getMessage))
+    ),
+    RestaurantEndpoints.getRestaurantBySlug.zServerLogic(slug =>
+      restaurantService.getBySlug(slug).mapError(e => FudusApiError(e.getMessage))
+    ),
+    RestaurantEndpoints.getRestaurantBySlugFood.zServerLogic(slug =>
+      restaurantFoodService.getRestaurantFoodBySlug(slug).mapError(e => FudusApiError(e.getMessage))
+    )
   )
 
   val docEndpoints: List[ZServerEndpoint[Any, Any]] = SwaggerInterpreter()
@@ -31,7 +53,11 @@ final case class FudusServer(databaseService: DatabaseService, restaurantService
 }
 
 object FudusServer {
-  type FudusEnv = RestaurantService with DatabaseService
+  type FudusEnv = CategoryService
+    with RestaurantService
+    with DatabaseService
+    with FoodService
+    with RestaurantFoodService
 
   val layer: ZLayer[FudusEnv, Throwable, FudusServer] =
     ZLayer.fromFunction(FudusServer.apply _)

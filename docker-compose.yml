@@ -7,3 +7,11 @@ services:
       - "26257:26257"
       - "8082:8080"
     command: start-single-node --insecure
+  elastic:
+    image: elasticsearch:8.5.0
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    command: start-single-node --insecure
+    environment:
+      - "discovery.type=single-node"

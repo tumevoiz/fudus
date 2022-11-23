@@ -1,3 +1,12 @@
 package fudus.api.model
 
-case class Restaurant(slug: String, name: String, description: String, imageBase64: String, stars: Int)
+case class RestaurantUUID(value: String) extends AnyVal
+
+case class Restaurant(
+    uuid: RestaurantUUID,
+    slug: String,
+    name: String,
+    description: String,
+    imageBase64: String,
+    rating: Float
+)

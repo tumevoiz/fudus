@@ -31,6 +31,8 @@ lazy val api = (project in file("api"))
       "org.flywaydb" % "flyway-core" % "9.6.0",
       "org.postgresql" % "postgresql" % "42.3.1",
       "org.slf4j" % "slf4j-api" % "2.0.3",
+      "com.sksamuel.elastic4s" %% "elastic4s-core" % "8.4.4",
+      "com.sksamuel.elastic4s" %% "elastic4s-effect-zio" % "8.4.4",
 
       // Test
       "com.softwaremill.sttp.tapir" %% "tapir-sttp-stub-server" % tapirVersion % Test,
