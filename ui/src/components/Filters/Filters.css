@@ -1,0 +1,42 @@
+.filtersWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 1em;
+    justify-content: center;
+    width: 80%;
+}
+
+.filtersWrapper form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.filterTag {
+    background-color: #F3F6F8;
+    border-radius: 3em;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    display: inline-flex;
+    margin: 0.1em;
+}
+
+.filterTag:hover {
+    background-color: #dee4e8;
+}
+.filterTag:active {
+    background-color: #c9cfd3;
+}
+
+.filterTag img {
+    margin: 0 0.3em 0 1em;
+    width: 1.5em;
+}
+
+.filterTag p {
+    margin: 0.1em 1em 0 0.3em;
+}

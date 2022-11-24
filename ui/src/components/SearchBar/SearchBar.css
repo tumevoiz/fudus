@@ -1,5 +1,5 @@
 .searchBox {
-    width: 50%;
+    width: 80%;
     height: 40px;
     font-size: 16px;
     background: #FFFFFF;
@@ -10,4 +10,7 @@
 
 input[type=text] {
     padding-left: 30px;
+}
+input[type=text]:focus-visible {
+    outline: none;
 }

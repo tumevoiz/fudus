@@ -6,6 +6,8 @@ import './index.css';
 import './assets/fonts/Martel_Sans/MartelSans-Regular.ttf';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+
+// Pages
 import Search from './pages/Search/Search';
 import Menu from './pages/Menu/Menu';
 import Error from './pages/Error/Error';
