@@ -45,7 +45,7 @@ body {
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  color: rgb(40,40,40);
   justify-content: center;
 }
 

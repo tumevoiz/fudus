@@ -1,6 +1,6 @@
 import meat_and_chips_img from "./../../meat_and_chips.jpeg"
 import './MenuCard.css';
-import AddButton from "../../components/AddButton/AddButton";
+import Button from "../../components/Button/Button";
 
 function MenuCard() {
     return (
@@ -12,10 +12,9 @@ function MenuCard() {
                     <p className={"priceTag"}>39 zł</p>
                 </div>
                 <div>
-                    <AddButton></AddButton>
+                    <Button text={"+"} style={"AddButton"}/>
                 </div>
             </div>
-
         </div>
     );
 }

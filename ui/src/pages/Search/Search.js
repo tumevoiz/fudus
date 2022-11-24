@@ -1,10 +1,11 @@
 import './Search.css';
 import SearchBar from "../../components/SearchBar/SearchBar";
-
+import Navigation from "../../components/Navigation/Navigation";
 
 function Search() {
     return (
         <div className="Search">
+            <Navigation />
             <div className={"banner"}>
                 <div className={"writing"}>
                     <h1>Twoje ulubione jedzenie w okolicy</h1>
