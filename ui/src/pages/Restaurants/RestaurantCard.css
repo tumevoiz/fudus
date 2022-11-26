@@ -18,6 +18,8 @@
 img.restaurantCardImg {
     width: 14.6em;
     border-radius: 1em;
+    height: 10em;
+    object-fit: cover;
 }
 
 h2 {
