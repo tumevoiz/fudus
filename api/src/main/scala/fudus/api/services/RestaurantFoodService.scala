@@ -2,27 +2,27 @@ package fudus.api.services
 
 import fudus.api.errors.{FudusDatabaseError, FudusError}
 import fudus.api.model.Food
+import fudus.api.repository.{FoodRepository, RestaurantRepository}
 import zio._
 
+// TODO this isn't looks too good, move it
 final case class RestaurantFoodService(
-    foodService: FoodService,
-    restaurantService: RestaurantService
+    foodRepository: FoodRepository,
+    restaurantRepository: RestaurantRepository
 ) {
-  def getRestaurantFoodBySlug(slug: String): IO[FudusError, List[Food]] = (for {
-    restaurant <- restaurantService.getBySlug(slug)
-    food <- foodService.listFoodByRestaurantUUID(restaurant.uuid)
-  } yield food).mapError(e => FudusDatabaseError(e.getMessage))
+  def fetchRestaurantFoodBySlug(slug: String): IO[FudusError, List[Food]] =
+    (for {
+      restaurant <- restaurantRepository.findBySlug(slug)
+      food <- foodRepository.findByRestaurantUUID(restaurant.uuid)
+    } yield food).mapError(e => FudusDatabaseError(e.getMessage))
 }
 
 object RestaurantFoodService {
-  def layer: ZLayer[RestaurantService with FoodService, Nothing, RestaurantFoodService] =
+  val layer: ZLayer[RestaurantRepository with FoodRepository, Nothing, RestaurantFoodService] =
     ZLayer {
       for {
-        foodService <- ZIO.service[FoodService]
-        restaurantService <- ZIO.service[RestaurantService]
-      } yield RestaurantFoodService(foodService, restaurantService)
+        foodRepository <- ZIO.service[FoodRepository]
+        restaurantRepository <- ZIO.service[RestaurantRepository]
+      } yield RestaurantFoodService(foodRepository, restaurantRepository)
     }
-
-  def getRestaurantFoodBySlug(slug: String): ZIO[RestaurantFoodService, FudusError, List[Food]] =
-    ZIO.serviceWithZIO[RestaurantFoodService](_.getRestaurantFoodBySlug(slug))
 }

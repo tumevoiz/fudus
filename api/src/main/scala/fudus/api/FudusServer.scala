@@ -2,13 +2,8 @@ package fudus.api
 
 import fudus.api.endpoints._
 import fudus.api.errors.{FudusApiError, FudusError, FudusServerError}
-import fudus.api.services.{
-  CategoryService,
-  DatabaseService,
-  FoodService,
-  RestaurantFoodService,
-  RestaurantService
-}
+import fudus.api.repository.{CategoryRepository, FoodRepository, RestaurantRepository}
+import fudus.api.services.{DatabaseService, RestaurantFoodService}
 import sttp.tapir.server.ziohttp.ZioHttpInterpreter
 import sttp.tapir.swagger.bundle.SwaggerInterpreter
 import sttp.tapir.ztapir._
@@ -18,22 +13,24 @@ import zio._
 
 final case class FudusServer(
     databaseService: DatabaseService,
-    categoryService: CategoryService,
-    restaurantService: RestaurantService,
+    categoryService: CategoryRepository,
+    restaurantService: RestaurantRepository,
     restaurantFoodService: RestaurantFoodService
 ) {
   val apiEndpoints: List[ZServerEndpoint[Any, Any]] = List(
     CategoryEndpoints.listCategories.zServerLogic(_ =>
-      categoryService.getAll().mapError(e => FudusApiError(e.getMessage))
+      categoryService.findAll.mapError(e => FudusApiError(e.getMessage))
     ),
     RestaurantEndpoints.listRestaurants.zServerLogic(_ =>
-      restaurantService.listRestaurants.mapError(e => FudusApiError(e.getMessage))
+      restaurantService.findAll.mapError(e => FudusApiError(e.getMessage))
     ),
     RestaurantEndpoints.getRestaurantBySlug.zServerLogic(slug =>
-      restaurantService.getBySlug(slug).mapError(e => FudusApiError(e.getMessage))
+      restaurantService.findBySlug(slug).mapError(e => FudusApiError(e.getMessage))
     ),
     RestaurantEndpoints.getRestaurantBySlugFood.zServerLogic(slug =>
-      restaurantFoodService.getRestaurantFoodBySlug(slug).mapError(e => FudusApiError(e.getMessage))
+      restaurantFoodService
+        .fetchRestaurantFoodBySlug(slug)
+        .mapError(e => FudusApiError(e.getMessage))
     )
   )
 
@@ -53,10 +50,10 @@ final case class FudusServer(
 }
 
 object FudusServer {
-  type FudusEnv = CategoryService
-    with RestaurantService
+  type FudusEnv = CategoryRepository
+    with RestaurantRepository
     with DatabaseService
-    with FoodService
+    with FoodRepository
     with RestaurantFoodService
 
   val layer: ZLayer[FudusEnv, Throwable, FudusServer] =
