@@ -15,4 +15,9 @@ object Ops {
       case "Admin"  => UserRole.Admin
     }
   }
+
+  implicit class UserOps0(user: User) {
+    def hasAdminRole: Boolean = user.role == UserRole.Admin
+    def hasClientRole: Boolean = user.role == UserRole.Client
+  }
 }

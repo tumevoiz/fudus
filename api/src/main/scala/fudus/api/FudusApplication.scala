@@ -1,8 +1,8 @@
 package fudus.api
 
 import fudus.api.errors.FudusError
-import fudus.api.repository.{CategoryRepository, FoodRepository, RestaurantRepository}
-import fudus.api.services.{DatabaseService, RestaurantFoodService}
+import fudus.api.repository._
+import fudus.api.services._
 import io.getquill.SnakeCase
 import io.getquill.jdbczio.Quill
 import zio._
@@ -15,11 +15,18 @@ object FudusApplication extends ZIOAppDefault {
         FudusServer.layer,
         Quill.DataSource.fromPrefix("db.default"),
         Quill.Postgres.fromNamingStrategy(SnakeCase),
-        DatabaseService.layer,
+        // Repositories
         CategoryRepository.layer,
+        CredentialsRepository.layer,
         RestaurantRepository.layer,
-        CategoryRepository.layer,
         FoodRepository.layer,
-        RestaurantFoodService.layer
+        UserRepository.layer,
+        // Services
+        AuthenticationService.layer,
+        DatabaseService.layer,
+        FoodService.layer,
+        RestaurantFoodService.layer,
+        RestaurantService.layer,
+        UserService.layer
       )
 }

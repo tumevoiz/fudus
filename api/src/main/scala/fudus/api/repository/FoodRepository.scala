@@ -31,6 +31,13 @@ final case class FoodRepository(quillCtx: DatabaseService.QuillContext) {
           }
       }
     }
+
+  def save(food: Food): Task[Unit] =
+    run {
+      quote {
+        query[Food].insertValue(lift(food))
+      }
+    }.mapAttempt(_ => {})
 }
 
 object FoodRepository {

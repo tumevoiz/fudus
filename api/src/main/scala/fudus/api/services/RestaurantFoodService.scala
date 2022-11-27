@@ -25,4 +25,7 @@ object RestaurantFoodService {
         restaurantRepository <- ZIO.service[RestaurantRepository]
       } yield RestaurantFoodService(foodRepository, restaurantRepository)
     }
+
+  def fetchRestaurantFoodBySlug(slug: String): ZIO[RestaurantFoodService, FudusError, List[Food]] =
+    ZIO.serviceWithZIO[RestaurantFoodService](_.fetchRestaurantFoodBySlug(slug))
 }

@@ -33,6 +33,7 @@ lazy val api = (project in file("api"))
       "org.slf4j" % "slf4j-api" % "2.0.3",
       "com.sksamuel.elastic4s" %% "elastic4s-core" % "8.4.4",
       "com.sksamuel.elastic4s" %% "elastic4s-effect-zio" % "8.4.4",
+      "com.github.jwt-scala" %% "jwt-core" % "9.1.2",
 
       // Test
       "com.softwaremill.sttp.tapir" %% "tapir-sttp-stub-server" % tapirVersion % Test,

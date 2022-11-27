@@ -82,3 +82,8 @@ final case class UserService(
       )
     } yield ()
 }
+
+object UserService {
+  val layer: ZLayer[CredentialsRepository with UserRepository, Throwable, UserService] =
+    ZLayer.fromFunction(UserService.apply _)
+}
