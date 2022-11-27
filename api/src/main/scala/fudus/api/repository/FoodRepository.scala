@@ -1,10 +1,10 @@
-package fudus.api.services
+package fudus.api.repository
 
 import fudus.api.model.{CategoryUUID, Food, Restaurant, RestaurantUUID}
-import fudus.api.services.DatabaseService.QuillContext
+import fudus.api.services.DatabaseService
 import zio._
 
-final case class FoodService(quillCtx: DatabaseService.QuillContext) {
+final case class FoodRepository(quillCtx: DatabaseService.QuillContext) {
   import quillCtx._
 
   // UUID database encoders
@@ -15,7 +15,7 @@ final case class FoodService(quillCtx: DatabaseService.QuillContext) {
   ): Decoder[Col] =
     arrayRawDecoder[CategoryUUID, Col]
 
-  def listFoodByRestaurantUUID(restaurantUUID: RestaurantUUID): Task[List[Food]] =
+  def findByRestaurantUUID(restaurantUUID: RestaurantUUID): Task[List[Food]] =
     run {
       quote {
         query[Food]
@@ -33,12 +33,7 @@ final case class FoodService(quillCtx: DatabaseService.QuillContext) {
     }
 }
 
-object FoodService {
-  def listFoodByRestaurantUUID(
-      restaurantUUID: RestaurantUUID
-  ): ZIO[FoodService, Throwable, List[Food]] =
-    ZIO.serviceWithZIO[FoodService](_.listFoodByRestaurantUUID(restaurantUUID))
-
-  def layer: ZLayer[QuillContext, Throwable, FoodService] =
-    ZLayer.fromFunction(FoodService.apply _)
+object FoodRepository {
+  val layer: ZLayer[DatabaseService.QuillContext, Throwable, FoodRepository] =
+    ZLayer.fromFunction(FoodRepository.apply _)
 }
