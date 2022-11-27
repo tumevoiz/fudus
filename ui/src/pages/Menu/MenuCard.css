@@ -8,8 +8,10 @@
 
 img.menuCardImg {
     width: 14.6em;
+    height: 10em;
     border-radius: 1em;
     margin-top: 0.2em;
+    object-fit: cover;
 }
 
 h2 {

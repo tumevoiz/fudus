@@ -3,6 +3,7 @@ import './SearchBar.css';
 function SearchBar() {
     function handleSubmit(event) {
         console.log('Submitted: ' + this.state.value);
+
         event.preventDefault();
     }
 

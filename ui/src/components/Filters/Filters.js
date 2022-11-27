@@ -22,10 +22,8 @@ function Filters() {
         {name: 'pizza', img: pizza},
     ];
     let categoriesList = [];
-    categories.forEach((category) => {
-        // restaurantList.push( <li key={index}>{restaurant}</li>)
-        //restaurantList.push(<RestaurantCard name={restaurant.name} stars={restaurant.stars} time={restaurant.time}></RestaurantCard>)
-        categoriesList.push(<div className={"filterTag"} onClick={() => addFilter(category.name)}><img src={category.img}/><p>{category.name}</p></div>)
+    categories.forEach((category, index) => {
+        categoriesList.push(<div key={index} className={"filterTag"} onClick={() => addFilter(category.name)}><img src={category.img}/><p>{category.name}</p></div>)
     })
 
     function handleSubmit(event) {

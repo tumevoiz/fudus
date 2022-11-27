@@ -1,26 +1,25 @@
-import './Search.css';
+import React, {useEffect} from 'react';
+import './Restaurants.css';
 import SearchBar from "../../components/SearchBar/SearchBar";
 import Navigation from "../../components/Navigation/Navigation";
 import RestaurantCard from "./RestaurantCard";
 import Filters from "../../components/Filters/Filters";
+import {useDispatch, useSelector} from "react-redux";
+import allActions from "../../actions/actions";
+import * as R from 'ramda'
 
-function Search() {
-    let restaurants = [
-        {name: 'PizzaHut', stars: 4.8, time: 30},
-        {name: 'Neko', stars: 5.0, time: 25},
-        {name: 'Chinkalia', stars: 4.9, time: 20},
-        {name: 'PoRzeczka', stars: 4.6, time: 41},
-        {name: 'Saray Kebab', stars: 2.7, time: 15},
-    ];
-    let restaurantList = [];
-    restaurants.forEach((restaurant) => {
-        // restaurantList.push( <li key={index}>{restaurant}</li>)
-        restaurantList.push(<RestaurantCard name={restaurant.name} stars={restaurant.stars} time={restaurant.time}/>)
-    })
+const Restaurants = () => {
+    const restaurants = useSelector(state => state.restaurants);
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(allActions.restaurantActions.fetchRestaurants())
+        console.log('restaurants', restaurants)
+    }, [dispatch])
 
     return (
         <div className="Search">
-            <Navigation />
+            <Navigation/>
             <div className={"banner"}>
                 <div className={"writing"}>
                     <h1>Twoje ulubione jedzenie w okolicy</h1>
@@ -28,15 +27,15 @@ function Search() {
                     <p>Skorzystaj z wyszukiwarki, aby znaleźć swoją ulubioną restaurację!</p>
                 </div>
                 <div className={"searchTop"}>
-                    <SearchBar />
+                    <SearchBar onSubmit/>
                 </div>
             </div>
-            <Filters />
+            <Filters/>
             <div className={"restaurantsCardsWrapper"}>
-                {restaurantList}
+                {!R.isEmpty(restaurants) ? restaurants.restaurants.map((restaurant, index) => <RestaurantCard key={index} restaurant={restaurant} />): <p>Waiting...</p>}
             </div>
         </div>
     );
 }
 
-export default Search;
+export default Restaurants;
