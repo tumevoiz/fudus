@@ -1,5 +1,5 @@
 CREATE TABLE restaurant (
-    uuid uuid primary key unique ,
+    uuid varchar(100) primary key unique ,
     slug varchar(50) unique ,
     name varchar(100) ,
     description text ,
@@ -8,7 +8,7 @@ CREATE TABLE restaurant (
 );
 
 CREATE TABLE food (
-    uuid uuid primary key unique ,
+    uuid varchar(100) primary key unique ,
     name varchar(100) ,
     categories varchar(100)[],
     price real,

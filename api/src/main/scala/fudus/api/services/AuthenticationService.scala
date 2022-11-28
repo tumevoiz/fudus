@@ -1,6 +1,6 @@
 package fudus.api.services
 
-import fudus.api.errors.{ErrorMessages, FudusAuthenticationError, FudusError}
+import fudus.api.errors.{ErrorMessages, FudusApiError, FudusAuthenticationError, FudusError}
 import fudus.api.model.User
 import fudus.api.repository.{CredentialsRepository, UserRepository}
 import pdi.jwt.{Jwt, JwtAlgorithm, JwtClaim}
@@ -48,6 +48,12 @@ final case class AuthenticationService(
 object AuthenticationService {
   val layer: ZLayer[CredentialsRepository with UserRepository, Throwable, AuthenticationService] =
     ZLayer.fromFunction(AuthenticationService.apply _)
+
+  def authenticate(
+      username: String,
+      password: String
+  ): ZIO[AuthenticationService, FudusError, String] =
+    ZIO.serviceWithZIO[AuthenticationService](_.authenticate(username, password))
 
   def authenticateByToken(token: String): ZIO[AuthenticationService, FudusError, Unit] =
     ZIO.serviceWithZIO[AuthenticationService](_.authenticateByToken(token))

@@ -1,15 +1,17 @@
 package fudus.api.repository
 
-import fudus.api.model.{CategoryUUID, Food, Restaurant, RestaurantUUID}
+import fudus.api.model.{CategoryUUID, Food, FoodUUID, Restaurant, RestaurantUUID}
 import fudus.api.services.DatabaseService
 import zio._
 
 final case class FoodRepository(quillCtx: DatabaseService.QuillContext) {
   import quillCtx._
 
+  import fudus.api.encoder.sql._
+
   // UUID database encoders
   implicit def arrayUUIDEncoder[Col <: Seq[CategoryUUID]]: Encoder[Col] =
-    arrayRawEncoder[CategoryUUID, Col]("uuid")
+    arrayRawEncoder[CategoryUUID, Col]("varchar")
   implicit def arrayUUIDDecoder[Col <: Seq[CategoryUUID]](implicit
       bf: CBF[CategoryUUID, Col]
   ): Decoder[Col] =

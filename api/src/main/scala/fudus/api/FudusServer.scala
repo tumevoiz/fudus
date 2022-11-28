@@ -25,11 +25,10 @@ final case class FudusServer(
 //    CategoryEndpoints.listCategories.zServerLogic(_ =>
 //      categoryService.findAll.mapError(e => FudusApiError(e.getMessage))
 //    ),
-//    RestaurantEndpoints.listRestaurants.zServerLogic(_ =>
-//      restaurantRepository.findAll.mapError(e => FudusApiError(e.getMessage))
-//    ),
-//      RestaurantEndpoints.getRestaurantBySlug,
-//      RestaurantEndpoints.getRestaurantBySlugFood,
+      RootEndpoints.login,
+      RestaurantEndpoints.listRestaurants,
+      RestaurantEndpoints.getRestaurantBySlug,
+      RestaurantEndpoints.getRestaurantBySlugFood,
       RestaurantEndpoints.createRestaurant
     )
 
@@ -64,6 +63,7 @@ object FudusServer {
     with RestaurantFoodService
     with AuthenticationService
     with RestaurantService
+    with FoodService
 
   val layer: ZLayer[FudusEnv, Throwable, FudusServer] =
     ZLayer.fromFunction(FudusServer.apply _)

@@ -15,12 +15,4 @@ object CategoryEndpoints {
       .in("categories")
       .out(jsonBody[List[Category]])
       .errorOut(jsonBody[FudusApiError])
-
-  val addCategory: SecureEndpoint[Category, FudusApiError, Category, Any] =
-    endpoint.post
-      .securityIn(auth.bearer[String]())
-      .in("categories")
-      .in(jsonBody[Category])
-      .out(jsonBody[Category])
-      .errorOut(jsonBody[FudusApiError])
 }

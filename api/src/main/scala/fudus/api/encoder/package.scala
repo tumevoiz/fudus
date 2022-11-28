@@ -11,6 +11,11 @@ package object encoder {
   implicit val categoryUuidEncoder: JsonEncoder[CategoryUUID] =
     JsonEncoder[String].contramap(_.value)
 
+  implicit val credentialsUuidDecoder: JsonDecoder[CredentialsUUID] =
+    JsonDecoder[String].map(CredentialsUUID)
+  implicit val credentialsUuidEncoder: JsonEncoder[CredentialsUUID] =
+    JsonEncoder[String].contramap(_.value)
+
   implicit val foodUuidDecoder: JsonDecoder[FoodUUID] =
     JsonDecoder[String].map(FoodUUID)
   implicit val foodUuidEncoder: JsonEncoder[FoodUUID] =

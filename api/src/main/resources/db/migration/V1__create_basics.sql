@@ -1,5 +1,5 @@
 CREATE TABLE category (
-    uuid uuid primary key not null ,
+    uuid varchar(100) primary key not null ,
     name text not null ,
     icon varchar(8) not null
 );

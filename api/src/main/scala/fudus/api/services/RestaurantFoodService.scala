@@ -12,13 +12,15 @@ final case class RestaurantFoodService(
 ) {
   def fetchRestaurantFoodBySlug(slug: String): IO[FudusError, List[Food]] =
     (for {
-      restaurant <- restaurantRepository.findBySlug(slug)
+      restaurant <- restaurantRepository
+        .findBySlug(slug)
+        .someOrFail(FudusDatabaseError("Restaurant not found"))
       food <- foodRepository.findByRestaurantUUID(restaurant.uuid)
-    } yield food).mapError(e => FudusDatabaseError(e.getMessage))
+    } yield food).refineToOrDie[FudusDatabaseError]
 }
 
 object RestaurantFoodService {
-  val layer: ZLayer[RestaurantRepository with FoodRepository, Nothing, RestaurantFoodService] =
+  val layer: ZLayer[RestaurantRepository with FoodRepository, Throwable, RestaurantFoodService] =
     ZLayer {
       for {
         foodRepository <- ZIO.service[FoodRepository]

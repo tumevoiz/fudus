@@ -8,6 +8,8 @@ import zio._
 final case class CategoryRepository(quillCtx: DatabaseService.QuillContext) {
   import quillCtx._
 
+  import fudus.api.encoder.sql._
+
   def findAll: Task[List[Category]] =
     run {
       quote {

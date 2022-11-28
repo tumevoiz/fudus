@@ -7,6 +7,8 @@ import zio._
 final case class UserRepository(quillCtx: DatabaseService.QuillContext) {
   import quillCtx._
 
+  import fudus.api.encoder.sql._
+
   import fudus.api.model.Ops.{UserRoleOps0, StringOps0}
 
   implicit val encodeUserRole: MappedEncoding[UserRole.Type, String] =

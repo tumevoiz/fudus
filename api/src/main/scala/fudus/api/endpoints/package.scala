@@ -14,12 +14,12 @@ package object endpoints {
   val secureEndpoint
       : ZPartialServerEndpoint[AuthenticationService, String, Any, Unit, FudusApiError, Unit, Any] =
     endpoint
-      .securityIn(header[String]("X-AUTH-TOKEN"))
+      .securityIn(auth.bearer[String]())
       .errorOut(jsonBody[FudusApiError])
       .zServerSecurityLogic(token =>
         AuthenticationService.authenticateByToken(token).mapError(e => FudusApiError(e.getMessage))
       )
 
-  val baseEndpoint =
-    endpoint.errorOut(jsonBody[FudusApiError])
+  val baseEndpoint: ZPartialServerEndpoint[Any, Unit, String, Unit, FudusApiError, Unit, Any] =
+    endpoint.errorOut(jsonBody[FudusApiError]).zServerSecurityLogic(_ => ZIO.succeed("Authorized"))
 }

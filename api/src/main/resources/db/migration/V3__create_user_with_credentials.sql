@@ -1,5 +1,5 @@
 CREATE TABLE "user" (
-    uuid uuid primary key unique ,
+    uuid varchar(100) primary key unique ,
     email varchar(100) unique ,
     address text ,
     city varchar(50) ,
@@ -7,7 +7,7 @@ CREATE TABLE "user" (
 );
 
 CREATE TABLE credentials (
-    uuid uuid primary key unique ,
+    uuid varchar(100) primary key unique ,
     username varchar(30) unique ,
     password varchar(50) unique ,
     "user" varchar(100) unique
