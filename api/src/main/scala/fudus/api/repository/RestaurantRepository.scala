@@ -16,21 +16,21 @@ final case class RestaurantRepository(quillCtx: Quill.Postgres[SnakeCase]) {
       quote {
         query[Restaurant].filter(_.slug == lift(slug))
       }
-    }.mapAttempt(_.headOption)
+    }.map(_.headOption)
 
   def findByUUID(uuid: RestaurantUUID): Task[Option[Restaurant]] =
     run {
       quote {
         query[Restaurant].filter(_.uuid == lift(uuid))
       }
-    }.mapAttempt(_.headOption)
+    }.map(_.headOption)
 
   def save(restaurant: Restaurant): Task[Unit] =
     run {
       quote {
         query[Restaurant].insertValue(lift(restaurant))
       }
-    }.mapAttempt(_ => {})
+    }.as[Unit]
 
   def findAll: Task[List[Restaurant]] =
     run {

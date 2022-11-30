@@ -1,7 +1,12 @@
 package fudus.api
 
 package object errors {
-  trait FudusError extends Throwable
+  trait FudusError extends Throwable {
+    def message: String
+
+    override def getMessage: String = message
+  }
+
   case class FudusDatabaseError(message: String) extends FudusError
   case class FudusServerError(message: String) extends FudusError
 
@@ -13,7 +18,9 @@ package object errors {
   case class FudusFoodCreationError(message: String) extends FudusError
   case class FudusValidationError(message: String) extends FudusError
 
-  case class FudusApiError(message: String)
+  case class FudusApiError(message: String) {
+    override def toString: String = message
+  }
 
   object ErrorMessages {
     val BadPassword = "Bad password"

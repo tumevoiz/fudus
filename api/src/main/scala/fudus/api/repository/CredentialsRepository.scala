@@ -14,14 +14,14 @@ final case class CredentialsRepository(quillCtx: DatabaseService.QuillContext) {
       quote {
         query[Credentials].insertValue(lift(credentials))
       }
-    }.mapAttempt(_ => {})
+    }.as[Unit]
 
-  def findByUsername(username: String): Task[Credentials] =
+  def findByUsername(username: String): Task[Option[Credentials]] =
     run {
       quote {
         query[Credentials].filter(_.username == lift(username))
       }
-    }.mapAttempt(_.head)
+    }.map(_.headOption)
 }
 
 object CredentialsRepository {

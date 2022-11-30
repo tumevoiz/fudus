@@ -22,14 +22,14 @@ final case class CategoryRepository(quillCtx: DatabaseService.QuillContext) {
       quote {
         query[Category].filter(_.uuid == lift(uuid))
       }
-    }.mapAttempt(_.headOption)
+    }.map(_.headOption)
 
   def save(category: Category): Task[Unit] =
     run {
       quote {
         query[Category].insertValue(lift(category))
       }
-    }.mapAttempt(_ => {})
+    }.as[Unit]
 }
 
 object CategoryRepository {

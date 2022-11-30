@@ -1,23 +1,23 @@
 package fudus.api.model
 
 object Ops {
-  implicit class UserRoleOps0(userRole: UserRole.Type) {
+  implicit class UserRoleOps0(userRole: CustomerRole.Type) {
     def asString: String = userRole match {
-      case UserRole.Client => "Client"
-      case UserRole.Admin  => "Admin"
-      case _               => "???"
+      case CustomerRole.Client => "Client"
+      case CustomerRole.Admin  => "Admin"
+      case _                   => "???"
     }
   }
 
   implicit class StringOps0(str: String) {
-    def asUserRole: UserRole.Type = str match {
-      case "Client" => UserRole.Client
-      case "Admin"  => UserRole.Admin
+    def asUserRole: CustomerRole.Type = str match {
+      case "Client" => CustomerRole.Client
+      case "Admin"  => CustomerRole.Admin
     }
   }
 
-  implicit class UserOps0(user: User) {
-    def hasAdminRole: Boolean = user.role == UserRole.Admin
-    def hasClientRole: Boolean = user.role == UserRole.Client
+  implicit class UserOps0(user: Customer) {
+    def hasAdminRole: Boolean = user.role == CustomerRole.Admin
+    def hasClientRole: Boolean = user.role == CustomerRole.Client
   }
 }

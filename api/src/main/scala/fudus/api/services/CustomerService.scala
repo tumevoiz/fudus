@@ -6,29 +6,29 @@ import fudus.api.errors.{
   FudusValidationError,
   ValidationMessages
 }
-import fudus.api.model.{Credentials, CredentialsUUID, User, UserRole, UserUUID}
-import fudus.api.repository.{CredentialsRepository, UserRepository}
+import fudus.api.model.{Credentials, CredentialsUUID, Customer, CustomerRole, CustomerUUID}
+import fudus.api.repository.{CredentialsRepository, CustomerRepository}
 import zio._
 
 import java.util.UUID
 
-final case class UserService(
+final case class CustomerService(
     credentialsRepository: CredentialsRepository,
-    userRepository: UserRepository
+    customerRepository: CustomerRepository
 ) {
   def create(
       username: String,
       password: String,
       email: String,
-      role: UserRole.Type
+      role: CustomerRole.Type
   ): IO[FudusError, Unit] =
     for {
       _ <- validateUsername(username)
       _ <- validatePassword(password)
       _ <- validateEmail(email)
 
-      user = User(
-        uuid = UserUUID(UUID.randomUUID().toString),
+      customer = Customer(
+        uuid = CustomerUUID(UUID.randomUUID().toString),
         email = email,
         address = "",
         city = "",
@@ -39,12 +39,12 @@ final case class UserService(
         uuid = CredentialsUUID(UUID.randomUUID().toString),
         username = username,
         password = password,
-        user = user.uuid
+        customer = customer.uuid
       )
 
       // TODO could be improved using STM or SAGA
-      _ <- userRepository
-        .save(user)
+      _ <- customerRepository
+        .save(customer)
         .mapError(e => FudusUserCreationError(e.getMessage))
 
       _ <- credentialsRepository
@@ -83,7 +83,7 @@ final case class UserService(
     } yield ()
 }
 
-object UserService {
-  val layer: ZLayer[CredentialsRepository with UserRepository, Throwable, UserService] =
-    ZLayer.fromFunction(UserService.apply _)
+object CustomerService {
+  val layer: ZLayer[CredentialsRepository with CustomerRepository, Throwable, CustomerService] =
+    ZLayer.fromFunction(CustomerService.apply _)
 }

@@ -6,7 +6,7 @@ case class OrderUUID(value: String) extends AnyVal
 
 case class Order(
     uuid: OrderUUID,
-    by: User,
+    by: Customer,
     restaurantUUID: String,
     orderedFoods: Seq[OrderedFood],
     creationDate: String,

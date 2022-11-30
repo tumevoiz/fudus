@@ -41,7 +41,10 @@ final case class FudusServer(
   def start: ZIO[FudusEnv, Throwable, Unit] = (for {
     port <- System.envOrElse("PORT", "8080").map(_.toInt)
     _ <- ZIO.logInfo("Starting migrations") *> databaseService.migrate
-    _ <- ZIO.logInfo("Starting HTTP server") *> Server.start(port, httpApp)
+    _ <- ZIO
+      .logInfo("Starting HTTP server") *> Server
+      .start(port, httpApp)
+      .onError(e => ZIO.logError(e.prettyPrint))
   } yield ())
 }
 
@@ -51,13 +54,13 @@ object FudusServer {
     with CredentialsRepository
     with FoodRepository
     with RestaurantRepository
-    with UserRepository
+    with CustomerRepository
     with AuthenticationService
     with DatabaseService
     with FoodService
     with RestaurantFoodService
     with RestaurantService
-    with UserService
+    with CustomerService
 
   type FudusServerEnv = RestaurantRepository
     with RestaurantFoodService

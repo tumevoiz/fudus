@@ -25,9 +25,9 @@ package object sql {
   implicit val decodeRestaurantUUID: MappedEncoding[RestaurantUUID, String] =
     MappedEncoding(_.value)
 
-  implicit val encodeUserUUID: MappedEncoding[String, UserUUID] =
-    MappedEncoding(UserUUID)
-  implicit val decodeUserUUID: MappedEncoding[UserUUID, String] =
+  implicit val encodeUserUUID: MappedEncoding[String, CustomerUUID] =
+    MappedEncoding(CustomerUUID)
+  implicit val decodeUserUUID: MappedEncoding[CustomerUUID, String] =
     MappedEncoding(_.value)
 
 }

@@ -1,8 +1,8 @@
 package fudus.api.services
 
 import fudus.api.errors.{ErrorMessages, FudusApiError, FudusAuthenticationError, FudusError}
-import fudus.api.model.User
-import fudus.api.repository.{CredentialsRepository, UserRepository}
+import fudus.api.model.Customer
+import fudus.api.repository.{CredentialsRepository, CustomerRepository}
 import pdi.jwt.{Jwt, JwtAlgorithm, JwtClaim}
 
 import java.time.Clock
@@ -10,7 +10,7 @@ import zio._
 
 final case class AuthenticationService(
     credentialsRepository: CredentialsRepository,
-    userRepository: UserRepository
+    customerRepository: CustomerRepository
 ) {
   implicit val clock: Clock = Clock.systemUTC
 
@@ -19,13 +19,15 @@ final case class AuthenticationService(
 
   def authenticate(username: String, password: String): IO[FudusError, String] =
     (for {
-      credentials <- credentialsRepository.findByUsername(username)
+      credentials <- credentialsRepository
+        .findByUsername(username)
+        .someOrFail(FudusAuthenticationError(ErrorMessages.UserNotFound))
       _ <- ZIO.when(credentials.password != password)(
         ZIO.fail(FudusAuthenticationError(ErrorMessages.BadPassword))
       )
-      _ <- userRepository
-        .findByUUID(credentials.user)
-        .orElseFail(FudusAuthenticationError(ErrorMessages.UserNotFound)) // check if user exists
+      _ <- customerRepository
+        .findByUUID(credentials.customer)
+        .someOrFail(FudusAuthenticationError(ErrorMessages.UserNotFound))
     } yield jwtEncode(credentials.username)).refineToOrDie[FudusAuthenticationError]
 
   def authenticateByToken(token: String): IO[FudusError, Unit] =
@@ -46,7 +48,8 @@ final case class AuthenticationService(
 }
 
 object AuthenticationService {
-  val layer: ZLayer[CredentialsRepository with UserRepository, Throwable, AuthenticationService] =
+  val layer
+      : ZLayer[CredentialsRepository with CustomerRepository, Throwable, AuthenticationService] =
     ZLayer.fromFunction(AuthenticationService.apply _)
 
   def authenticate(

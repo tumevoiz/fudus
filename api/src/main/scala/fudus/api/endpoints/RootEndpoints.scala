@@ -8,6 +8,7 @@ import sttp.tapir.ztapir._
 import sttp.tapir.generic.auto._
 import sttp.tapir.json.zio._
 
+import zio._
 object RootEndpoints {
   import fudus.api.model.Requests._
   import fudus.api.model.Responses._
