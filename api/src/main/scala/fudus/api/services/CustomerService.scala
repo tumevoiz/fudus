@@ -6,7 +6,7 @@ import fudus.api.errors.{
   FudusValidationError,
   ValidationMessages
 }
-import fudus.api.model.{Credentials, CredentialsUUID, Customer, CustomerRole, CustomerUUID}
+import fudus.api.model.Domain.{Credentials, CredentialsUUID, Customer, CustomerRole, CustomerUUID}
 import fudus.api.repository.{CredentialsRepository, CustomerRepository}
 import zio._
 

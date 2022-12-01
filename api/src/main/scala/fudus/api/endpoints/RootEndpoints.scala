@@ -2,7 +2,7 @@ package fudus.api.endpoints
 
 import fudus.api.FudusServer.FudusServerEnv
 import fudus.api.errors.FudusApiError
-import fudus.api.model.Food
+import fudus.api.model.Domain.Food
 import fudus.api.services.{AuthenticationService, RestaurantFoodService}
 import sttp.tapir.ztapir._
 import sttp.tapir.generic.auto._

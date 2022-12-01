@@ -1,6 +1,6 @@
 package fudus.api.repository
 
-import fudus.api.model.{Restaurant, RestaurantUUID}
+import fudus.api.model.Domain.{Food, FoodUUID, Restaurant, RestaurantUUID}
 import fudus.api.services.DatabaseService
 import io.getquill.SnakeCase
 import io.getquill.jdbczio.Quill
@@ -22,6 +22,23 @@ final case class RestaurantRepository(quillCtx: Quill.Postgres[SnakeCase]) {
     run {
       quote {
         query[Restaurant].filter(_.uuid == lift(uuid))
+      }
+    }.map(_.headOption)
+
+  def findByFoodUUID(foodUUID: FoodUUID): Task[Option[Restaurant]] =
+    run {
+      quote {
+        query[Restaurant]
+          .join(query[Food])
+          .on { case (restaurant, food) =>
+            food.restaurant == restaurant.uuid
+          }
+          .filter { case (_, food) =>
+            food.uuid == lift(foodUUID)
+          }
+          .map { case (restaurant, _) =>
+            restaurant
+          }
       }
     }.map(_.headOption)
 

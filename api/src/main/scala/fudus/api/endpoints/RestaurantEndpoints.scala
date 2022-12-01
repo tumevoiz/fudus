@@ -2,7 +2,7 @@ package fudus.api.endpoints
 
 import fudus.api.FudusServer.FudusServerEnv
 import fudus.api.errors.FudusApiError
-import fudus.api.model.{Category, Food, Restaurant}
+import fudus.api.model.Domain.{Category, Food, Restaurant}
 import fudus.api.repository.RestaurantRepository
 import fudus.api.services.{AuthenticationService, RestaurantFoodService, RestaurantService}
 import fudus.api.types.SecureEndpoint

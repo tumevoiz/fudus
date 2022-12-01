@@ -1,6 +1,6 @@
 package fudus.api.repository
 
-import fudus.api.model.{CategoryUUID, Food, FoodUUID, Restaurant, RestaurantUUID}
+import fudus.api.model.Domain.{CategoryUUID, Food, FoodUUID, Restaurant, RestaurantUUID}
 import fudus.api.services.DatabaseService
 import zio._
 
@@ -8,6 +8,13 @@ final case class FoodRepository(quillCtx: DatabaseService.QuillContext) {
   import quillCtx._
 
   import fudus.api.encoder.sql._
+
+  def findByUUID(uuid: FoodUUID): Task[Option[Food]] =
+    run {
+      quote {
+        query[Food].filter(_.uuid == lift(uuid))
+      }
+    }.map(_.headOption)
 
   def findByRestaurantUUID(restaurantUUID: RestaurantUUID): Task[List[Food]] =
     run {

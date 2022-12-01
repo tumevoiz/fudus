@@ -1,6 +1,6 @@
 package fudus.api.encoder
 
-import fudus.api.model._
+import fudus.api.model.Domain._
 import io.getquill.MappedEncoding
 import io.getquill._
 

@@ -1,5 +1,7 @@
 package fudus.api.model
 
+import Domain._
+
 object Ops {
   implicit class UserRoleOps0(userRole: CustomerRole.Type) {
     def asString: String = userRole match {

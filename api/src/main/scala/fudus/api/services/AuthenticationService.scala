@@ -1,12 +1,13 @@
 package fudus.api.services
 
 import fudus.api.errors.{ErrorMessages, FudusApiError, FudusAuthenticationError, FudusError}
-import fudus.api.model.Customer
+import fudus.api.model.Domain.{Customer, CustomerUUID, TokenContent}
 import fudus.api.repository.{CredentialsRepository, CustomerRepository}
 import pdi.jwt.{Jwt, JwtAlgorithm, JwtClaim}
 
 import java.time.Clock
 import zio._
+import zio.json._
 
 final case class AuthenticationService(
     credentialsRepository: CredentialsRepository,
@@ -17,6 +18,8 @@ final case class AuthenticationService(
   private val secretKey = "fuduslove"
   private val jwtAlgorithm = JwtAlgorithm.HS512
 
+  import fudus.api.encoder._
+
   def authenticate(username: String, password: String): IO[FudusError, String] =
     (for {
       credentials <- credentialsRepository
@@ -25,18 +28,26 @@ final case class AuthenticationService(
       _ <- ZIO.when(credentials.password != password)(
         ZIO.fail(FudusAuthenticationError(ErrorMessages.BadPassword))
       )
-      _ <- customerRepository
+      customer <- customerRepository
         .findByUUID(credentials.customer)
         .someOrFail(FudusAuthenticationError(ErrorMessages.UserNotFound))
-    } yield jwtEncode(credentials.username)).refineToOrDie[FudusAuthenticationError]
+    } yield jwtEncode(customer.uuid)).refineToOrDie[FudusAuthenticationError]
 
-  def authenticateByToken(token: String): IO[FudusError, Unit] =
-    for {
-      _ <- ZIO.when(jwtDecode(token).isEmpty)(ZIO.fail(FudusAuthenticationError("Invalid token")))
-    } yield () // TODO implement me
+  def authenticateByToken(token: String): IO[FudusError, CustomerUUID] =
+    (for {
+      decodedToken <- ZIO
+        .attempt(jwtDecode(token))
+        .someOrFail(FudusAuthenticationError("Unauthorized token"))
+    } yield decodedToken.content.fromJson[TokenContent] match {
+      case Right(dt) => dt.customer
+      case Left(_) => {
+        ZIO.fail(FudusAuthenticationError("Malformed token"))
+        CustomerUUID("invalid")
+      }
+    }).refineToOrDie[FudusAuthenticationError] // TODO implement me
 
-  private def jwtEncode(username: String): String = {
-    val json = s"""{"user":"${username}"}"""
+  private def jwtEncode(customer: CustomerUUID): String = {
+    val json = TokenContent(customer).toJson
     val claim = JwtClaim {
       json
     }.issuedNow.expiresIn(300)
@@ -58,6 +69,6 @@ object AuthenticationService {
   ): ZIO[AuthenticationService, FudusError, String] =
     ZIO.serviceWithZIO[AuthenticationService](_.authenticate(username, password))
 
-  def authenticateByToken(token: String): ZIO[AuthenticationService, FudusError, Unit] =
+  def authenticateByToken(token: String): ZIO[AuthenticationService, FudusError, CustomerUUID] =
     ZIO.serviceWithZIO[AuthenticationService](_.authenticateByToken(token))
 }

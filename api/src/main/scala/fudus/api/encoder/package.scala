@@ -1,7 +1,7 @@
 package fudus.api
 
 import fudus.api.errors.{FudusApiError, FudusError}
-import fudus.api.model._
+import fudus.api.model.Domain._
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
 package object encoder {
@@ -41,4 +41,9 @@ package object encoder {
     DeriveJsonEncoder.gen[Restaurant]
   implicit val restaurantZioDecoder: zio.json.JsonDecoder[Restaurant] =
     DeriveJsonDecoder.gen[Restaurant]
+
+  implicit val tokenContentEncoder: zio.json.JsonEncoder[TokenContent] =
+    DeriveJsonEncoder.gen[TokenContent]
+  implicit val tokenContentDecoder: zio.json.JsonDecoder[TokenContent] =
+    DeriveJsonDecoder.gen[TokenContent]
 }

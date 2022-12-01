@@ -1,5 +1,7 @@
 package fudus.api.model
 
+import fudus.api.model.Domain.Basket
+import fudus.api.model.Requests.LoginRequest
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder}
 
 object Responses {

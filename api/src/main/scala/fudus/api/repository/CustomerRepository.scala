@@ -1,6 +1,6 @@
 package fudus.api.repository
 
-import fudus.api.model.{Customer, CustomerRole, CustomerUUID}
+import fudus.api.model.Domain.{Customer, CustomerRole, CustomerUUID}
 import fudus.api.services.DatabaseService
 import zio._
 

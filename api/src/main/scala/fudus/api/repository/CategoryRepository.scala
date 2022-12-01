@@ -1,7 +1,7 @@
 package fudus.api.repository
 
 import fudus.api.errors.{FudusDatabaseError, FudusError}
-import fudus.api.model.{Category, CategoryUUID}
+import fudus.api.model.Domain.{Category, CategoryUUID}
 import fudus.api.services.DatabaseService
 import zio._
 

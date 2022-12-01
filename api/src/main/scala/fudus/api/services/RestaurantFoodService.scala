@@ -1,7 +1,7 @@
 package fudus.api.services
 
 import fudus.api.errors.{FudusDatabaseError, FudusError}
-import fudus.api.model.Food
+import fudus.api.model.Domain.Food
 import fudus.api.repository.{FoodRepository, RestaurantRepository}
 import zio._
 

@@ -1,6 +1,6 @@
 package fudus.api.repository
 
-import fudus.api.model.{Order, OrderUUID}
+import fudus.api.model.Domain.{Order, OrderUUID}
 import fudus.api.services.DatabaseService
 import zio._
 
@@ -31,4 +31,7 @@ final case class OrderRepository(quillCtx: DatabaseService.QuillContext) {
     }.as[Unit]
 }
 
-object OrderRepository {}
+object OrderRepository {
+  val layer: ZLayer[DatabaseService.QuillContext, Throwable, OrderRepository] =
+    ZLayer.fromFunction(OrderRepository.apply _)
+}

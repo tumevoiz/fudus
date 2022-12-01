@@ -1,6 +1,6 @@
 package fudus.api.repository
 
-import fudus.api.model.{Credentials, CredentialsUUID}
+import fudus.api.model.Domain.{Credentials, CredentialsUUID}
 import fudus.api.services.DatabaseService
 import zio._
 

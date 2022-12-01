@@ -7,7 +7,7 @@ import fudus.api.errors.{
   FudusValidationError,
   ValidationMessages
 }
-import fudus.api.model.{Restaurant, RestaurantUUID}
+import fudus.api.model.Domain.{Restaurant, RestaurantUUID}
 import fudus.api.repository.RestaurantRepository
 import zio._
 

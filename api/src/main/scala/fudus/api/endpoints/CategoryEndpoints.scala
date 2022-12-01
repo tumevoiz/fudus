@@ -1,7 +1,7 @@
 package fudus.api.endpoints
 
 import fudus.api.errors.FudusApiError
-import fudus.api.model.{Category, Restaurant}
+import fudus.api.model.Domain.{Category, Restaurant}
 import fudus.api.types.SecureEndpoint
 import sttp.tapir._
 import sttp.tapir.generic.auto._

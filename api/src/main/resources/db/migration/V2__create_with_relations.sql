@@ -12,5 +12,5 @@ CREATE TABLE food (
     name varchar(100) ,
     categories varchar(100)[],
     price real,
-    restaurant varchar(255)
+    restaurant varchar(100)
 );

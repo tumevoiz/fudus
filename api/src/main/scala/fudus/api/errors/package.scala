@@ -16,6 +16,7 @@ package object errors {
   case class FudusUserCreationError(message: String) extends FudusError
   case class FudusRestaurantCreationError(message: String) extends FudusError
   case class FudusFoodCreationError(message: String) extends FudusError
+  case class FudusOrderingError(message: String) extends FudusError
   case class FudusValidationError(message: String) extends FudusError
 
   case class FudusApiError(message: String) {
@@ -25,9 +26,14 @@ package object errors {
   object ErrorMessages {
     val BadPassword = "Bad password"
     val UserNotFound = "User not found"
+
+    val GenericDbSaveError = "Failed to save request to database"
   }
 
   object ValidationMessages {
+    val GenericUUIDEmpty = "UUID is empty"
+    val GenericUUIDInvalid = "UUID is invalid"
+
     val UsernameTooShort = "Username is too short"
     val UsernameTooLong = "Username is too long"
 
@@ -48,5 +54,6 @@ package object errors {
 
     val CategoryDoesNotExists = "Category does not exists"
     val RestaurantDoesNotExists = "Restaurant does not exists"
+    val FoodDoesNotExists = "Food does not exists"
   }
 }
