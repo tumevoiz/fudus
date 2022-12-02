@@ -23,12 +23,12 @@ final case class CustomerRepository(quillCtx: DatabaseService.QuillContext) {
       }
     }.map(_.headOption)
 
-  def save(customer: Customer): Task[Unit] =
+  def save(customer: Customer): Task[Long] =
     run {
       quote {
         query[Customer].insertValue(lift(customer))
       }
-    }.as[Unit]
+    }
 }
 
 object CustomerRepository {

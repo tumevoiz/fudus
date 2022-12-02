@@ -24,12 +24,12 @@ final case class CategoryRepository(quillCtx: DatabaseService.QuillContext) {
       }
     }.map(_.headOption)
 
-  def save(category: Category): Task[Unit] =
+  def save(category: Category): Task[Long] =
     run {
       quote {
         query[Category].insertValue(lift(category))
       }
-    }.as[Unit]
+    }
 }
 
 object CategoryRepository {

@@ -9,12 +9,12 @@ final case class CredentialsRepository(quillCtx: DatabaseService.QuillContext) {
 
   import fudus.api.encoder.sql._
 
-  def save(credentials: Credentials): Task[Unit] =
+  def save(credentials: Credentials): Task[Long] =
     run {
       quote {
         query[Credentials].insertValue(lift(credentials))
       }
-    }.as[Unit]
+    }
 
   def findByUsername(username: String): Task[Option[Credentials]] =
     run {

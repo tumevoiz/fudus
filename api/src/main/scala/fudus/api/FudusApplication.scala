@@ -21,13 +21,15 @@ object FudusApplication extends ZIOAppDefault {
         RestaurantRepository.layer,
         FoodRepository.layer,
         CustomerRepository.layer,
+        OrderingRepository.layer,
         // Services
         AuthenticationService.layer,
         DatabaseService.layer,
         FoodService.layer,
         RestaurantFoodService.layer,
         RestaurantService.layer,
-        CustomerService.layer
+        CustomerService.layer,
+        OrderingService.layer
       )
       .debug
 }

@@ -42,12 +42,12 @@ final case class RestaurantRepository(quillCtx: Quill.Postgres[SnakeCase]) {
       }
     }.map(_.headOption)
 
-  def save(restaurant: Restaurant): Task[Unit] =
+  def save(restaurant: Restaurant): Task[Long] =
     run {
       quote {
         query[Restaurant].insertValue(lift(restaurant))
       }
-    }.as[Unit]
+    }
 
   def findAll: Task[List[Restaurant]] =
     run {

@@ -14,31 +14,33 @@ import fudus.api.model.Domain.{
   CustomerUUID,
   FoodUUID,
   HasUUID,
-  Order,
-  OrderUUID,
+  Ordering,
+  OrderingUUID,
   RestaurantUUID
 }
 import fudus.api.repository.{
   CustomerRepository,
   FoodRepository,
-  OrderRepository,
+  OrderingRepository,
   RestaurantRepository
 }
 import zio._
 
 import java.util.UUID
 
-final case class OrderService(
+final case class OrderingService(
     customerRepository: CustomerRepository,
     foodRepository: FoodRepository,
-    orderRepository: OrderRepository
+    orderRepository: OrderingRepository
 ) {
   def create(basket: Basket, orderedBy: CustomerUUID): IO[FudusError, Unit] =
     (for {
-      _ <- ZIO.foreach(basket)(entry => validateUUID(entry.food))
-      order = Order(
-        uuid = OrderUUID(UUID.randomUUID().toString),
-        by = orderedBy,
+      _ <- ZIO
+        .foreach(basket)(entry => validateUUID(entry.food))
+        .mapError(e => FudusOrderingError(e.getMessage))
+      order = Ordering(
+        uuid = OrderingUUID(UUID.randomUUID().toString),
+        orderedBy = orderedBy,
         basket = basket,
         creationDate = java.time.LocalDate.now().toString,
         hasPaid = false
@@ -46,7 +48,7 @@ final case class OrderService(
       _ <- orderRepository
         .save(order)
         .orElseFail(FudusOrderingError(ErrorMessages.GenericDbSaveError))
-        .tapError(e => ZIO.logError(e.getMessage))
+        .tapError(e => ZIO.logError(s"Error cause: ${e.getMessage}"))
     } yield ()).refineToOrDie[FudusOrderingError]
 
   // TODO move it to domain
@@ -61,17 +63,17 @@ final case class OrderService(
     } yield ()
 }
 
-object OrderService {
+object OrderingService {
   val layer: ZLayer[
-    CustomerRepository with FoodRepository with OrderRepository,
+    CustomerRepository with FoodRepository with OrderingRepository,
     Throwable,
-    OrderService
+    OrderingService
   ] =
-    ZLayer.fromFunction(OrderService.apply _)
+    ZLayer.fromFunction(OrderingService.apply _)
 
   def create(
-      orderedFood: Seq[BasketEntry],
+      basket: Basket,
       orderedBy: CustomerUUID
-  ): ZIO[OrderService, FudusError, Unit] =
-    ZIO.serviceWithZIO[OrderService](_.create(orderedFood, orderedBy))
+  ): ZIO[OrderingService, FudusError, Unit] =
+    ZIO.serviceWithZIO[OrderingService](_.create(basket, orderedBy))
 }
