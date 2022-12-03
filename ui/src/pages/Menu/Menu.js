@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import './Menu.css';
 import MenuCard from './MenuCard';
 import SearchBar from "../../components/SearchBar/SearchBar";
-import Navigation from "../../components/Navigation/Navigation";
+import App from './../App'
 import {useDispatch, useSelector} from "react-redux";
 
 import allActions from "../../actions/actions";
@@ -24,16 +24,19 @@ function Menu(props) {
     }, [dispatch])
 
     return (
-        <div className="Menu">
-            <Navigation />
-            <div className={"searchTop"}>
-                <SearchBar/>
+        <App>
+            <div className="Menu">
+                <div className={"searchTop"}>
+                    <SearchBar/>
+                </div>
+                <div className={"restaurantName"}><h1>{restaurant.name}</h1></div>
+                <div className={"menuCardsWrapper"}>
+                    {!R.isEmpty(menu) ? menu.menu.map((menuItem, index) => <MenuCard key={index}
+                                                                                     menuItem={menuItem}/>) :
+                        <p>Waiting...</p>}
+                </div>
             </div>
-            <div className={"restaurantName"}><h1>{restaurant.name}</h1></div>
-            <div className={"menuCardsWrapper"}>
-                {!R.isEmpty(menu) ? menu.menu.map((menuItem, index) => <MenuCard key={index} menu={menuItem} />): <p>Waiting...</p>}
-            </div>
-        </div>
+        </App>
     );
 }
 
