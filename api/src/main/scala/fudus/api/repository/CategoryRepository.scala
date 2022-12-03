@@ -35,4 +35,7 @@ final case class CategoryRepository(quillCtx: DatabaseService.QuillContext) {
 object CategoryRepository {
   val layer: ZLayer[DatabaseService.QuillContext, Throwable, CategoryRepository] =
     ZLayer.fromFunction(CategoryRepository.apply _)
+
+  def findAll: ZIO[CategoryRepository, Throwable, List[Category]] =
+    ZIO.serviceWithZIO[CategoryRepository](_.findAll)
 }

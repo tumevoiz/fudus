@@ -23,9 +23,7 @@ final case class FudusServer(
 ) {
   val apiEndpoints: List[ZServerEndpoint[FudusServerEnv, Any]] =
     List(
-//    CategoryEndpoints.listCategories.zServerLogic(_ =>
-//      categoryService.findAll.mapError(e => FudusApiError(e.getMessage))
-//    ),
+      CategoryEndpoints.listCategories,
       RootEndpoints.login,
       RestaurantEndpoints.listRestaurants,
       RestaurantEndpoints.getRestaurantBySlug,
@@ -66,7 +64,8 @@ object FudusServer {
     with OrderingRepository
     with OrderingService
 
-  type FudusServerEnv = RestaurantRepository
+  type FudusServerEnv = CategoryRepository
+    with RestaurantRepository
     with RestaurantFoodService
     with AuthenticationService
     with RestaurantService
