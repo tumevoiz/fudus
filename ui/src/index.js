@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux'
 import './index.css';
 import './assets/fonts/Martel_Sans/MartelSans-Regular.ttf';
-import reportWebVitals from './reportWebVitals';
 // Pages
 import Restaurants from "./pages/Restaurants/Restaurants";
 import Menu from './pages/Menu/Menu';
@@ -18,6 +17,7 @@ import thunk from "redux-thunk";
 import userReducer from "./reducers/user";
 import restaurantsReducer from "./reducers/restaurants";
 import menuReducer from "./reducers/menu";
+import basketReducer from "./reducers/basket";
 
 const history = createBrowserHistory()
 
@@ -25,6 +25,7 @@ const rootReducer = (history) => ({
     user: userReducer,
     restaurants: restaurantsReducer,
     menu: menuReducer,
+    basket: basketReducer,
     router: connectRouter(history)
 });
 
