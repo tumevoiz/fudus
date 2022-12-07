@@ -16,6 +16,11 @@ package object encoder {
   implicit val credentialsUuidEncoder: JsonEncoder[CredentialsUUID] =
     JsonEncoder[String].contramap(_.value)
 
+  implicit val customerUuidDecoder: JsonDecoder[CustomerUUID] =
+    JsonDecoder[String].map(CustomerUUID)
+  implicit val customerUuidEncoder: JsonEncoder[CustomerUUID] =
+    JsonEncoder[String].contramap(_.value)
+
   implicit val foodUuidDecoder: JsonDecoder[FoodUUID] =
     JsonDecoder[String].map(FoodUUID)
   implicit val foodUuidEncoder: JsonEncoder[FoodUUID] =
@@ -46,4 +51,9 @@ package object encoder {
     DeriveJsonEncoder.gen[TokenContent]
   implicit val tokenContentDecoder: zio.json.JsonDecoder[TokenContent] =
     DeriveJsonDecoder.gen[TokenContent]
+
+  implicit val basketEncoder: zio.json.JsonEncoder[BasketEntry] =
+    DeriveJsonEncoder.gen[BasketEntry]
+  implicit val basketDecoder: zio.json.JsonDecoder[BasketEntry] =
+    DeriveJsonDecoder.gen[BasketEntry]
 }

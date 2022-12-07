@@ -24,15 +24,18 @@ final case class CategoryRepository(quillCtx: DatabaseService.QuillContext) {
       }
     }.map(_.headOption)
 
-  def save(category: Category): Task[Unit] =
+  def save(category: Category): Task[Long] =
     run {
       quote {
         query[Category].insertValue(lift(category))
       }
-    }.as[Unit]
+    }
 }
 
 object CategoryRepository {
   val layer: ZLayer[DatabaseService.QuillContext, Throwable, CategoryRepository] =
     ZLayer.fromFunction(CategoryRepository.apply _)
+
+  def findAll: ZIO[CategoryRepository, Throwable, List[Category]] =
+    ZIO.serviceWithZIO[CategoryRepository](_.findAll)
 }

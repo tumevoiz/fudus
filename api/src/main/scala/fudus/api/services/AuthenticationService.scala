@@ -50,7 +50,7 @@ final case class AuthenticationService(
     val json = TokenContent(customer).toJson
     val claim = JwtClaim {
       json
-    }.issuedNow.expiresIn(300)
+    }.issuedNow.expiresIn(3600)
     Jwt.encode(claim, secretKey, jwtAlgorithm)
   }
 

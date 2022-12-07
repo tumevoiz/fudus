@@ -30,4 +30,14 @@ package object sql {
   implicit val decodeUserUUID: MappedEncoding[CustomerUUID, String] =
     MappedEncoding(_.value)
 
+  import fudus.api.encoder.{basketEncoder, basketDecoder}
+  import zio.json._
+
+  implicit val basketSqlEncoder: MappedEncoding[String, BasketEntry] =
+    MappedEncoding(
+      _.fromJson[BasketEntry].getOrElse(throw new RuntimeException("sql encoder failure"))
+    )
+  implicit val basketSqlDecoder: MappedEncoding[BasketEntry, String] =
+    MappedEncoding(_.toJson)
+
 }

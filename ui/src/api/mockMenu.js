@@ -2,7 +2,6 @@ import jap2 from "./../assets/jap-2.jpeg"
 import jap1 from "./../assets/jap-1.jpeg"
 import jap3 from "./../assets/jap-3.jpeg"
 import jap4 from "./../assets/jap-4.jpeg"
-import jap5 from "./../assets/jap-5.jpeg"
 
 import burger1 from "./../assets/burger1.jpeg"
 import burger2 from "./../assets/burger2.jpeg"
@@ -49,13 +48,6 @@ export default [
         name: "Ramen Teriyaki",
         price: 32,
         img: jap4,
-    },
-    {
-        id: 5,
-        restaurantId: 1,
-        name: "Ramen Tonkotsu",
-        price: 35,
-        img: jap5,
     },
     {
         id: 6,

@@ -18,18 +18,18 @@ final case class FudusServer(
     categoryService: CategoryRepository,
     restaurantRepository: RestaurantRepository,
     restaurantService: RestaurantService,
-    restaurantFoodService: RestaurantFoodService
+    restaurantFoodService: RestaurantFoodService,
+    orderingService: OrderingService
 ) {
   val apiEndpoints: List[ZServerEndpoint[FudusServerEnv, Any]] =
     List(
-//    CategoryEndpoints.listCategories.zServerLogic(_ =>
-//      categoryService.findAll.mapError(e => FudusApiError(e.getMessage))
-//    ),
+      CategoryEndpoints.listCategories,
       RootEndpoints.login,
       RestaurantEndpoints.listRestaurants,
       RestaurantEndpoints.getRestaurantBySlug,
       RestaurantEndpoints.getRestaurantBySlugFood,
-      RestaurantEndpoints.createRestaurant
+      RestaurantEndpoints.createRestaurant,
+      OrderingEndpoint.createOrdering
     )
 
   val docEndpoints: List[ZServerEndpoint[FudusServerEnv, Any]] =
@@ -61,12 +61,16 @@ object FudusServer {
     with RestaurantFoodService
     with RestaurantService
     with CustomerService
+    with OrderingRepository
+    with OrderingService
 
-  type FudusServerEnv = RestaurantRepository
+  type FudusServerEnv = CategoryRepository
+    with RestaurantRepository
     with RestaurantFoodService
     with AuthenticationService
     with RestaurantService
     with FoodService
+    with OrderingService
 
   val layer: ZLayer[FudusEnv, Throwable, FudusServer] =
     ZLayer.fromFunction(FudusServer.apply _)

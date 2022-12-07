@@ -4,7 +4,7 @@ import io.getquill.Embedded
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder}
 
 object Domain {
-  sealed trait HasUUID {
+  sealed trait HasUUID extends Product with Serializable {
     def value: String
   }
 
@@ -45,17 +45,17 @@ object Domain {
       restaurant: RestaurantUUID
   )
 
-  case class OrderUUID(value: String) extends HasUUID
+  case class OrderingUUID(value: String) extends AnyVal
 
-  case class Order(
-      uuid: OrderUUID,
-      by: CustomerUUID,
-      basket: Seq[BasketEntry],
+  case class Ordering(
+      uuid: OrderingUUID,
+      orderedBy: CustomerUUID,
+      basket: Basket,
       creationDate: String,
       hasPaid: Boolean
   )
 
-  case class BasketEntry(food: FoodUUID, amount: Int, notes: String) extends Embedded
+  case class BasketEntry(food: FoodUUID, amount: Int, notes: String)
   type Basket = Seq[BasketEntry]
 
   case class RestaurantUUID(value: String) extends HasUUID
