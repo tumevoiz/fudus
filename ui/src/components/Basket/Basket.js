@@ -6,7 +6,6 @@ import * as R from "ramda";
 
 function Basket({menuItems, totalPrice}) {
     const basketItems = useSelector(state => state.basket);
-    // const isBasketEmpty = R.isEmpty(basketItems)
 
     return (
         <div className={'Basket'}>
