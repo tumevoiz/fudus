@@ -15,6 +15,8 @@ const Restaurants = () => {
     useEffect(() => {
         dispatch(allActions.restaurantActions.fetchRestaurants())
         console.log('restaurants', restaurants)
+        dispatch(allActions.categoriesActions.fetchCategories())
+        console.log('restaurants', restaurants)
     }, [dispatch])
 
     return (

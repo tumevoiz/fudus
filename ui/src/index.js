@@ -6,6 +6,8 @@ import './assets/fonts/Martel_Sans/MartelSans-Regular.ttf';
 // Pages
 import Restaurants from "./pages/Restaurants/Restaurants";
 import Menu from './pages/Menu/Menu';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
 import {createBrowserHistory} from "history";
 import {ConnectedRouter, connectRouter, routerMiddleware} from "connected-react-router";
 import {configureStore} from "@reduxjs/toolkit";
@@ -40,6 +42,8 @@ const routes = (
     <Switch>
         <Route path='/' component={Restaurants} exact />
         <Route path='/menu/:restaurantSlug' component={Menu} />
+        <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
     </Switch>
 )
 

@@ -4,8 +4,9 @@ import {useSelector} from "react-redux";
 import React from 'react';
 import * as R from "ramda";
 
-function Basket() {
+function Basket({menuItems, totalPrice}) {
     const basketItems = useSelector(state => state.basket);
+    // const isBasketEmpty = R.isEmpty(basketItems)
 
     return (
         <div className={'Basket'}>
