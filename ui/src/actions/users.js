@@ -1,24 +1,24 @@
 import {
-    FETCH_USER_START,
-    FETCH_USER_SUCCESS,
-    FETCH_USER_FAILURE
+    LOGIN_USER_START,
+    LOGIN_USER_SUCCESS,
+    LOGIN_USER_FAILURE
 } from '../actionTypes'
 
-import {fetchUser as fetchUserApi } from "../api/user";
+import {loginUser as fetchUserApi } from "../api/user";
 
-const fetchUser = () => async dispatch => {
+const loginUser = () => async dispatch => {
     try{
-        dispatch({type: FETCH_USER_START})
+        dispatch({type: LOGIN_USER_START})
 
         const user = await fetchUserApi()
         dispatch({
-            type: FETCH_USER_SUCCESS,
+            type: LOGIN_USER_SUCCESS,
             payload: user,
         })
         console.log('fetch user', user)
     } catch (err) {
         dispatch({
-            type: FETCH_USER_FAILURE,
+            type: LOGIN_USER_FAILURE,
             payload: err,
             error: true,
         })
@@ -27,5 +27,5 @@ const fetchUser = () => async dispatch => {
 }
 
 export default {
-    fetchUser
+    loginUser
 }

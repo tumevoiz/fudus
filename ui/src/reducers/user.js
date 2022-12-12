@@ -1,20 +1,23 @@
-import {FETCH_USER_SUCCESS, LOG_OUT_USER_SUCCESS} from "../actionTypes";
+import {LOGIN_USER_SUCCESS, LOG_OUT_USER_SUCCESS} from "../actionTypes";
 
-const initialState = {}
+const initialState = {
+    user: {},
+    isLoggedIn: false
+}
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_USER_SUCCESS:
+        case LOGIN_USER_SUCCESS:
             return {
                 ...state,
                 user: action.payload,
-                loggedIn: true
+                isLoggedIn: true
             }
         case LOG_OUT_USER_SUCCESS:
             return {
                 ...state,
                 user: {},
-                loggedIn: false
+                isLoggedIn: false
             }
         default:
             return state

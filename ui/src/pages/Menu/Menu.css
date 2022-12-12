@@ -19,12 +19,11 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    width: 80%;
+    width: 90%;
 }
 
 .searchTop {
     width: 100%;
-    /*padding: 10px;*/
 }
 
 .restaurantName {

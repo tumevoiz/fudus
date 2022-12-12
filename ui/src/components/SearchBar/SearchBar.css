@@ -8,9 +8,9 @@
     border-radius: 15px;
 }
 
-input[type=text] {
+input[type=text].searchBox {
     padding-left: 30px;
 }
-input[type=text]:focus-visible {
+input[type=text].searchBox:focus-visible {
     outline: none;
 }
