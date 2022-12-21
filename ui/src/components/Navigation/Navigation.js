@@ -1,11 +1,18 @@
 import './Navigation.css';
 import Button from "../Button/Button";
 import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import allActions from "../../actions/actions";
 
 function Navigation() {
     const isLoggedIn = useSelector(state => state.user.isLoggedIn);
     const username = useSelector(state => state.user.user.username);
+    const dispatch = useDispatch()
+
+    const handleClick = (event) => {
+        dispatch(allActions.userActions.logoutUser())
+        event.preventDefault();
+    };
 
     return (
         <div className={"navigationBar"}>
@@ -13,10 +20,12 @@ function Navigation() {
                 <h1>Fuduś</h1>
             </Link>
             {isLoggedIn ? (
-                <div>{username}</div>
+                <div>{username}
+                    <Button text={"Wyloguj"} style={"ActionButton"} onClick={handleClick}/>
+                </div>
             ) : (
                 <Link to={{pathname: `/Login`}}>
-                    <Button text={"Zaloguj się"} style={"ActionButton"} component={Link} to="/Login"/>
+                    <Button text={"Zaloguj"} style={"ActionButton"} component={Link} to="/Login"/>
                 </Link>
             )}
         </div>

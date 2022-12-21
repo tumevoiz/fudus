@@ -1,4 +1,4 @@
-import {LOGIN_USER_SUCCESS, LOG_OUT_USER_SUCCESS} from "../actionTypes";
+import {LOGIN_USER_SUCCESS, LOG_OUT_USER_SUCCESS, LOGIN_USER_FAILURE} from "../actionTypes";
 
 const initialState = {
     user: {},
@@ -12,6 +12,12 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 user: action.payload,
                 isLoggedIn: true
+            }
+        case LOGIN_USER_FAILURE:
+            return {
+                ...state,
+                user: {},
+                isLoggedIn: false,
             }
         case LOG_OUT_USER_SUCCESS:
             return {
