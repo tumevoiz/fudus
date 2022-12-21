@@ -20,7 +20,8 @@ function Navigation() {
                 <h1>Fuduś</h1>
             </Link>
             {isLoggedIn ? (
-                <div>{username}
+                <div className={"loggedInNav"}>
+                    <p>{username}</p>
                     <Button text={"Wyloguj"} style={"ActionButton"} onClick={handleClick}/>
                 </div>
             ) : (
