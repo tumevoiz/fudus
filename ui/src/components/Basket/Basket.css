@@ -7,10 +7,6 @@
     padding: 1em;
 }
 
-.Basket button {
-    /*width: 80%;*/
-}
-
 .BasketItem {
     display: inline-flex;
     flex-direction: row;
@@ -52,6 +48,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding: 1em 0;
 }
 
 .itemsCount .amountButtons {
@@ -62,12 +59,12 @@
 
 .itemsCount .amountButtons button:first-child {
     width: 1em;
-    border-radius: 0.3em 0.3em 0 0;
+    border-radius: 0 0.7em 0 0;
     padding: 0 1.1em 0 0.5em;
 }
 
 .itemsCount .amountButtons button:last-child {
     width: 1em;
-    border-radius: 0 0 0.3em 0.3em;
+    border-radius: 0 0 0.7em 0;
     padding: 0 1em 0 0.6em;
 }
