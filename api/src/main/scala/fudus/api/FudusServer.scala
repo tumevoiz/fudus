@@ -26,6 +26,7 @@ final case class FudusServer(
     List(
       CategoryEndpoints.listCategories,
       RootEndpoints.login,
+      RootEndpoints.register,
       RestaurantEndpoints.listRestaurants,
       RestaurantEndpoints.getRestaurantBySlug,
       RestaurantEndpoints.getRestaurantBySlugFood,
