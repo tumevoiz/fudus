@@ -50,7 +50,7 @@ const registerUser = (username, password) => async dispatch => {
             payload: err,
             error: true,
         })
-        console.log("error")
+        console.log("error" + err)
     }
 }
 
