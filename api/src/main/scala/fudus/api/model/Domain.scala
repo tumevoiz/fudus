@@ -6,6 +6,8 @@ import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder}
 object Domain {
   sealed trait HasUUID extends Product with Serializable {
     def value: String
+
+    override def toString: String = value
   }
 
   case class CategoryUUID(value: String) extends HasUUID

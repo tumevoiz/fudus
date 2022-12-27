@@ -31,7 +31,7 @@ package object errors {
   }
 
   object ValidationMessages {
-    val GenericUUIDEmpty = "UUID is empty"
+    val GenericUUIDEmpty = "Nie podawaj mi pustego UUID. Miau >.<"
     val GenericUUIDInvalid = "UUID is invalid"
 
     val UsernameTooShort = "Username is too short"

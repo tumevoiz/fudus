@@ -2,6 +2,10 @@ package fudus.api
 
 import fudus.api.errors.{FudusApiError, FudusError}
 import fudus.api.model.Domain._
+import io.circe._
+import sttp.tapir.Codec.PlainCodec
+import sttp.tapir.{Codec, DecodeResult, Schema}
+import sttp.tapir.generic.Derived
 import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 
 package object encoder {
@@ -25,6 +29,9 @@ package object encoder {
     JsonDecoder[String].map(FoodUUID)
   implicit val foodUuidEncoder: JsonEncoder[FoodUUID] =
     JsonEncoder[String].contramap(_.value)
+
+  implicit val foodUuidCodec: Encoder[FoodUUID] =
+    Encoder.encodeString.contramap(s => s.value)
 
   implicit val restaurantUuidDecoder: JsonDecoder[RestaurantUUID] =
     JsonDecoder[String].map(RestaurantUUID)

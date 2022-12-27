@@ -9,6 +9,7 @@ import sttp.tapir.server.ziohttp.ZioHttpInterpreter
 import sttp.tapir.swagger.bundle.SwaggerInterpreter
 import sttp.tapir.ztapir._
 import zhttp.http._
+import zhttp.http.middleware.Cors.CorsConfig
 import zhttp.service.Server
 import zio._
 
@@ -38,12 +39,20 @@ final case class FudusServer(
   val httpApp: HttpApp[FudusServerEnv, Throwable] =
     ZioHttpInterpreter().toHttp(apiEndpoints ++ docEndpoints)
 
+  val corsConfig: CorsConfig = CorsConfig(
+    anyOrigin = true,
+    anyMethod = true
+  )
+
+  val combined: Http[FudusServerEnv, Throwable, Request, Response] =
+    httpApp @@ Middleware.cors(corsConfig)
+
   def start: ZIO[FudusEnv, Throwable, Unit] = (for {
     port <- System.envOrElse("PORT", "8080").map(_.toInt)
     _ <- ZIO.logInfo("Starting migrations") *> databaseService.migrate
     _ <- ZIO
       .logInfo("Starting HTTP server") *> Server
-      .start(port, httpApp)
+      .start(port, combined)
       .onError(e => ZIO.logError(e.prettyPrint))
   } yield ())
 }
@@ -64,7 +73,8 @@ object FudusServer {
     with OrderingRepository
     with OrderingService
 
-  type FudusServerEnv = CategoryRepository
+  type FudusServerEnv = CustomerService
+    with CategoryRepository
     with RestaurantRepository
     with RestaurantFoodService
     with AuthenticationService
