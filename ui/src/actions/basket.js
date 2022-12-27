@@ -1,9 +1,9 @@
 import {ADD_MENU_ITEM_TO_BASKET, REMOVE_MENU_ITEM_FROM_BASKET} from '../actionTypes'
 
-const addMenuItemToBasket = (id) => dispatch => {
+const addMenuItemToBasket = (menuItem) => dispatch => {
     dispatch({
         type: ADD_MENU_ITEM_TO_BASKET,
-        payload: id,
+        payload: menuItem,
     })
 }
 

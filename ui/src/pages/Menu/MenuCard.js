@@ -14,7 +14,7 @@ function MenuCard({menuItem}) {
         if (isAdded) {
             dispatch(allActions.basketActions.removeMenuItemFromBasket(menuItem.id))
         } else {
-            dispatch(allActions.basketActions.addMenuItemToBasket(menuItem.id))
+            dispatch(allActions.basketActions.addMenuItemToBasket(menuItem))
         }
 
         console.log("Added to cart!")
