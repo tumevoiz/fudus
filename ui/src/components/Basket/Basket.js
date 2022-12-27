@@ -12,9 +12,10 @@ function Basket({menuItems, totalPrice}) {
     return (
         <div className={'Basket'}>
             {!R.isEmpty(basketItems) ? basketItems.basket.map((basketItem, index) => <BasketItem basketItem={basketItem}/>) : <p>Twój koszyk jest pusty.</p>}
+            <hr />
             {!R.isEmpty(basketItems) ?
                 <Link to='/basket'>
-                    <button className={"btn btn-dark ActionButtonReversed"} type={"submit"}>Przejdź do kasy</button>
+                    <button className={"btn btn-dark ActionButtonReversed"}>Przejdź do kasy</button>
                 </Link> : ""
             }
         </div>

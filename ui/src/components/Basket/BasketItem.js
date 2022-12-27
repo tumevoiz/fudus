@@ -20,12 +20,14 @@ function BasketItem({basketItem}) {
         <div className={'BasketItem'}>
             <div><img src={basketItem.img}/></div>
             <div><p>{basketItem.name}</p></div>
-            <div className="btn-group amountButtons" role="group">
-                <button type="button" className="btn" onClick={removeItemFromBasket}>-</button>
+            <div className={"itemsCount"}>
                 <p>{basketItem.count}</p>
-                <button type="button" className="btn" onClick={addItemToBasket}>+</button>
+                <div className="amountButtons">
+                    <button type="button" className="btn" onClick={addItemToBasket}>+</button>
+                    <button type="button" className="btn" onClick={removeItemFromBasket}>-</button>
+                </div>
             </div>
-            <div><p>{basketItem.price*basketItem.count} zł</p></div>
+            <div><p>{basketItem.price * basketItem.count} zł</p></div>
         </div>
     );
 }

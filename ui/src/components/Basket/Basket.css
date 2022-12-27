@@ -15,6 +15,7 @@
     display: inline-flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 }
 
 .BasketItem img {
@@ -22,29 +23,19 @@
     height: 3em;
     border-radius: 0.5em;
     margin-top: 0.2em;
+    margin-right: 1em;
     object-fit: cover;
 }
 
 .BasketItem p {
-
-}
-
-.amountButtons {
-
+    margin: 0 0.5em;
 }
 
 .amountButtons button {
-
-}
-
-.amountButtons button {
-    width: 1em;
     text-align: center;
     background: linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%);
-    border-radius: 10px;
     color: whitesmoke;
     font-weight: 600;
-    border: none;
 }
 
 .amountButtons button:hover {
@@ -55,4 +46,28 @@
 .amountButtons button:active {
     background: linear-gradient(90deg, rgb(231, 105, 39) 0%, rgb(246, 33, 87) 100%) border-box;
     color: whitesmoke;
+}
+
+.itemsCount {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.itemsCount .amountButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.itemsCount .amountButtons button:first-child {
+    width: 1em;
+    border-radius: 0.3em 0.3em 0 0;
+    padding: 0 1.1em 0 0.5em;
+}
+
+.itemsCount .amountButtons button:last-child {
+    width: 1em;
+    border-radius: 0 0 0.3em 0.3em;
+    padding: 0 1em 0 0.6em;
 }

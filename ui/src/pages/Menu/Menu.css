@@ -36,6 +36,28 @@
     border-radius: 1em;
     width: 80%;
     display: flex;
+    flex-direction: column;
+}
+
+.restaurantInfo .rowUpper {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.restaurantInfo .rowUpper div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.restaurantInfo .rowUpper h2 {
+    font-size: 25px;
+}
+
+.restaurantInfo .rowLower{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding: 0 2em;
 }

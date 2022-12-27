@@ -30,11 +30,15 @@ function Menu(props) {
                     <SearchBar/>
                 </div>
                 <div className={"restaurantInfo"}>
-                    <h1>{restaurant.name}</h1>
-                    <div>
-                        <i className={"bi bi-star"} style={{fontSize: 30}}/><h1>{restaurant.rating}</h1>
+                    <div className={"rowUpper"}>
+                        <h1>{restaurant.name}</h1>
+                        <div>
+                            <i className={"bi bi-star"} style={{fontSize: 25}}/><h2>{restaurant.rating}</h2>
+                        </div>
                     </div>
-                    <p>{restaurant.description}</p>
+                    <div className={"rowLower"}>
+                        <p>{restaurant.description}</p>
+                    </div>
                 </div>
                 <div className={"menuCardsWrapper"}>
                     {!R.isEmpty(menu) ? menu.menu.map((menuItem, index) => <MenuCard key={index}
