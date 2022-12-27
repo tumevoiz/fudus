@@ -27,7 +27,7 @@ function BasketItem({basketItem}) {
                     <button type="button" className="btn" onClick={removeItemFromBasket}>-</button>
                 </div>
             </div>
-            <div><p>{basketItem.price * basketItem.count} zł</p></div>
+            <div className={"itemPrice"}><p>{basketItem.price * basketItem.count} zł</p></div>
         </div>
     );
 }
