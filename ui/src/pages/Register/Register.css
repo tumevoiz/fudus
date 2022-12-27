@@ -1,60 +1,104 @@
 .RegisterContainer {
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    background: linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%);
+    background-color: white;
 }
 
-.Register-wrapper {
+.register-wrapper {
     width: 50%;
     max-width: 500px;
-    height: 100%;
+    max-height: 70%;
     min-width: 200px;
     padding: 3em;
-    background-color: cornflowerblue;
+    background-color: white;
 }
-.Register-wrapper h1 {
+.register-wrapper h1 {
     margin: 0;
     padding: 0;
 }
 .RegisterForm {
     padding: 3em 0;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-content: space-around;
-    justify-content: space-around;
     height: 70%;
 }
 
 .RegisterForm input[type=text], .RegisterForm input[type=password] {
-    margin: 1em 0;
-    padding: 0 1em;
-    height: 3em;
-    width: 100%;
-    border-radius: 10px;
-    border: 2px solid darkgray;
-    font-size: 16px;
-    line-height: 16px;
-}
-
-.RegisterForm input[type=text]:active, .RegisterForm input[type=password]:active {
-    margin: 1em 0;
-    height: 3em;
-    width: 100%;
-    border-radius: 10px;
+    margin-top: 0.5em;
     background: linear-gradient(white, white) padding-box,
     linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%) border-box;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
+    border-radius: 10px;
+}
+
+.RegisterForm input[type=text]:active, .RegisterForm input[type=password]:active,
+.RegisterForm input[type=text]:focus, .RegisterForm input[type=password]:focus {
+    background: linear-gradient(white, white) padding-box,
+    linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%) border-box;
+    border: 2px solid transparent;
+    outline: none;
+    box-shadow: none;
 }
 
 .RegisterForm input[type=text]:focus-visible, .RegisterForm input[type=password]:focus-visible {
     background: linear-gradient(white, white) padding-box,
     linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%) border-box;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
 }
 
-.RegisterForm div.ActionButtonReversed {
+.ActionButtonReversed {
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%);
+    border-radius: 10px;
+    color: whitesmoke;
+    font-weight: 600;
+    border: none;
+}
+
+.ActionButtonReversed:hover {
+    background: linear-gradient(90deg, rgb(236, 141, 94) 0%, rgb(241, 91, 127) 100%);
+    color: whitesmoke;
+}
+
+.ActionButtonReversed:active {
+    background: linear-gradient(90deg, rgb(231, 105, 39) 0%, rgb(246, 33, 87) 100%) border-box;
+    color: whitesmoke;
+}
+
+.RegisterForm .ActionButtonReversed {
     margin-top: 3em;
+    font-size: 1.3em;
+}
+
+.RegisterForm label {
+
+}
+
+.RegisterForm .errorMessage {
+    color: #d50303;
+}
+
+.changeSignAction {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.changeSignAction p {
+    margin: 0;
+    padding: 0;
+}
+
+#loginLink {
+    color: rgba(248, 129, 70, 1);
+}
+
+#loginLink:hover {
+    color: rgba(248, 72, 114, 1);
+}
+
+#loginLink:active {
+    color: rgba(246, 33, 87);
+    border: none;
 }

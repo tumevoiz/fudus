@@ -45,6 +45,7 @@ const routes = (
         <Route path='/menu/:restaurantSlug' component={Menu} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
+        <Route path='/basket' component={Register} />
     </Switch>
 )
 

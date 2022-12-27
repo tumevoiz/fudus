@@ -78,3 +78,27 @@
 .LoginForm .errorMessage {
     color: #d50303;
 }
+
+.changeSignAction {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.changeSignAction p {
+    margin: 0;
+    padding: 0;
+}
+
+#registerLink {
+    color: rgba(248, 129, 70, 1);
+}
+
+#registerLink:hover {
+    color: rgba(248, 72, 114, 1);
+}
+
+#registerLink:active {
+    color: rgba(246, 33, 87);
+    border: none;
+}

@@ -1,57 +1,71 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './Register.css';
 import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../actions/actions";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import Button from "../../components/Button/Button";
-import {Redirect} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 
 function Register() {
     const isLoggedIn = useSelector(state => state.user.isLoggedIn);
     const dispatch = useDispatch()
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
 
     if (isLoggedIn) {
         return <Redirect to={"/"}/>
     }
     return (
         <div className={"RegisterContainer"}>
-            <div className="Register-wrapper">
-                <h1>Zaloguj się</h1>
+            <div className="register-wrapper">
+                <h1>Zarejestruj się</h1>
                 <Formik
-                    initialValues={{Register: '', password: ''}}
+                    initialValues={{username: '', password: ''}}
                     validate={values => {
                         const errors = {};
                         if (!values.username) {
-                            errors.Register = 'Required';
+                            errors.username = 'Pole wymagane.';
+                        }
+                        if (!values.password) {
+                            errors.password = 'Pole wymagane.';
                         } else if (
-                            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.username)
+                            !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i.test(values.password)
                         ) {
-                            errors.Register = 'Invalid username address';
+                            errors.password = 'Hasło musi zawierać min. 8 znaków, w tym cyfre i znak specjalny.';
                         }
                         return errors;
                     }}
-                    onSubmit={(values, {setSubmitting}) => {
+                    onSubmit={async (values, {setSubmitting}) => {
+                        dispatch(allActions.userActions.registerUser(values.username, values.password))
                         setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
+                            console.log(JSON.stringify(values, null, 2));
                             setSubmitting(false);
                         }, 400);
                     }}
                 >
                     {({isSubmitting}) => (
                         <Form className={"RegisterForm"}>
-                            <Field type="text" name="username" onChange={e => setUsername(e.target.value)}/>
-                            <ErrorMessage name="username" component="div" onChange={e => setPassword(e.target.value)}/>
-                            <Field type="password" name="password"/>
-                            <ErrorMessage name="password" component="div"/>
-                            <Button text="Zaloguj" style={'ActionButtonReversed'} onClick={async () => {
-                                dispatch(allActions.userActions.RegisterUser(username, password))
-                            }}>
-                            </Button>
+                            <div className={"mb-3"}>
+                                <label>Login:</label>
+                                <Field type="text" name="username" className={"form-control"}/>
+                                <ErrorMessage className={"errorMessage"} name="username" component="div"/>
+                            </div>
+                            <div className={"mb-3"}>
+                                <label>Hasło:</label>
+                                <Field type="password" name="password" className={"form-control"}/>
+                                <ErrorMessage className={"errorMessage"} name="password" component="div"/>
+                            </div>
+                            <button className={"btn btn-dark ActionButtonReversed"} type={"submit"}>Załóż konto</button>
                         </Form>
                     )}
                 </Formik>
+                <hr/>
+                <div className={"changeSignAction"}>
+
+                    <p>Masz już konto?</p>
+                    <Link
+                        to='/login'
+                        id='registerLink'
+                        className='btn btn-inverse btn-block btn-lg'
+                    >Zaloguj się</Link>
+                </div>
             </div>
         </div>
     )
