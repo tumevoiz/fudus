@@ -26,7 +26,7 @@ function RestaurantCard({restaurant}) {
                 </div>
                 <div className={"restaurantDetails"}>
                     <div>
-                        <img src={starIcon} /><p className={"starsTag"}>{restaurant.stars}</p>
+                        <img src={starIcon} /><p className={"starsTag"}>{restaurant.rating}</p>
                     </div>
                     <div>
                         <img src={timeIcon} /><p className={"timeTag"}>{convertTime(restaurant.deliveryTime)}</p>

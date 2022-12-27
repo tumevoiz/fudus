@@ -4,6 +4,7 @@ import {Provider} from 'react-redux'
 import './index.css';
 import './assets/fonts/Martel_Sans/MartelSans-Regular.ttf';
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 // Pages
 import Restaurants from "./pages/Restaurants/Restaurants";
 import Menu from './pages/Menu/Menu';

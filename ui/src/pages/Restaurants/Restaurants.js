@@ -21,7 +21,7 @@ const Restaurants = () => {
 
     return (
         <App>
-            <div className="Search">
+            <div className={"Restaurant"}>
                 <div className={"banner"}>
                     <div className={"writing"}>
                         <h1>Twoje ulubione jedzenie w okolicy</h1>

@@ -1,6 +1,6 @@
 .Sidebar {
     display: flex;
-    background-color: #36A0FF;
+    background-color: white;
     min-width: 30%;
     flex-wrap: wrap;
     align-items: center;

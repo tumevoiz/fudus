@@ -12,6 +12,7 @@
     justify-content: center;
     flex-direction: column;
     text-align: center;
+    padding-top: 2em;
 }
 
 .menuCardsWrapper {
@@ -26,9 +27,37 @@
     width: 100%;
 }
 
-.restaurantName {
+.restaurantInfo {
+    margin: 1em;
+    padding: 2em;
+    color: whitesmoke;
+    background: rgb(248, 129, 70);
+    background: linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%);
+    border-radius: 1em;
     width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.restaurantInfo .rowUpper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.restaurantInfo .rowUpper div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.restaurantInfo .rowUpper h2 {
+    font-size: 25px;
+}
+
+.restaurantInfo .rowLower{
     display: flex;
     flex-direction: row;
     justify-content: left;
+    padding: 0 2em;
 }

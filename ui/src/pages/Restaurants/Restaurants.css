@@ -1,12 +1,11 @@
 .root {
     display: grid;
     justify-items: center;
-    margin-top: 10px;
     flex-direction: column;
     height: 100%;
 }
 
-.Search {
+.Restaurant {
     width: 100%;
     display: flex;
     align-items: center;

@@ -38,6 +38,7 @@ function Register() {
                             console.log(JSON.stringify(values, null, 2));
                             setSubmitting(false);
                         }, 400);
+                        return <Redirect to={"/"}/>
                     }}
                 >
                     {({isSubmitting}) => (
@@ -58,7 +59,6 @@ function Register() {
                 </Formik>
                 <hr/>
                 <div className={"changeSignAction"}>
-
                     <p>Masz już konto?</p>
                     <Link
                         to='/login'
