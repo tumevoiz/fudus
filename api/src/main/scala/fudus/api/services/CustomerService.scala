@@ -20,6 +20,8 @@ final case class CustomerService(
       username: String,
       password: String,
       email: String,
+      address: String,
+      city: String,
       role: CustomerRole.Type
   ): IO[FudusError, Unit] =
     for {
@@ -30,8 +32,8 @@ final case class CustomerService(
       customer = Customer(
         uuid = CustomerUUID(UUID.randomUUID().toString),
         email = email,
-        address = "",
-        city = "",
+        address = address,
+        city = city,
         role = role
       )
 
@@ -84,6 +86,16 @@ final case class CustomerService(
 }
 
 object CustomerService {
+  def create(
+      username: String,
+      password: String,
+      email: String,
+      address: String,
+      city: String,
+      role: CustomerRole.Type
+  ): ZIO[CustomerService, FudusError, Unit] =
+    ZIO.serviceWithZIO[CustomerService](_.create(username, password, email, address, city, role))
+
   val layer: ZLayer[CredentialsRepository with CustomerRepository, Throwable, CustomerService] =
     ZLayer.fromFunction(CustomerService.apply _)
 }
