@@ -1,58 +1,73 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './Login.css';
 import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../actions/actions";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import App from "../App";
+import {Link, Redirect} from "react-router-dom";
 
 function Login() {
     const isLoggedIn = useSelector(state => state.user.isLoggedIn);
     const dispatch = useDispatch()
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
 
+    if (isLoggedIn) {
+        return <Redirect to={"/"}/>
+    }
     return (
-        <App>
+        <div className={"LoginContainer"}>
             <div className="login-wrapper">
-                <h1>Please Log In</h1>
+                <h1>Zaloguj się</h1>
                 <Formik
-                    initialValues={{login: '', password: ''}}
+                    initialValues={{username: '', password: ''}}
                     validate={values => {
                         const errors = {};
                         if (!values.username) {
-                            errors.login = 'Required';
+                            errors.username = 'Pole wymagane.';
+                        }
+                        if (!values.password) {
+                            errors.password = 'Pole wymagane.';
                         } else if (
-                            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.username)
+                            !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i.test(values.password)
                         ) {
-                            errors.login = 'Invalid username address';
+                            errors.password = 'Hasło musi zawierać min. 8 znaków, w tym cyfre i znak specjalny.';
                         }
                         return errors;
                     }}
-                    onSubmit={(values, {setSubmitting}) => {
+                    onSubmit={async (values, {setSubmitting}) => {
+                        dispatch(allActions.userActions.loginUser(values.username, values.password))
                         setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
+                            console.log(JSON.stringify(values, null, 2));
                             setSubmitting(false);
                         }, 400);
                     }}
                 >
                     {({isSubmitting}) => (
                         <Form className={"LoginForm"}>
-                            <div></div>
-                            <Field type="text" name="username" onChange={e => setUsername(e.target.value)}/>
-                            <ErrorMessage name="username" component="div" onChange={e => setPassword(e.target.value)}/>
-                            <div></div>
-                            <Field type="password" name="password"/>
-                            <ErrorMessage name="password" component="div"/>
-                            <button type="submit" disabled={isSubmitting} onClick={async () => {
-                                dispatch(allActions.userActions.loginUser(username, password))
-                            }}>
-                                Log in
-                            </button>
+                            <div className={"mb-3"}>
+                                <label>Login:</label>
+                                <Field type="text" name="username" className={"form-control"}/>
+                                <ErrorMessage className={"errorMessage"} name="username" component="div"/>
+                            </div>
+                            <div className={"mb-3"}>
+                                <label>Hasło:</label>
+                                <Field type="password" name="password" className={"form-control"}/>
+                                <ErrorMessage className={"errorMessage"} name="password" component="div"/>
+                            </div>
+                            <button className={"btn btn-dark ActionButtonReversed"} type={"submit"}>Zaloguj</button>
                         </Form>
                     )}
                 </Formik>
+                <hr/>
+                <div className={"changeSignAction"}>
+
+                    <p>Nie masz jeszcze konta?</p>
+                    <Link
+                        to='/register'
+                        id='registerLink'
+                        className='btn btn-inverse btn-block btn-lg'
+                    >Zarejesteruj się</Link>
+                </div>
             </div>
-        </App>
+        </div>
     )
 }
 

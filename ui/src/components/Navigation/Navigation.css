@@ -9,4 +9,18 @@
   margin-bottom: 20px;
 }
 
+.loggedInNav {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 
+.loggedInNav p {
+  margin: 0;
+  margin-right: 0.3em;
+}
+
+.loggedInNav div {
+  margin-left: 0.3em;
+}

@@ -47,6 +47,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: rgb(40,40,40);
   justify-content: center;
+  height: 100vh;
 }
 
 code {
@@ -54,6 +55,6 @@ code {
     monospace;
 }
 
-a {
-  text-decoration: none;
+a, a:hover, a:focus{
+  text-decoration: none !important;
 }

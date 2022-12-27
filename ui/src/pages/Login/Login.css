@@ -1,10 +1,104 @@
-.LoginForm {
-    width: 80%;
+.LoginContainer {
+    height: 100vh;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.login-wrapper {
+    width: 50%;
+    max-width: 500px;
+    max-height: 70%;
+    min-width: 200px;
+    padding: 3em;
+    background-color: white;
+}
+.login-wrapper h1 {
+    margin: 0;
+    padding: 0;
+}
+.LoginForm {
+    padding: 3em 0;
+    height: 70%;
 }
 
 .LoginForm input[type=text], .LoginForm input[type=password] {
-    width: 60%;
-    margin: 1em;
+    margin-top: 0.5em;
+    background: linear-gradient(white, white) padding-box,
+    linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%) border-box;
+    border: 2px solid transparent;
+    border-radius: 10px;
+}
+
+.LoginForm input[type=text]:active, .LoginForm input[type=password]:active,
+.LoginForm input[type=text]:focus, .LoginForm input[type=password]:focus {
+    background: linear-gradient(white, white) padding-box,
+    linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%) border-box;
+    border: 2px solid transparent;
+    outline: none;
+    box-shadow: none;
+}
+
+.LoginForm input[type=text]:focus-visible, .LoginForm input[type=password]:focus-visible {
+    background: linear-gradient(white, white) padding-box,
+    linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%) border-box;
+    border: 2px solid transparent;
+}
+
+.ActionButtonReversed {
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%);
+    border-radius: 10px;
+    color: whitesmoke;
+    font-weight: 600;
+    border: none;
+}
+
+.ActionButtonReversed:hover {
+    background: linear-gradient(90deg, rgb(236, 141, 94) 0%, rgb(241, 91, 127) 100%);
+    color: whitesmoke;
+}
+
+.ActionButtonReversed:active {
+    background: linear-gradient(90deg, rgb(231, 105, 39) 0%, rgb(246, 33, 87) 100%) border-box;
+    color: whitesmoke;
+}
+
+.LoginForm .ActionButtonReversed {
+    margin-top: 3em;
+    font-size: 1.3em;
+}
+
+.LoginForm label {
+
+}
+
+.LoginForm .errorMessage {
+    color: #d50303;
+}
+
+.changeSignAction {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.changeSignAction p {
+    margin: 0;
+    padding: 0;
+}
+
+#registerLink {
+    color: rgba(248, 129, 70, 1);
+}
+
+#registerLink:hover {
+    color: rgba(248, 72, 114, 1);
+}
+
+#registerLink:active {
+    color: rgba(246, 33, 87);
+    border: none;
 }

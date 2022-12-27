@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux'
 import './index.css';
 import './assets/fonts/Martel_Sans/MartelSans-Regular.ttf';
+import "bootstrap/dist/css/bootstrap.min.css";
 // Pages
 import Restaurants from "./pages/Restaurants/Restaurants";
 import Menu from './pages/Menu/Menu';
@@ -44,6 +45,7 @@ const routes = (
         <Route path='/menu/:restaurantSlug' component={Menu} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
+        <Route path='/basket' component={Register} />
     </Switch>
 )
 
