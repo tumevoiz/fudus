@@ -11,7 +11,7 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: action.payload,
-                isLoggedIn: true
+                isLoggedIn: true,
             }
         case LOGIN_USER_FAILURE:
             return {

@@ -9,15 +9,16 @@
 .register-wrapper {
     width: 50%;
     max-width: 500px;
-    max-height: 70%;
     min-width: 200px;
     padding: 3em;
     background-color: white;
 }
+
 .register-wrapper h1 {
     margin: 0;
     padding: 0;
 }
+
 .RegisterForm {
     padding: 3em 0;
     height: 70%;

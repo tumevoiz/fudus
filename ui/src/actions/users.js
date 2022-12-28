@@ -13,20 +13,20 @@ import {loginUser as loginUserApi, registerUser as registerUserApi} from "../api
 const loginUser = (username, password) => async dispatch => {
     try{
         dispatch({type: LOGIN_USER_START})
-
-        const user = await loginUserApi(username, password)
+        const response = await loginUserApi(username, password)
         dispatch({
             type: LOGIN_USER_SUCCESS,
-            payload: user,
+            payload: response,
+            error: false,
         })
-        console.log('logging user', user)
+        return
     } catch (err) {
         dispatch({
             type: LOGIN_USER_FAILURE,
             payload: err,
             error: true,
         })
-        console.log("error")
+        return Error("Ups... Logowanie nie powiodło sie. Sprawdź dane i spróbuj ponownie miau")
     }
 }
 
@@ -38,19 +38,19 @@ const registerUser = (username, password) => async dispatch => {
     try{
         dispatch({type: REGISTER_USER_START})
 
-        const user = await registerUserApi(username, password)
+        const response = await registerUserApi(username, password)
         dispatch({
             type: REGISTER_USER_SUCCESS,
-            payload: user,
+            payload: response,
         })
-        console.log('registering user', user)
+
     } catch (err) {
         dispatch({
             type: REGISTER_USER_FAILURE,
             payload: err,
             error: true,
         })
-        console.log("error" + err)
+        return Error("Ups... Logowanie nie powiodło sie. Sprawdź dane i spróbuj ponownie miau")
     }
 }
 
