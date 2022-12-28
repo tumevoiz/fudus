@@ -1,4 +1,5 @@
 import {
+    FETCH_CATEGORIES_FAILURE,
     FETCH_CATEGORIES_SUCCESS,
 } from "../actionTypes";
 
@@ -12,6 +13,10 @@ const basketReducer = (state = initialState, action) => {
             return {
                 ...state,
                 categories: action.payload,
+            }
+        case FETCH_CATEGORIES_FAILURE:
+            return {
+                ...state,
             }
         default:
             return state

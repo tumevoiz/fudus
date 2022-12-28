@@ -23,3 +23,15 @@
 .loggedInNav div {
   margin-left: 0.3em;
 }
+
+.loggedInNav a {
+  color: rgba(248, 129, 70, 1);
+}
+
+.loggedInNav a:hover {
+  color: rgb(245, 151, 112);
+}
+
+.loggedInNav a:active {
+  color: rgba(248, 72, 114, 1);
+}
