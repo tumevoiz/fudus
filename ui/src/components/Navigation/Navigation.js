@@ -9,7 +9,7 @@ function Navigation() {
     const username = useSelector(state => state.user.user.username);
     const dispatch = useDispatch()
 
-    const handleClick = (event) => {
+    const handleLogout = (event) => {
         dispatch(allActions.userActions.logoutUser())
         event.preventDefault();
     };
@@ -21,8 +21,11 @@ function Navigation() {
             </Link>
             {isLoggedIn ? (
                 <div className={"loggedInNav"}>
+                    <Link to={{pathname: `/order`}}>
+                        <i className={"bi bi-basket3-fill"} style={{fontSize: 25}}/>
+                    </Link>
                     <p>{username}</p>
-                    <Button text={"Wyloguj"} style={"ActionButton"} onClick={handleClick}/>
+                    <Button text={"Wyloguj"} style={"ActionButton"} onClick={handleLogout}/>
                 </div>
             ) : (
                 <Link to={{pathname: `/Login`}}>

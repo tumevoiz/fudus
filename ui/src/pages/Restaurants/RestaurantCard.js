@@ -5,20 +5,20 @@ import timeIcon from './../../assets/icons/time.png'
 
 function RestaurantCard({restaurant}) {
     console.log('restaurantCard', restaurant)
-     const linkParams ={
-         pathname: `/menu/${restaurant.name}`,
-         state: {restaurant: restaurant},
-     }
+    const linkParams = {
+        pathname: `/menu/${restaurant.name}`,
+        state: {restaurant: restaurant},
+    }
 
     function convertTime(deliveryTime) {
-        if (deliveryTime > 60){
-            return (deliveryTime/60) + " h " + deliveryTime%60 + " min"
+        if (deliveryTime > 60) {
+            return (deliveryTime / 60) + " h " + deliveryTime % 60 + " min"
         }
         return deliveryTime + " min"
     }
 
     return (
-        <Link to={linkParams} >
+        <Link to={linkParams}>
             <div className={"restaurantCardStyle"}>
                 <img src={restaurant.img} className={"restaurantCardImg"} alt={"meat and chips"}/>
                 <h2>{restaurant.name}</h2>
@@ -26,10 +26,10 @@ function RestaurantCard({restaurant}) {
                 </div>
                 <div className={"restaurantDetails"}>
                     <div>
-                        <img src={starIcon} /><p className={"starsTag"}>{restaurant.rating}</p>
+                        <img src={starIcon}/><p className={"starsTag"}>{restaurant.rating}</p>
                     </div>
                     <div>
-                        <img src={timeIcon} /><p className={"timeTag"}>{convertTime(restaurant.deliveryTime)}</p>
+                        <img src={timeIcon}/><p className={"timeTag"}>{convertTime(restaurant.deliveryTime)}</p>
                     </div>
                 </div>
             </div>

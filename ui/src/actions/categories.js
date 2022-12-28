@@ -10,12 +10,12 @@ const fetchCategories = () => async dispatch => {
     dispatch({type: FETCH_CATEGORIES_START})
 
     try{
-        const restaurants = await fetchCategoriesApi()
+        const categories = await fetchCategoriesApi()
         dispatch({
             type: FETCH_CATEGORIES_SUCCESS,
-            payload: restaurants,
+            payload: categories.data,
         })
-        console.log('fetch restaurants', restaurants)
+        console.log('fetch categories', categories)
     } catch (err) {
         dispatch({
             type: FETCH_CATEGORIES_FAILURE,

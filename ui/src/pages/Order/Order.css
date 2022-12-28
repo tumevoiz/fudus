@@ -1,4 +1,4 @@
-.RegisterContainer {
+.OrderContainer {
     height: 100vh;
     display: flex;
     align-items: center;
@@ -6,9 +6,10 @@
     background-color: white;
 }
 
-.register-wrapper {
+.order-wrapper {
     width: 50%;
     max-width: 500px;
+    max-height: 70%;
     min-width: 200px;
     padding: 3em;
     background-color: white;
@@ -19,12 +20,12 @@
     padding: 0;
 }
 
-.RegisterForm {
+.OrderForm {
     padding: 3em 0;
     height: 70%;
 }
 
-.RegisterForm input[type=text], .RegisterForm input[type=password] {
+.OrderForm input[type=text], .OrderForm input[type=password] {
     margin-top: 0.5em;
     background: linear-gradient(white, white) padding-box,
     linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%) border-box;
@@ -32,8 +33,8 @@
     border-radius: 10px;
 }
 
-.RegisterForm input[type=text]:active, .RegisterForm input[type=password]:active,
-.RegisterForm input[type=text]:focus, .RegisterForm input[type=password]:focus {
+.OrderForm input[type=text]:active, .OrderForm input[type=password]:active,
+.OrderForm input[type=text]:focus, .OrderForm input[type=password]:focus {
     background: linear-gradient(white, white) padding-box,
     linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%) border-box;
     border: 2px solid transparent;
@@ -41,7 +42,7 @@
     box-shadow: none;
 }
 
-.RegisterForm input[type=text]:focus-visible, .RegisterForm input[type=password]:focus-visible {
+.OrderForm input[type=text]:focus-visible, .OrderForm input[type=password]:focus-visible {
     background: linear-gradient(white, white) padding-box,
     linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%) border-box;
     border: 2px solid transparent;
@@ -67,16 +68,16 @@
     color: whitesmoke;
 }
 
-.RegisterForm .ActionButtonReversed {
+.OrderForm .ActionButtonReversed {
     margin-top: 3em;
     font-size: 1.3em;
 }
 
-.RegisterForm label {
+.OrderForm label {
 
 }
 
-.RegisterForm .errorMessage {
+.OrderForm .errorMessage {
     color: #d50303;
 }
 

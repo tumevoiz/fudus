@@ -45,7 +45,7 @@
     justify-content: space-between;
 }
 
-.restaurantInfo .rowUpper div{
+.restaurantInfo .rowUpper div {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -55,7 +55,7 @@
     font-size: 25px;
 }
 
-.restaurantInfo .rowLower{
+.restaurantInfo .rowLower {
     display: flex;
     flex-direction: row;
     justify-content: left;

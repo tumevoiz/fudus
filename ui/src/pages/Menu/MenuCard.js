@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './MenuCard.css';
 import Button from "../../components/Button/Button";
-import {useState} from "react";
 import allActions from "../../actions/actions";
 import {useDispatch} from "react-redux";
 
@@ -33,7 +32,7 @@ function MenuCard({menuItem}) {
                     <p className={"priceTag"}>{menuItem.price} zł</p>
                 </div>
                 <div>
-                    <Button text={isAdded ? "✓" : "+"} style={isAdded ? "AddButton added" :"AddButton"} onClick={addToCart}/>
+                    <Button text={isAdded ? "✓" : "+"} style={isAdded ? "AddButton added" : "AddButton"} onClick={addToCart}/>
                 </div>
             </div>
         </div>

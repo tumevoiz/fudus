@@ -1,17 +1,25 @@
-import restaurants from './mockRestaurants'
-import menu from './mockMenu'
-import * as R from 'ramda'
-import {propEq} from "ramda";
+import axios from "axios";
+
+const restaurantsEndpoint = 'http://localhost:8080/restaurants'
+const restaurantEndpoint = 'http://localhost:8080/restaurant/'
 
 export const fetchRestaurants = async () => {
-    return new Promise(resolve => {
-        resolve(restaurants)
-    })
+    return await axios.get(restaurantsEndpoint);
 }
 
-export const fetchMenuByRestaurantId = async (id) => {
-    return new Promise(resolve => {
-        const menuItems = R.filter(propEq('restaurantId', id), menu)
-        resolve(menuItems)
-    })
+export const fetchRestaurant = async (slug) => {
+    return await axios.get(restaurantEndpoint+slug);
+}
+
+export const fetchMenu = async (slug) => {
+    return await axios.get(restaurantEndpoint+slug+"/food");
+}
+
+export const addRestaurant = async (restaurant) => {
+    return await axios.post(restaurantEndpoint, {
+        params: {restaurant},
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
 }

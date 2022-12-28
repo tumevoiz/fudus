@@ -1,25 +1,37 @@
 .navigationBar {
-  height: 60px;
-  width: 100%;
-  text-align: center;
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  flex-direction: row;
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
 }
 
 .loggedInNav {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .loggedInNav p {
-  margin: 0;
-  margin-right: 0.3em;
+    margin: 0;
+    margin-right: 0.3em;
 }
 
 .loggedInNav div {
-  margin-left: 0.3em;
+    margin-left: 0.3em;
+}
+
+.loggedInNav a {
+    color: rgba(248, 129, 70, 1);
+}
+
+.loggedInNav a:hover {
+    color: rgb(245, 151, 112);
+}
+
+.loggedInNav a:active {
+    color: rgba(248, 72, 114, 1);
 }
