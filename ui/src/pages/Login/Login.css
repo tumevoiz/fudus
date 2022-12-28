@@ -14,10 +14,12 @@
     padding: 3em;
     background-color: white;
 }
+
 .login-wrapper h1 {
     margin: 0;
     padding: 0;
 }
+
 .LoginForm {
     padding: 3em 0;
     height: 70%;

@@ -1,60 +1,60 @@
 @font-face {
-  font-family: "Martel_Sans";
-  src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-Black.ttf") format("truetype");
-  font-weight: normal;
+    font-family: "Martel_Sans";
+    src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-Black.ttf") format("truetype");
+    font-weight: normal;
 }
 
 @font-face {
-  font-family: "Martel_Sans";
-  src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-Bold.ttf") format("truetype");
-  font-weight: bold;
+    font-family: "Martel_Sans";
+    src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-Bold.ttf") format("truetype");
+    font-weight: bold;
 }
 
 @font-face {
-  font-family: 'Martel_Sans';
-  src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-ExtraBold.ttf") format("truetype");
-  font-weight: 900;
+    font-family: 'Martel_Sans';
+    src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-ExtraBold.ttf") format("truetype");
+    font-weight: 900;
 }
 
 @font-face {
-  font-family: 'Martel_Sans';
-  src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-ExtraLight.ttf") format("truetype");
-  font-weight: normal;
+    font-family: 'Martel_Sans';
+    src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-ExtraLight.ttf") format("truetype");
+    font-weight: normal;
 }
 
 @font-face {
-  font-family: 'Martel_Sans';
-  src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-Regular.ttf") format("truetype");
-  font-weight: normal;
+    font-family: 'Martel_Sans';
+    src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-Regular.ttf") format("truetype");
+    font-weight: normal;
 }
 
 @font-face {
-  font-family: "Martel_Sans";
-  font-weight: 900;
-  src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-Light.ttf") format("truetype");
+    font-family: "Martel_Sans";
+    font-weight: 900;
+    src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-Light.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Martel_Sans";
-  font-weight: 900;
-  src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-SemiBold.ttf") format("truetype");
+    font-family: "Martel_Sans";
+    font-weight: 900;
+    src: local("Martel_Sans"), url("./assets/fonts/Martel_Sans/MartelSans-SemiBold.ttf") format("truetype");
 }
 
 body {
-  font-family: Martel_Sans;
-  font-weight: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: rgb(40,40,40);
-  justify-content: center;
-  height: 100vh;
+    font-family: Martel_Sans;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: rgb(40, 40, 40);
+    justify-content: center;
+    height: 100vh;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-a, a:hover, a:focus{
-  text-decoration: none !important;
+a, a:hover, a:focus {
+    text-decoration: none !important;
 }

@@ -36,9 +36,9 @@ const removeItemFromBasket = (id, basket) => {
     if (id === -1) {
         return basket
     } else {
-        if (basket[foundId].count === 1){
+        if (basket[foundId].count === 1) {
             basket = R.remove(R.lastIndexOf(foundId), 1, basket)
-            if (R.isEmpty(basket)){
+            if (R.isEmpty(basket)) {
                 return {}
             }
             return basket
@@ -57,7 +57,7 @@ const basketReducer = (state = initialState, action) => {
             return {
                 ...state,
                 basket: addItemToBasket(action.payload, state.basket),
-    }
+            }
         case REMOVE_MENU_ITEM_FROM_BASKET:
             return {
                 ...state,

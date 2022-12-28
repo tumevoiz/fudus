@@ -14,10 +14,7 @@ import Order from "./pages/Order/Order";
 import {createBrowserHistory} from "history";
 import {ConnectedRouter, connectRouter, routerMiddleware} from "connected-react-router";
 import {configureStore} from "@reduxjs/toolkit";
-import {
-    Switch,
-    Route,
-} from "react-router-dom";
+import {Route, Switch,} from "react-router-dom";
 import thunk from "redux-thunk";
 import userReducer from "./reducers/user";
 import restaurantsReducer from "./reducers/restaurants";
@@ -45,11 +42,11 @@ export const store = configureStore({
 
 const routes = (
     <Switch>
-        <Route path='/' component={Restaurants} exact />
-        <Route path='/menu/:restaurantSlug' component={Menu} />
-        <Route path='/login' component={Login} />
-        <Route path='/register' component={Register} />
-        <Route path='/order' component={Order} />
+        <Route path='/' component={Restaurants} exact/>
+        <Route path='/menu/:restaurantSlug' component={Menu}/>
+        <Route path='/login' component={Login}/>
+        <Route path='/register' component={Register}/>
+        <Route path='/order' component={Order}/>
     </Switch>
 )
 

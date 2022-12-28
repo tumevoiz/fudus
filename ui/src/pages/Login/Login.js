@@ -3,7 +3,7 @@ import './Login.css';
 import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../actions/actions";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import {Link, Redirect, useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 function Login() {
     const isLoggedIn = useSelector(state => state.user.isLoggedIn);

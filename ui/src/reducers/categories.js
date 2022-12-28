@@ -1,7 +1,4 @@
-import {
-    FETCH_CATEGORIES_FAILURE,
-    FETCH_CATEGORIES_SUCCESS,
-} from "../actionTypes";
+import {FETCH_CATEGORIES_FAILURE, FETCH_CATEGORIES_SUCCESS,} from "../actionTypes";
 
 const initialState = {
     categories: []
