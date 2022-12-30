@@ -46,6 +46,15 @@ package object encoder {
   implicit val categoryZioEncoder: zio.json.JsonEncoder[Category] = DeriveJsonEncoder.gen[Category]
   implicit val categoryZioDecoder: zio.json.JsonDecoder[Category] = DeriveJsonDecoder.gen[Category]
 
+  import fudus.api.model.Ops._
+  implicit val customerRoleZioEncoder: JsonDecoder[CustomerRole.Type] =
+    JsonDecoder[String].map(_.asUserRole)
+  implicit val customerRoleZioDecoder: JsonEncoder[CustomerRole.Type] =
+    JsonEncoder[String].contramap(_.asString)
+
+  implicit val customerZioEncoder: zio.json.JsonEncoder[Customer] = DeriveJsonEncoder.gen[Customer]
+  implicit val customerZioDecoder: zio.json.JsonDecoder[Customer] = DeriveJsonDecoder.gen[Customer]
+
   implicit val foodZioEncoder: zio.json.JsonEncoder[Food] = DeriveJsonEncoder.gen[Food]
   implicit val foodZioDecoder: zio.json.JsonDecoder[Food] = DeriveJsonDecoder.gen[Food]
 

@@ -22,7 +22,10 @@ object RootEndpoints {
         loginRequest =>
           AuthenticationService
             .authenticate(loginRequest.username, loginRequest.password)
-            .mapBoth(e => FudusApiError(e.getMessage), token => LoginResponse(token))
+            .mapBoth(
+              e => FudusApiError(e.getMessage),
+              response => LoginResponse(response._1, response._2)
+            )
       )
 
   val register: ZServerEndpoint[FudusServerEnv, Any] =

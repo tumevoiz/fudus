@@ -20,7 +20,7 @@ final case class AuthenticationService(
 
   import fudus.api.encoder._
 
-  def authenticate(username: String, password: String): IO[FudusError, String] =
+  def authenticate(username: String, password: String): IO[FudusError, (String, Customer)] =
     (for {
       credentials <- credentialsRepository
         .findByUsername(username)
@@ -31,7 +31,7 @@ final case class AuthenticationService(
       customer <- customerRepository
         .findByUUID(credentials.customer)
         .someOrFail(FudusAuthenticationError(ErrorMessages.UserNotFound))
-    } yield jwtEncode(customer.uuid)).refineToOrDie[FudusAuthenticationError]
+    } yield (jwtEncode(customer.uuid), customer)).refineToOrDie[FudusAuthenticationError]
 
   def authenticateByToken(token: String): IO[FudusError, CustomerUUID] =
     (for {
@@ -66,7 +66,7 @@ object AuthenticationService {
   def authenticate(
       username: String,
       password: String
-  ): ZIO[AuthenticationService, FudusError, String] =
+  ): ZIO[AuthenticationService, FudusError, (String, Customer)] =
     ZIO.serviceWithZIO[AuthenticationService](_.authenticate(username, password))
 
   def authenticateByToken(token: String): ZIO[AuthenticationService, FudusError, CustomerUUID] =
