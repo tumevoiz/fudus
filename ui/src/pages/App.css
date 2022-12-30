@@ -8,6 +8,8 @@
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .AppRow {
@@ -17,16 +19,9 @@
     background-color: ghostwhite;
 }
 
-
 .AppColumn {
     display: flex;
     width: 70%;
-    flex-direction: column;
-}
-
-.SidebarColumn {
-    display: flex;
-    width: 30%;
     flex-direction: column;
 }
 

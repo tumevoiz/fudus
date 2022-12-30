@@ -2,7 +2,8 @@ import {ADD_MENU_ITEM_TO_BASKET, REMOVE_MENU_ITEM_FROM_BASKET} from "../actionTy
 import * as R from "ramda";
 
 const initialState = {
-    basket: {}
+    totalPrice: 0,
+    basket: []
 }
 
 const addItemToBasket = (menuItem, basket) => {
@@ -15,7 +16,9 @@ const addItemToBasket = (menuItem, basket) => {
     let id = R.findIndex(R.propEq('id', menuItem.id))(basket)
     console.log('id' + id)
     if (id !== -1) {
-        basket[id].count += 1
+        const newMenuItem = Object.assign({}, menuItem)
+        newMenuItem.count += 1
+        basket[id] = newMenuItem
         console.log(basket)
         return basket
     } else {
@@ -45,9 +48,17 @@ const removeItemFromBasket = (id, basket) => {
         } else {
             basket[foundId].count -= 1
             console.log(basket)
-            return basket
+            let newBasket = basket
+            return newBasket
         }
     }
+}
+
+function countTotalPrice(basket) {
+    if (!R.isEmpty(basket)){
+        return R.reduce((x, y) => x+parseInt(y.count)*parseInt(y.price), 0, basket)
+    } else {return 0}
+
 }
 
 const basketReducer = (state = initialState, action) => {
@@ -57,11 +68,13 @@ const basketReducer = (state = initialState, action) => {
             return {
                 ...state,
                 basket: addItemToBasket(action.payload, state.basket),
+                totalPrice: countTotalPrice(state.basket),
             }
         case REMOVE_MENU_ITEM_FROM_BASKET:
             return {
                 ...state,
                 basket: removeItemFromBasket(action.payload, state.basket),
+                totalPrice: countTotalPrice(state.basket),
             }
         default:
             return state

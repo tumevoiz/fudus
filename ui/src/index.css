@@ -47,7 +47,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     color: rgb(40, 40, 40);
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 code {

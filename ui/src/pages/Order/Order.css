@@ -1,106 +1,174 @@
 .OrderContainer {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: white;
 }
 
-.order-wrapper {
-    width: 50%;
-    max-width: 500px;
-    max-height: 70%;
+.orderWrapper {
+    width: 90%;
     min-width: 200px;
-    padding: 3em;
+    margin-top: 2em;
+    padding: 2em;
     background-color: white;
 }
 
-.register-wrapper h1 {
+.orderWrapper h1 {
+    font-size: 1.8em;
     margin: 0;
     padding: 0;
+    font-weight: 500;
 }
 
-.OrderForm {
-    padding: 3em 0;
-    height: 70%;
-}
-
-.OrderForm input[type=text], .OrderForm input[type=password] {
-    margin-top: 0.5em;
-    background: linear-gradient(white, white) padding-box,
-    linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%) border-box;
-    border: 2px solid transparent;
-    border-radius: 10px;
-}
-
-.OrderForm input[type=text]:active, .OrderForm input[type=password]:active,
-.OrderForm input[type=text]:focus, .OrderForm input[type=password]:focus {
-    background: linear-gradient(white, white) padding-box,
-    linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%) border-box;
-    border: 2px solid transparent;
-    outline: none;
-    box-shadow: none;
-}
-
-.OrderForm input[type=text]:focus-visible, .OrderForm input[type=password]:focus-visible {
-    background: linear-gradient(white, white) padding-box,
-    linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%) border-box;
-    border: 2px solid transparent;
-}
-
-.ActionButtonReversed {
+.orderItem {
+    display: inline-flex;
+    flex-direction: row;
     width: 100%;
-    text-align: center;
+    padding: 1.2em;
+    margin: 0.3em;
+    border-radius: 1em;
+    flex-wrap: wrap;
+}
+
+.orderItem img {
+    width: 8em;
+    border-radius: 1em;
+    height: 6em;
+    object-fit: cover;
+}
+
+.orderItemDetails {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.orderItemDetails p {
+    padding: 0;
+    margin: 0;
+}
+
+.upperOrderRow {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+}
+
+.lowerOrderRow {
+    flex-direction: column;
+    align-items: center;
+}
+
+.orderItem .countChanger {
+    display: flex;
+    flex-direction: row;
     background: linear-gradient(90deg, rgba(248, 129, 70, 1) 0%, rgba(248, 72, 114, 1) 100%);
-    border-radius: 10px;
-    color: whitesmoke;
-    font-weight: 600;
+    margin-left: auto;
+    border-radius: 0.5em;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    margin-right: 1em;
+}
+
+.countChanger p {
+    padding: 0.5em 0.5em;
+}
+
+.countChanger button {
+    background-color: transparent;
     border: none;
+    padding: 0.5em 0.8em;
+    font-weight: bold;
+    color: white;
 }
 
-.ActionButtonReversed:hover {
-    background: linear-gradient(90deg, rgb(236, 141, 94) 0%, rgb(241, 91, 127) 100%);
-    color: whitesmoke;
+.countChanger button:first-child:hover {
+    background: linear-gradient(90deg, rgb(256, 256, 256, 0.2) 0%, rgb(256, 256, 256, 0.2) 100%);
+    border-radius: 0.5em 0 0 0.5em;
 }
 
-.ActionButtonReversed:active {
-    background: linear-gradient(90deg, rgb(231, 105, 39) 0%, rgb(246, 33, 87) 100%) border-box;
-    color: whitesmoke;
+.countChanger button:last-child:hover {
+    background: linear-gradient(90deg, rgb(256, 256, 256, 0.2) 0%, rgb(256, 256, 256, 0.2) 100%);
+    border-radius: 0 0.5em 0.5em 0;
 }
 
-.OrderForm .ActionButtonReversed {
-    margin-top: 3em;
-    font-size: 1.3em;
+.countChanger button:first-child:active {
+    background: linear-gradient(90deg, rgb(0, 0, 0, 0.2) 0%, rgb(0, 0, 0, 0.2) 100%);
+    border-radius: 0.5em 0 0 0.5em;
 }
 
-.OrderForm label {
-
+.countChanger button:last-child:active {
+    background: linear-gradient(90deg, rgb(0, 0, 0, 0.2) 0%, rgb(0, 0, 0, 0.2) 100%);
+    border-radius: 0 0.5em 0.5em 0;
 }
 
-.OrderForm .errorMessage {
-    color: #d50303;
+.orderButtons {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
 }
 
-.changeSignAction {
+.orderButtons button {
+    width: 30%;
+}
+
+.otherDetailsWrapper {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+}
+
+.deliveryAddressWrapper {
+    padding: 2em 1em;
+}
+
+.deliveryAddressWrapper h3 {
+    font-size: 1.5em;
+}
+
+.deliveryAddressWrapper p {
+    margin: 0 0 0 10px;
+}
+
+.totalPriceWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+}
+
+.totalPriceWrapper div {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
 }
 
-.changeSignAction p {
-    margin: 0;
-    padding: 0;
+.totalPriceWrapper p, h4 {
+    padding: 0.2em;
+    margin: 0 auto 0 0;
 }
 
-#loginLink {
-    color: rgba(248, 129, 70, 1);
+.totalPriceWrapper .value {
+    font-weight: bolder;
+    margin: 0 0 0 auto;
 }
 
-#loginLink:hover {
-    color: rgba(248, 72, 114, 1);
-}
 
-#loginLink:active {
-    color: rgba(246, 33, 87);
-    border: none;
+@media only screen and (max-width: 910px) {
+    .orderWrapper {
+        margin-top: 1em;
+        padding: 0em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .orderWrapper h1 {
+        font-size: 1.4em;
+        margin-top: 1em;
+        font-weight: 500;
+    }
 }

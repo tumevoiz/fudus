@@ -17,7 +17,7 @@ const fetchRestaurants = () => async dispatch => {
         const response = await fetchRestaurantsApi()
         dispatch({
             type: FETCH_RESTAURANTS_SUCCESS,
-            payload: response.data,
+            payload: response,
         })
     } catch (err) {
         dispatch({
@@ -35,7 +35,7 @@ const fetchMenu = (slug) => async dispatch => {
         const response = await fetchMenuApi(slug)
         dispatch({
             type: FETCH_MENU_SUCCESS,
-            payload: response.data,
+            payload: response,
         })
     } catch (err) {
         dispatch({
@@ -48,5 +48,5 @@ const fetchMenu = (slug) => async dispatch => {
 
 export default {
     fetchRestaurants,
-    fetchMenuByRestaurantId: fetchMenu,
+    fetchMenu,
 }
