@@ -45,16 +45,15 @@ function Register() {
                         return errors;
                     }}
                     onSubmit={async (values, {setSubmitting}) => {
+                        setErrorMsg("")
+                        setSubmitting(true)
                         const errorResponse = await dispatch(allActions.userActions.registerUser(values.username, values.password))
                         if (!errorResponse) {
                             location.state.push("/")
                         } else {
+                            setSubmitting(false)
                             setErrorMsg(errorResponse.toString())
                         }
-                        setTimeout(() => {
-                            console.log(JSON.stringify(values, null, 2));
-                            setSubmitting(false);
-                        }, 400);
                     }}
                 >
                     {({isSubmitting}) => (
@@ -85,7 +84,11 @@ function Register() {
                                 <ErrorMessage className={"errorMessage"} name="city" component="div"/>
                             </div>
                             <p className={"errorMessage"}>{errorMsg}</p>
-                            <button className={"btn btn-dark ActionButtonReversed"} type={"submit"}>Załóż konto</button>
+                            <button className={"btn btn-dark ActionButtonReversed"} type={"submit"}>
+                                {isSubmitting ?
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div> : "Załóż konto"}</button>
                         </Form>
                     )}
                 </Formik>

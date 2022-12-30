@@ -3,12 +3,12 @@ import './Login.css';
 import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../actions/actions";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 function Login() {
     const isLoggedIn = useSelector(state => state.user.isLoggedIn);
     const dispatch = useDispatch()
-    const location = useLocation()
+    const history = useHistory()
     const [errorMsg, setErrorMsg] = useState("")
 
     return (
@@ -31,20 +31,19 @@ function Login() {
                         }
                         return errors;
                     }}
-                    onSubmit={async (values, formikHelpers) => {
+                    onSubmit={async (values, {setSubmitting}) => {
+                        setErrorMsg("")
+                        setSubmitting(true)
                         const errorResponse = await dispatch(allActions.userActions.loginUser(values.username, values.password))
                         if (!errorResponse) {
-                            location.state.push("/")
+                            history.push("/")
                         } else {
+                            setSubmitting(false)
                             setErrorMsg(errorResponse.toString())
                         }
-                        setTimeout(() => {
-                            console.log(JSON.stringify(values, null, 2));
-                            //setSubmitting(false);
-                        }, 400);
                     }}
                 >
-                    {() => (
+                    {({isSubmitting}) => (
                         <Form className={"LoginForm"}>
                             <div className={"mb-3"}>
                                 <label>Login:</label>
@@ -57,7 +56,10 @@ function Login() {
                                 <ErrorMessage className={"errorMessage"} name="password" component="div"/>
                             </div>
                             <p className={"errorMessage"}>{errorMsg}</p>
-                            <button className={"btn btn-dark ActionButtonReversed"} type={"submit"}>Zaloguj</button>
+                            <button className={"btn btn-dark ActionButtonReversed"} type={"submit"}>{isSubmitting ?
+                                <div className="spinner-border text-danger" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div> : "Zaloguj"}</button>
                         </Form>
                     )}
                 </Formik>
