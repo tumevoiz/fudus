@@ -29,7 +29,6 @@ const removeItemFromBasket = (id, basket) => {
     if (basket === undefined) {
         return []
     }
-
     let foundId = R.findIndex(R.propEq('id', id))(basket)
     if (id === -1) {
         return basket

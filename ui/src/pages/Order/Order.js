@@ -1,22 +1,41 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Order.css';
 import {useDispatch, useSelector} from "react-redux";
 import App from "../App";
 import allActions from "../../actions/actions";
-import {useHistory} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import * as R from "ramda";
 
 function Order() {
-    const isLoggedIn = useSelector(state => state.user.isLoggedIn);
-    const user = useSelector(state => state.user.user);
-    const itemsInBasket = useSelector(state => state.basket.basket);
+    const isLoggedIn = useSelector(state => state.user.isLoggedIn)
+    const user = useSelector(state => state.user.user)
+    const itemsInBasket = useSelector(state => state.basket.basket)
+    const [isSubmitting, setSubmitting] = useState(false)
+    const [errorMsg, setErrorMsg] = useState("")
     const dispatch = useDispatch()
-    let history = useHistory();
+    let history = useHistory()
 
-    function handleConfirm(event) {
-        event.preventDefault()
-        dispatch(allActions.orderActions.placeOrder())
+    function transformBasketItemToOrder(item) {
+        let orderItem = {}
+        orderItem.food = item.uuid
+        orderItem.amount = item.count
+        orderItem.notes = item.notes
+        return orderItem
     }
+
+    const handleConfirm = async () => {
+        if (!isLoggedIn) {
+            let order = R.map(transformBasketItemToOrder, itemsInBasket);
+            const errorResponse = await dispatch(allActions.orderActions.placeOrder(order))
+            if (!errorResponse) {
+                history.push("/")
+            } else {
+                setErrorMsg(errorResponse)
+            }
+        } else {
+            return <Redirect to={"/login"}/>
+        }
+    };
 
     function handleCancel(event) {
         event.preventDefault()
@@ -32,6 +51,7 @@ function Order() {
     }
 
     let totalPrice = R.reduce((x, y) => x+parseInt(y.count)*parseInt(y.price), 0, itemsInBasket)
+
     const order = itemsInBasket.map((basketItem, index) => {
         return <div key={index} className={"orderItem shadow-sm"}>
             <div>
@@ -64,10 +84,8 @@ function Order() {
                     <div className={"otherDetailsWrapper"}>
                         <div className={"deliveryAddressWrapper"}>
                             <h3>Adres dostawy:</h3>
-                            {/*<p>{user.address}</p>*/}
-                            {/*<p>{user.city}</p>*/}
-                            <p>ul. Nowy Świat 26/14</p>
-                            <p>Pińczów</p>
+                            <p>{user.address}</p>
+                            <p>{user.city}</p>
                         </div>
                         <div className={"totalPriceWrapper"}>
                             <div>
@@ -82,9 +100,13 @@ function Order() {
                             </div>
                         </div>
                     </div>
+                    <p className={"errorMessage"}>{errorMsg}</p>
                     <div className={"orderButtons"}>
                         <button className={"btn btn-dark ActionButtonReversed"} onClick={handleCancel}>Anuluj</button>
-                        <button className={"btn btn-dark ActionButtonReversed"} onClick={handleConfirm}>Zamów</button>
+                        <button className={"btn btn-dark ActionButtonReversed"} onClick={handleConfirm}>{isSubmitting ?
+                            <div className="spinner-border text-danger" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div> : "Zamów"}</button>
                     </div>
                 </div>
             </div>
