@@ -4,12 +4,12 @@ import {useDispatch, useSelector} from "react-redux";
 import App from "../App";
 import allActions from "../../actions/actions";
 import {useHistory} from "react-router-dom";
+import * as R from "ramda";
 
 function Order() {
     const isLoggedIn = useSelector(state => state.user.isLoggedIn);
     const user = useSelector(state => state.user.user);
     const itemsInBasket = useSelector(state => state.basket.basket);
-    const totalPrice = useSelector(state => state.basket.totalPrice);
     const dispatch = useDispatch()
     let history = useHistory();
 
@@ -23,6 +23,15 @@ function Order() {
         history.goBack()
     }
 
+    function removeItemFromBasket(basketItem) {
+        dispatch(allActions.basketActions.removeMenuItemFromBasket(basketItem.id))
+    }
+
+    function addItemToBasket(basketItem) {
+        dispatch(allActions.basketActions.addMenuItemToBasket(basketItem))
+    }
+
+    let totalPrice = R.reduce((x, y) => x+parseInt(y.count)*parseInt(y.price), 0, itemsInBasket)
     const order = itemsInBasket.map((basketItem, index) => {
         return <div key={index} className={"orderItem shadow-sm"}>
             <div>
@@ -32,9 +41,9 @@ function Order() {
                 <div className={"upperOrderRow"}>
                     <h2>{basketItem.name}</h2>
                     <div className={"countChanger"}>
-                        <button>-</button>
+                        <button onClick={() => removeItemFromBasket(basketItem)}>-</button>
                         <p>{basketItem.count}</p>
-                        <button>+</button>
+                        <button onClick={() => addItemToBasket(basketItem)}>+</button>
                     </div>
                     <h2>{basketItem.price} zł</h2>
                 </div>

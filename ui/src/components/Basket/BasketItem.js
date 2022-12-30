@@ -1,6 +1,6 @@
 import './Basket.css';
 import React from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../actions/actions";
 
 function BasketItem({basketItem}) {
