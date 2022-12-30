@@ -14,24 +14,30 @@ function Navigation() {
         event.preventDefault();
     };
 
+    const getUsername = () => {
+        return (<p>{username}</p>)
+    }
+
     return (
         <div className={"navigationBar"}>
             <Link to={{pathname: `/`}}>
                 <h1>Fuduś</h1>
             </Link>
-            {isLoggedIn ? (
-                <div className={"loggedInNav"}>
-                    <Link to={{pathname: `/order`}}>
-                        <i className={"bi bi-basket3-fill"} style={{fontSize: 25}}/>
-                    </Link>
-                    <p>{username}</p>
-                    <Button text={"Wyloguj"} style={"ActionButton"} onClick={handleLogout}/>
-                </div>
-            ) : (
-                <Link to={{pathname: `/Login`}}>
-                    <Button text={"Zaloguj"} style={"ActionButton"} component={Link} to="/Login"/>
+            <div className={"loggedInNav"}>
+                <Link to={{pathname: `/order`}}>
+                    <i className={"bi bi-basket3-fill"} style={{fontSize: 25}}/>
                 </Link>
-            )}
+                {isLoggedIn ? (
+                    <div>
+                        {getUsername}
+                        <Button text={"Wyloguj"} style={"ActionButton"} onClick={handleLogout}/>
+                    </div>
+                ) : (
+                    <Link to={{pathname: `/Login`}}>
+                        <Button text={"Zaloguj"} style={"ActionButton"} component={Link} to="/Login"/>
+                    </Link>
+                )}
+            </div>
         </div>
     );
 }

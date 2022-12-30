@@ -10,12 +10,7 @@ const App = ({children}) => (
             <Navigation/>
         </div>
         <div className='AppRow'>
-            <div className='AppColumn'>
-                {children}
-            </div>
-            <div className='SidebarColumn'>
-                <Sidebar/>
-            </div>
+            {children}
         </div>
     </div>
 )

@@ -10,7 +10,7 @@ function Basket({menuItems}) {
 
     return (
         <div className={'Basket'}>
-            {!R.isEmpty(basketItems) ? basketItems.map((basketItem, index) => <BasketItem basketItem={basketItem}/>) : <p>Twój koszyk jest pusty.</p>}
+            {!R.isEmpty(basketItems) ? basketItems.map((basketItem, index) => <BasketItem key={index} basketItem={basketItem}/>) : <p>Twój koszyk jest pusty.</p>}
             {!R.isEmpty(basketItems) ?
                 <Link to='/order'>
                     <button className={"btn btn-dark ActionButtonReversed"}>Przejdź do kasy</button>
