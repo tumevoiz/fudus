@@ -10,14 +10,14 @@ import {
 import {fetchRestaurants as fetchRestaurantsApi } from "../api/restaurants";
 import {fetchMenu as fetchMenuApi } from "../api/restaurants";
 
-const fetchRestaurants = () => async dispatch => {
+const fetchRestaurants = (filters) => async dispatch => {
     dispatch({type: FETCH_RESTAURANTS_START})
 
     try{
         const response = await fetchRestaurantsApi()
         dispatch({
             type: FETCH_RESTAURANTS_SUCCESS,
-            payload: response,
+            payload: {filters: filters, restaurants: response},
         })
     } catch (err) {
         dispatch({

@@ -4,7 +4,6 @@ import starIcon from './../../assets/icons/star.png'
 import timeIcon from './../../assets/icons/time.png'
 
 function RestaurantCard({restaurant}) {
-    console.log('restaurantCard', restaurant)
     const linkParams = {
         pathname: `/menu/${restaurant.name}`,
         state: {restaurant: restaurant},

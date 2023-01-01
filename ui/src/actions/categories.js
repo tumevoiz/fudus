@@ -1,15 +1,17 @@
 import {
+    ADD_FILTER_SUCCESS,
+    FETCH_CATEGORIES_FAILURE,
     FETCH_CATEGORIES_START,
     FETCH_CATEGORIES_SUCCESS,
-    FETCH_CATEGORIES_FAILURE
+    REMOVE_FILTER_SUCCESS
 } from '../actionTypes'
 
-import {fetchCategories as fetchCategoriesApi } from "../api/categories";
+import {fetchCategories as fetchCategoriesApi} from "../api/categories";
 
 const fetchCategories = () => async dispatch => {
     dispatch({type: FETCH_CATEGORIES_START})
 
-    try{
+    try {
         const categories = await fetchCategoriesApi()
         dispatch({
             type: FETCH_CATEGORIES_SUCCESS,
@@ -26,6 +28,22 @@ const fetchCategories = () => async dispatch => {
     }
 }
 
+const addFilter = (filter) => dispatch => {
+    dispatch({
+        type: ADD_FILTER_SUCCESS,
+        payload: filter,
+    })
+}
+
+const removeFilter = (filter) => dispatch => {
+    dispatch({
+        type: REMOVE_FILTER_SUCCESS,
+        payload: filter,
+    })
+}
+
 export default {
     fetchCategories,
+    addFilter,
+    removeFilter
 }
