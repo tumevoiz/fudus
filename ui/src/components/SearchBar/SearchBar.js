@@ -1,11 +1,10 @@
 import './SearchBar.css';
 
 function SearchBar() {
-    // function handleSubmit(event) {
-    //     console.log('Submitted: ' + this.state.value);
-    //
-    //     event.preventDefault();
-    // }
+    function handleSubmit(event) {
+        console.log('Submitted: ' + this.state.value);
+        event.preventDefault();
+    }
 
     function handleChange(event) {
          // this.setState({value: event.target.value});
@@ -13,9 +12,14 @@ function SearchBar() {
     }
 
     return (
-        <div className={"SearchBar"} onChange={handleChange}>
-            <input className={"searchBox"} type="text" placeholder="Na co masz ochotę?"/>
-        </div>
+        <form className={"SearchBar"} onSubmit={handleSubmit}>
+            <input
+                onChange={handleChange}
+                type="text"
+                className={"searchBox"}
+                placeholder="Na co masz ochotę?"
+            />
+        </form>
     );
 }
 
