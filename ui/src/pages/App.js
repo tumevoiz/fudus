@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Sidebar from './../components/Sidebar/Sidebar'
 import Navigation from "../components/Navigation/Navigation";
 import './App.css'
 

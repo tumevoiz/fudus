@@ -17,8 +17,6 @@ const Restaurants = () => {
     useEffect(() => {
         dispatch(allActions.restaurantActions.fetchRestaurants(filters))
         console.log('restaurants', restaurants)
-        // dispatch(allActions.categoriesActions.fetchCategories())
-        // console.log('restaurants', categories)
     }, [dispatch, filters])
 
     return (

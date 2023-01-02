@@ -3,12 +3,13 @@ import './Order.css';
 import {useDispatch, useSelector} from "react-redux";
 import App from "../App";
 import allActions from "../../actions/actions";
-import {Link, Redirect, useHistory, useLocation} from "react-router-dom";
+import {Redirect, useHistory, useLocation} from "react-router-dom";
 import * as R from "ramda";
 
 function Order() {
     const isLoggedIn = useSelector(state => state.user.isLoggedIn)
     const user = useSelector(state => state.user.user)
+    const token = useSelector(state => state.user.token)
     const itemsInBasket = useSelector(state => state.basket.basket)
     const [isSubmitting, setSubmitting] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
@@ -18,7 +19,7 @@ function Order() {
 
     function transformBasketItemToOrder(item) {
         let orderItem = {}
-        orderItem.food = item.uuid
+        orderItem.food = "3245345345"
         orderItem.amount = item.count
         orderItem.notes = item.notes
         return orderItem
@@ -27,7 +28,7 @@ function Order() {
     const handleConfirm = async () => {
         let order = R.map(transformBasketItemToOrder, itemsInBasket);
         console.log(order)
-        const errorResponse = await dispatch(allActions.orderActions.placeOrder(order))
+        const errorResponse = await dispatch(allActions.orderActions.placeOrder(token, order))
         if (!errorResponse) {
             dispatch(allActions.basketActions.cleanBasket())
             history.push("/")
@@ -108,7 +109,8 @@ function Order() {
                         <div className={"orderButtons"}>
                             <button className={"btn btn-dark ActionButtonReversed"} onClick={handleCancel}>Anuluj
                             </button>
-                            <button className={"btn btn-dark ActionButtonReversed"} onClick={handleConfirm}>{isSubmitting ?
+                            <button className={"btn btn-dark ActionButtonReversed"}
+                                    onClick={handleConfirm}>{isSubmitting ?
                                 <div className="spinner-border text-danger" role="status">
                                     <span className="visually-hidden">Loading...</span>
                                 </div> : "Zamów"}</button>

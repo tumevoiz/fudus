@@ -56,7 +56,7 @@ function Navigation() {
                 {isLoggedIn && isAdmin &&
                     <div>
                         {getUsername()}
-                        <Button text={"Wyloguj"} style={"ActionButton"} onClick={handleLogout}/>
+                        <Button text={"Dodaj restraurację"} style={"ActionButton"} onClick={handleLogout}/>
                     </div>
                 }
                 {isLoggedIn ? (
