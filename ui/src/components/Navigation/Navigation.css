@@ -25,6 +25,7 @@
 }
 
 .loggedInNav a {
+    padding: 0.5em 0.8em;
     color: rgba(248, 129, 70, 1);
 }
 
@@ -33,5 +34,21 @@
 }
 
 .loggedInNav a:active {
+    color: rgba(248, 72, 114, 1);
+}
+
+.orderBtnEmpty {
+    background-color: transparent;
+    border: none;
+    padding: 0.5em 0.8em;
+    font-weight: bold;
+    color: rgba(248, 129, 70, 1);
+}
+
+.orderBtnEmpty:hover {
+    color: rgb(245, 151, 112);
+}
+
+.orderBtnEmpty:active {
     color: rgba(248, 72, 114, 1);
 }
