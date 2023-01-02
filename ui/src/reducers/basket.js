@@ -1,4 +1,4 @@
-import {ADD_MENU_ITEM_TO_BASKET, REMOVE_MENU_ITEM_FROM_BASKET} from "../actionTypes";
+import {ADD_MENU_ITEM_TO_BASKET, CLEAN_BASKET, REMOVE_MENU_ITEM_FROM_BASKET} from "../actionTypes";
 import * as R from "ramda";
 
 const initialState = {
@@ -21,6 +21,7 @@ const addItemToBasket = (menuItem, basket) => {
         return basket
     } else {
         menuItem.count = 1
+        menuItem.notes = ""
         return R.append(menuItem, basket)
     }
 }
@@ -60,6 +61,10 @@ const basketReducer = (state = initialState, action) => {
         case REMOVE_MENU_ITEM_FROM_BASKET:
             return {
                 basket: removeItemFromBasket(action.payload, state.basket),
+            }
+        case CLEAN_BASKET:
+            return {
+                basket: [],
             }
         default:
             return state

@@ -16,7 +16,7 @@ const loginUser = (username, password) => async dispatch => {
         const response = await loginUserApi(username, password)
         dispatch({
             type: LOGIN_USER_SUCCESS,
-            payload: response,
+            payload: response.data,
             error: false,
         })
         return
@@ -34,11 +34,11 @@ const logoutUser = () => dispatch => {
     dispatch({type: LOG_OUT_USER_SUCCESS})
 }
 
-const registerUser = (username, password) => async dispatch => {
+const registerUser = (username, password, email, address, city) => async dispatch => {
     try{
         dispatch({type: REGISTER_USER_START})
 
-        const response = await registerUserApi(username, password)
+        const response = await registerUserApi(username, password, email, address, city)
         dispatch({
             type: REGISTER_USER_SUCCESS,
             payload: response,

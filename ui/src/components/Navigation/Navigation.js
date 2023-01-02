@@ -1,12 +1,16 @@
 import './Navigation.css';
 import Button from "../Button/Button";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../actions/actions";
+import * as R from "ramda";
+import {OverlayTrigger, Popover} from "react-bootstrap";
 
 function Navigation() {
     const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+    const isAdmin = useSelector(state => state.user.user.role);
     const username = useSelector(state => state.user.user.username);
+    const basket = useSelector(state => state.basket.basket);
     const dispatch = useDispatch()
 
     const handleLogout = (event) => {
@@ -18,18 +22,46 @@ function Navigation() {
         return (<p>{username}</p>)
     }
 
+    const handleRedirectToOrder = () => {
+        if (R.isEmpty(basket)) {
+            return <OverlayTrigger
+                trigger="click"
+                placement="bottom"
+                overlay={
+                    <Popover>
+                        <Popover.Body>
+                            <p>Twój koszyk jest pusty...</p>
+                        </Popover.Body>
+                    </Popover>
+                }
+            >
+                <button className={"orderBtnEmpty"}>
+                    <i className={"bi bi-basket3-fill"} style={{fontSize: 25}}/>
+                </button>
+            </OverlayTrigger>
+        } else {
+            return <Link to={{pathname: `/order`}}>
+                <i className={"bi bi-basket3-fill"} style={{fontSize: 25}}/>
+            </Link>
+    }
+}
+
     return (
         <div className={"navigationBar"}>
             <Link to={{pathname: `/`}}>
                 <h1>Fuduś</h1>
             </Link>
             <div className={"loggedInNav"}>
-                <Link to={{pathname: `/order`}}>
-                    <i className={"bi bi-basket3-fill"} style={{fontSize: 25}}/>
-                </Link>
+                {handleRedirectToOrder()}
+                {isLoggedIn && isAdmin &&
+                    <div>
+                        {getUsername()}
+                        <Button text={"Dodaj restraurację"} style={"ActionButton"} onClick={handleLogout}/>
+                    </div>
+                }
                 {isLoggedIn ? (
                     <div>
-                        {getUsername}
+                        {getUsername()}
                         <Button text={"Wyloguj"} style={"ActionButton"} onClick={handleLogout}/>
                     </div>
                 ) : (

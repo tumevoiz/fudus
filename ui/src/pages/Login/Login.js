@@ -3,12 +3,13 @@ import './Login.css';
 import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../actions/actions";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import {Link, useHistory} from "react-router-dom";
+import {Link, useHistory, useLocation} from "react-router-dom";
 
 function Login() {
     const isLoggedIn = useSelector(state => state.user.isLoggedIn);
     const dispatch = useDispatch()
     const history = useHistory()
+    const location = useLocation()
     const [errorMsg, setErrorMsg] = useState("")
 
     return (
@@ -36,7 +37,8 @@ function Login() {
                         setSubmitting(true)
                         const errorResponse = await dispatch(allActions.userActions.loginUser(values.username, values.password))
                         if (!errorResponse) {
-                            history.push("/")
+                            const link = (location.state && location.state.previousLocation) || "/"
+                            history.replace(link);
                         } else {
                             setSubmitting(false)
                             setErrorMsg(errorResponse.toString())
