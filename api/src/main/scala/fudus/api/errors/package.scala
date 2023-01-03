@@ -17,6 +17,7 @@ package object errors {
   case class FudusRestaurantCreationError(message: String) extends FudusError
   case class FudusFoodCreationError(message: String) extends FudusError
   case class FudusOrderingError(message: String) extends FudusError
+  case class FudusSearchError(message: String) extends FudusError
   case class FudusValidationError(message: String) extends FudusError
 
   case class FudusApiError(message: String) {

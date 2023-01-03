@@ -29,7 +29,8 @@ object FudusApplication extends ZIOAppDefault {
         RestaurantFoodService.layer,
         RestaurantService.layer,
         CustomerService.layer,
-        OrderingService.layer
+        OrderingService.layer,
+        SearchService.layer
       )
       .debug
 }

@@ -55,6 +55,13 @@ final case class RestaurantRepository(quillCtx: Quill.Postgres[SnakeCase]) {
         query[Restaurant]
       }
     }
+
+  def likeName(name: String): Task[List[Restaurant]] =
+    run {
+      quote {
+        query[Restaurant].filter(r => r.name like lift(s"%$name%"))
+      }
+    }
 }
 
 object RestaurantRepository {

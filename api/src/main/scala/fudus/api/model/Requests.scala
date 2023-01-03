@@ -28,4 +28,11 @@ object Requests {
     DeriveJsonEncoder.gen[OrderingCreateRequest]
   implicit val orderingCreateRequestDecoder: zio.json.JsonDecoder[OrderingCreateRequest] =
     DeriveJsonDecoder.gen[OrderingCreateRequest]
+
+  case class RestaurantSearchRequest(query: String)
+  implicit val restaurantSearchRequestEncoder: zio.json.JsonEncoder[RestaurantSearchRequest] =
+    DeriveJsonEncoder.gen[RestaurantSearchRequest]
+  implicit val restaurantSearchRequestDecoder: zio.json.JsonDecoder[RestaurantSearchRequest] =
+    DeriveJsonDecoder.gen[RestaurantSearchRequest]
+
 }

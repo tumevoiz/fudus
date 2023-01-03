@@ -37,7 +37,7 @@ final case class RestaurantService(restaurantRepository: RestaurantRepository) {
       .mapError(e => FudusRestaurantCreationError(e.getMessage))
   } yield ()
 
-  private def validateSlug(slug: String): IO[FudusError, Unit] =
+  private[services] def validateSlug(slug: String): IO[FudusError, Unit] =
     for {
       _ <- ZIO.when(slug.length < 4)(
         ZIO.fail(FudusValidationError(ValidationMessages.SlugTooShort))
@@ -50,7 +50,7 @@ final case class RestaurantService(restaurantRepository: RestaurantRepository) {
       )
     } yield ()
 
-  private def validateName(name: String): IO[FudusError, Unit] =
+  private[services] def validateName(name: String): IO[FudusError, Unit] =
     for {
       _ <- ZIO.when(name.length < 4)(
         ZIO.fail(FudusValidationError(ValidationMessages.RestaurantNameTooShort))

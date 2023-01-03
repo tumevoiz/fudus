@@ -16,6 +16,13 @@ final case class FoodRepository(quillCtx: DatabaseService.QuillContext) {
       }
     }.map(_.headOption)
 
+  def findByCategoryUUID(uuid: CategoryUUID): Task[List[Food]] =
+    run {
+      quote {
+        query[Food].filter(_.categories.contains(lift(uuid)))
+      }
+    }
+
   def findByRestaurantUUID(restaurantUUID: RestaurantUUID): Task[List[Food]] =
     run {
       quote {

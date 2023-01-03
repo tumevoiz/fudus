@@ -24,6 +24,13 @@ final case class CategoryRepository(quillCtx: DatabaseService.QuillContext) {
       }
     }.map(_.headOption)
 
+  def likeName(name: String): Task[List[Category]] =
+    run {
+      quote {
+        query[Category].filter(c => c.name like lift(s"%$name%"))
+      }
+    }
+
   def save(category: Category): Task[Long] =
     run {
       quote {
