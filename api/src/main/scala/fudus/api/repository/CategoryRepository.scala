@@ -1,14 +1,16 @@
 package fudus.api.repository
 
 import fudus.api.errors.{FudusDatabaseError, FudusError}
-import fudus.api.model.Domain.{Category, CategoryUUID}
+import fudus.api.model.Domain.{Category, CategoryUUID, Restaurant}
 import fudus.api.services.DatabaseService
+import io.getquill.Query
 import zio._
 
 final case class CategoryRepository(quillCtx: DatabaseService.QuillContext) {
   import quillCtx._
 
   import fudus.api.encoder.sql._
+  import fudus.api.encoder._
 
   def findAll: Task[List[Category]] =
     run {
@@ -24,12 +26,14 @@ final case class CategoryRepository(quillCtx: DatabaseService.QuillContext) {
       }
     }.map(_.headOption)
 
-  def likeName(name: String): Task[List[Category]] =
+  def likeName(name: String): Task[List[Category]] = {
+    val interpolatedName = s"%$name%"
     run {
       quote {
-        query[Category].filter(c => c.name like lift(s"%$name%"))
+        query[Category].filter(c => sql"name ilike ${lift(interpolatedName)}".asCondition)
       }
     }
+  }
 
   def save(category: Category): Task[Long] =
     run {
@@ -37,6 +41,7 @@ final case class CategoryRepository(quillCtx: DatabaseService.QuillContext) {
         query[Category].insertValue(lift(category))
       }
     }
+
 }
 
 object CategoryRepository {

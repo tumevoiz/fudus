@@ -1,8 +1,8 @@
 package fudus.api.repository
 
-import fudus.api.model.Domain.{Food, FoodUUID, Restaurant, RestaurantUUID}
+import fudus.api.model.Domain.{Category, Food, FoodUUID, Restaurant, RestaurantUUID}
 import fudus.api.services.DatabaseService
-import io.getquill.SnakeCase
+import io.getquill.{Query, SnakeCase}
 import io.getquill.jdbczio.Quill
 import zio._
 
@@ -10,6 +10,7 @@ final case class RestaurantRepository(quillCtx: Quill.Postgres[SnakeCase]) {
   import quillCtx._
 
   import fudus.api.encoder.sql._
+  import fudus.api.encoder._
 
   def findBySlug(slug: String): Task[Option[Restaurant]] =
     run {
@@ -56,12 +57,14 @@ final case class RestaurantRepository(quillCtx: Quill.Postgres[SnakeCase]) {
       }
     }
 
-  def likeName(name: String): Task[List[Restaurant]] =
+  def likeName(name: String): Task[List[Restaurant]] = {
+    val interpolatedName = s"%$name%"
     run {
       quote {
-        query[Restaurant].filter(r => r.name like lift(s"%$name%"))
+        query[Restaurant].filter(c => sql"name ilike ${lift(interpolatedName)}".asCondition)
       }
     }
+  }
 }
 
 object RestaurantRepository {
