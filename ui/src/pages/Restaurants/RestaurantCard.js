@@ -14,6 +14,7 @@ function RestaurantCard({restaurant}) {
                 <img src={`data:image/png;base64,${restaurant.imageBase64}`} className={"restaurantCardImg"} alt={"Restaurant exemplary food photo"}/>
                 <h2>{restaurant.name}</h2>
                 <div className={"restaurantDescription"}>
+                    <p>{restaurant.description}</p>
                 </div>
                 <div className={"restaurantDetails"}>
                     <div>

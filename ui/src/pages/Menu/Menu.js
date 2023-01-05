@@ -20,7 +20,7 @@ function Menu(props) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(allActions.restaurantActions.fetchMenu(restaurant.id))
+        dispatch(allActions.restaurantActions.fetchMenu(restaurant.slug))
         console.log('menu', menu)
     }, [dispatch])
 
