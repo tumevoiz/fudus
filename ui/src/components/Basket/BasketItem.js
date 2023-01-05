@@ -1,6 +1,6 @@
 import './Basket.css';
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import allActions from "../../actions/actions";
 
 function BasketItem({basketItem}) {
@@ -18,7 +18,7 @@ function BasketItem({basketItem}) {
 
     return (
         <div className={'BasketItem'}>
-            <div><img src={basketItem.img}/></div>
+            <div><img src={basketItem.imageBase64}/></div>
             <div><p>{basketItem.name}</p></div>
             <div className={"itemsCount"}>
                 <p>{basketItem.count}</p>

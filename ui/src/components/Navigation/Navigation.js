@@ -1,6 +1,6 @@
 import './Navigation.css';
 import Button from "../Button/Button";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../actions/actions";
 import * as R from "ramda";
@@ -43,8 +43,13 @@ function Navigation() {
             return <Link to={{pathname: `/order`}}>
                 <i className={"bi bi-basket3-fill"} style={{fontSize: 25}}/>
             </Link>
+        }
     }
-}
+
+    const addRestaurant = () => {
+        let restaurant = {}
+        dispatch(allActions.restaurantActions.addRestaurant(restaurant))
+    }
 
     return (
         <div className={"navigationBar"}>
@@ -56,7 +61,7 @@ function Navigation() {
                 {isLoggedIn && isAdmin &&
                     <div>
                         {getUsername()}
-                        <Button text={"Dodaj restraurację"} style={"ActionButton"} onClick={handleLogout}/>
+                        <Button text={"Dodaj restraurację"} style={"ActionButton"} onClick={addRestaurant}/>
                     </div>
                 }
                 {isLoggedIn ? (

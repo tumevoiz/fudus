@@ -1,8 +1,13 @@
 import './SearchBar.css';
+import {useDispatch} from "react-redux";
+import allActions from "../../actions/actions";
 
 function SearchBar() {
+    const dispatch = useDispatch()
+
     function handleSubmit(event) {
         console.log('Submitted: ' + this.state.value);
+        dispatch(allActions.restaurantActions.fetchRestaurantsByFilter())
         event.preventDefault();
     }
 

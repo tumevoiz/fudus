@@ -55,7 +55,7 @@ function Order() {
     const order = itemsInBasket.map((basketItem, index) => {
         return <div key={index} className={"orderItem shadow-sm"}>
             <div>
-                <img src={basketItem.img}/>
+                <img src={basketItem.imageBase64}/>
             </div>
             <div className={"orderItemDetails"}>
                 <div className={"upperOrderRow"}>
