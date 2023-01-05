@@ -11,14 +11,14 @@ import {fetchRestaurants as fetchRestaurantsApi, fetchRestaurantsByFilterApi} fr
 import {addRestaurant as addRestaurantApi } from "../api/restaurants";
 import {fetchMenu as fetchMenuApi } from "../api/restaurants";
 
-const fetchRestaurants = (filters) => async dispatch => {
+const fetchRestaurants = () => async dispatch => {
     dispatch({type: FETCH_RESTAURANTS_START})
 
     try{
         const response = await fetchRestaurantsApi()
         dispatch({
             type: FETCH_RESTAURANTS_SUCCESS,
-            payload: {filters: filters, restaurants: response.data},
+            payload: response.data,
         })
     } catch (err) {
         dispatch({
@@ -51,10 +51,10 @@ const fetchRestaurantsByFilter = (filter) => async dispatch => {
     dispatch({type: FETCH_RESTAURANTS_START})
 
     try{
-        const response = await fetchRestaurantsByFilterApi()
+        const response = await fetchRestaurantsByFilterApi(filter)
         dispatch({
             type: FETCH_RESTAURANTS_SUCCESS,
-            payload: {filters: filter, restaurants: response.data},
+            payload: response.data,
         })
     } catch (err) {
         dispatch({
@@ -65,11 +65,11 @@ const fetchRestaurantsByFilter = (filter) => async dispatch => {
     }
 }
 
-const addRestaurant = ({restaurant}) => async dispatch => {
+const addRestaurant = ({token, restaurant}) => async dispatch => {
     dispatch({type: ADD_RESTAURANT_START})
 
     try{
-        const response = await addRestaurantApi(restaurant)
+        const response = await addRestaurantApi(token, restaurant)
         dispatch({
             type: ADD_RESTAURANT_SUCCESS,
             payload: response,

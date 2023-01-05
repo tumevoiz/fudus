@@ -24,7 +24,7 @@ export const fetchRestaurantsByFilterApi = async (filter) => {
     return await instance.post(searchEndpoint, {query: filter})
 }
 
-export const addRestaurant = async (restaurant) => {
+export const addRestaurant = async (token, restaurant) => {
     const instance = axios.create({
         baseURL: 'http://localhost:8080'
     });
