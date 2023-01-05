@@ -1,5 +1,7 @@
 package fudus.api.services
 
+import cats.data.OptionT
+import cats.implicits._
 import fudus.api.errors.{FudusError, FudusSearchError}
 import fudus.api.model.Domain._
 import fudus.api.repository._
@@ -31,7 +33,7 @@ final case class SearchService(
     restaurants <- ZIO
       .foreach(food.flatten)(fd => restaurantRepository.findByUUID(fd.restaurant))
       .mapError(e => FudusSearchError(e.getMessage))
-  } yield restaurants.map(_.get)
+  } yield restaurants.traverse(identity).getOrElse(List.empty)
 }
 
 object SearchService {

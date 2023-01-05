@@ -22,7 +22,8 @@ final case class FoodService(
       name: String,
       categories: Seq[CategoryUUID],
       price: Float,
-      restaurant: RestaurantUUID
+      restaurant: RestaurantUUID,
+      imageBase64: String
   ): IO[FudusError, Unit] =
     for {
       _ <- validateCategories(categories)
@@ -32,7 +33,8 @@ final case class FoodService(
         name = name,
         categories = categories,
         price = price,
-        restaurant = restaurant
+        restaurant = restaurant,
+        imageBase64 = imageBase64
       )
       _ <- foodRepository.save(food).mapError(e => FudusFoodCreationError(e.getMessage))
     } yield ()
