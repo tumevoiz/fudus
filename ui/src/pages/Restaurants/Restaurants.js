@@ -14,10 +14,10 @@ const Restaurants = () => {
     const restaurants = useSelector(state => state.restaurants);
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(allActions.restaurantActions.fetchRestaurants(filters))
-        console.log('restaurants', restaurants)
-    }, [dispatch, filters])
+    // useEffect(() => {
+    //     // dispatch(allActions.restaurantActions.fetchRestaurants(filters))
+    //     console.log('restaurants', restaurants)
+    // }, [dispatch, filters, restaurants])
 
     return (
         <App>

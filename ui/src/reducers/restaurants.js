@@ -1,4 +1,4 @@
-import {FETCH_RESTAURANTS_SUCCESS} from "../actionTypes";
+import {FETCH_RESTAURANTS_FAILURE, FETCH_RESTAURANTS_SUCCESS} from "../actionTypes";
 import * as R from "ramda";
 
 const initialState = {}
@@ -23,7 +23,12 @@ const restaurantsReducer = (state = initialState, action) => {
         case FETCH_RESTAURANTS_SUCCESS:
             return {
                 ...state,
-                restaurants: filterFetchedRestaurants(action.payload.filters, action.payload.restaurants),
+                restaurants: action.payload,
+            }
+        case FETCH_RESTAURANTS_FAILURE:
+            return {
+                ...state,
+                restaurants: state.restaurants,
             }
         default:
             return state

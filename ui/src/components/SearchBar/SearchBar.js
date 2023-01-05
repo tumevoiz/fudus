@@ -5,24 +5,26 @@ import allActions from "../../actions/actions";
 function SearchBar() {
     const dispatch = useDispatch()
 
-    function handleSubmit(event) {
-        console.log('Submitted: ' + this.state.value);
-        dispatch(allActions.restaurantActions.fetchRestaurantsByFilter())
-        event.preventDefault();
+    const handleSubmit = (event) => {
+        if(event.keyCode === 13 && event.shiftKey === false) {
+            event.preventDefault();
+            console.log(event.target.values)
+            dispatch(allActions.restaurantActions.fetchRestaurantsByFilter(event.target.value))
+        }
     }
 
     function handleChange(event) {
-         // this.setState({value: event.target.value});
         console.log('Changed: ' + event.target.value)
     }
 
     return (
-        <form className={"SearchBar"} onSubmit={handleSubmit}>
+        <form className={"SearchBar"}>
             <input
                 onChange={handleChange}
                 type="text"
                 className={"searchBox"}
                 placeholder="Na co masz ochotę?"
+                onKeyDown={handleSubmit}
             />
         </form>
     );
