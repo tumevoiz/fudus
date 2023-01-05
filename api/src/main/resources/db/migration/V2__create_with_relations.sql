@@ -12,5 +12,6 @@ CREATE TABLE food (
     name varchar(100) ,
     categories varchar(100)[],
     price real,
-    restaurant varchar(100)
+    restaurant varchar(100),
+    image_base64 text
 );

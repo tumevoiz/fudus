@@ -44,7 +44,8 @@ object Domain {
       name: String,
       categories: Seq[CategoryUUID],
       price: Float,
-      restaurant: RestaurantUUID
+      restaurant: RestaurantUUID,
+      imageBase64: String
   )
 
   case class OrderingUUID(value: String) extends AnyVal
