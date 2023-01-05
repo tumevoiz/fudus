@@ -54,7 +54,7 @@ const fetchRestaurantsByFilter = (filter) => async dispatch => {
         const response = await fetchRestaurantsByFilterApi()
         dispatch({
             type: FETCH_RESTAURANTS_SUCCESS,
-            payload: {filters: filter, restaurants: response},
+            payload: {filters: filter, restaurants: response.data},
         })
     } catch (err) {
         dispatch({

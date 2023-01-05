@@ -11,7 +11,7 @@ function RestaurantCard({restaurant}) {
     return (
         <Link to={linkParams}>
             <div className={"restaurantCardStyle"}>
-                <img src={`data:image/png;base64,${restaurant.img}`} className={"restaurantCardImg"} alt={"Restaurant exemplary food photo"}/>
+                <img src={`data:image/png;base64,${restaurant.imageBase64}`} className={"restaurantCardImg"} alt={"Restaurant exemplary food photo"}/>
                 <h2>{restaurant.name}</h2>
                 <div className={"restaurantDescription"}>
                 </div>
