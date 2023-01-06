@@ -65,7 +65,7 @@ const fetchRestaurantsByFilter = (filter) => async dispatch => {
     }
 }
 
-const addRestaurant = ({token, restaurant}) => async dispatch => {
+const addRestaurant = (token, restaurant) => async dispatch => {
     dispatch({type: ADD_RESTAURANT_START})
 
     try{

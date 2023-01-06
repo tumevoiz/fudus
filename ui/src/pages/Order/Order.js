@@ -19,7 +19,7 @@ function Order() {
 
     function transformBasketItemToOrder(item) {
         let orderItem = {}
-        orderItem.food = "3245345345"
+        orderItem.food = item.uuid
         orderItem.amount = item.count
         orderItem.notes = item.notes
         return orderItem
