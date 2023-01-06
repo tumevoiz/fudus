@@ -3,7 +3,7 @@ import './Register.css';
 import {useDispatch} from "react-redux";
 import allActions from "../../actions/actions";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import {Link, useHistory, useLocation} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 function Register() {
     const dispatch = useDispatch()
@@ -46,7 +46,6 @@ function Register() {
                     onSubmit={async (values, {setSubmitting}) => {
                         setErrorMsg("")
                         setSubmitting(true)
-                        console.log(values)
                         const errorResponse = await dispatch(allActions.userActions.registerUser(values))
                         if (!errorResponse) {
                             history.push("/login")

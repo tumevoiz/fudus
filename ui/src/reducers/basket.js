@@ -11,7 +11,7 @@ const addItemToBasket = (menuItem, basket) => {
         return R.append(menuItem, basket)
     }
 
-    let id = R.findIndex(R.propEq('id', menuItem.id))(basket)
+    let id = R.findIndex(R.propEq('uuid', menuItem.uuid))(basket)
     if (id !== -1) {
         let oldCount = basket[id].count
         const newMenuItem = { ...menuItem };
@@ -26,17 +26,17 @@ const addItemToBasket = (menuItem, basket) => {
     }
 }
 
-const removeItemFromBasket = (id, basket) => {
+const removeItemFromBasket = (uuid, basket) => {
     if (basket === undefined) {
         return []
     }
-    let foundId = R.findIndex(R.propEq('id', id))(basket)
-    if (id === -1) {
+    let foundId = R.findIndex(R.propEq('uuid', uuid))(basket)
+    if (foundId === -1) {
         return basket
     } else {
         let oldCount = basket[foundId].count
         if (basket[foundId].count === 1) {
-            basket = R.remove(R.lastIndexOf(foundId), 1, basket)
+            basket = R.remove(foundId, 1, basket)
             if (R.isEmpty(basket)) {
                 return []
             }

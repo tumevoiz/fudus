@@ -16,12 +16,10 @@ function Menu(props) {
     }
 
     const menu = useSelector(state => state.menu);
-    console.log('before render', menu)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(allActions.restaurantActions.fetchMenu(restaurant.slug))
-        console.log('menu', menu)
     }, [dispatch])
 
     return (
