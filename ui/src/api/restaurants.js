@@ -30,5 +30,5 @@ export const addRestaurant = async (token, restaurant) => {
     });
 
     instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
-    return await instance.post(restaurantEndpoint, {restaurant})
+    return await instance.post(restaurantEndpoint, restaurant)
 }
