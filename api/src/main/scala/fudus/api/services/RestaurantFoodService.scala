@@ -12,10 +12,13 @@ final case class RestaurantFoodService(
 ) {
   def fetchRestaurantFoodBySlug(slug: String): IO[FudusError, List[Food]] =
     (for {
+      _ <- ZIO.logInfo(s"Finding restaurant: $slug")
       restaurant <- restaurantRepository
         .findBySlug(slug)
         .someOrFail(FudusDatabaseError("Restaurant not found"))
+      _ <- ZIO.logInfo(s"Found restaurant: ${restaurant.name}")
       food <- foodRepository.findByRestaurantUUID(restaurant.uuid)
+      _ <- ZIO.logInfo(s"Found food: ${food.map(_.name).mkString(", ")}")
     } yield food).refineToOrDie[FudusDatabaseError]
 }
 

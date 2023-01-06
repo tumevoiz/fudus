@@ -33,7 +33,7 @@ final case class SearchService(
     restaurants <- ZIO
       .foreach(food.flatten)(fd => restaurantRepository.findByUUID(fd.restaurant))
       .mapError(e => FudusSearchError(e.getMessage))
-  } yield restaurants.traverse(identity).getOrElse(List.empty)
+  } yield restaurants.traverse(identity).getOrElse(List.empty).distinct
 }
 
 object SearchService {

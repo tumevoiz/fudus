@@ -1,11 +1,20 @@
 package fudus.api
 
 import fudus.api.FudusServer.{FudusEnv, FudusServerEnv}
+import fudus.api.encoder._
 import fudus.api.endpoints._
 import fudus.api.errors.{FudusApiError, FudusError, FudusServerError}
 import fudus.api.repository._
 import fudus.api.services._
-import sttp.tapir.server.ziohttp.ZioHttpInterpreter
+import sttp.model.StatusCode
+import sttp.tapir.generic.auto.schemaForCaseClass
+import sttp.tapir.json.zio.jsonBody
+import sttp.tapir.server.interceptor.decodefailure.{
+  DecodeFailureHandler,
+  DefaultDecodeFailureHandler
+}
+import sttp.tapir.server.model.ValuedEndpointOutput
+import sttp.tapir.server.ziohttp.{ZioHttpInterpreter, ZioHttpServerOptions}
 import sttp.tapir.swagger.bundle.SwaggerInterpreter
 import sttp.tapir.ztapir._
 import zhttp.http._
@@ -38,8 +47,20 @@ final case class FudusServer(
   val docEndpoints: List[ZServerEndpoint[FudusServerEnv, Any]] =
     SwaggerInterpreter().fromServerEndpoints(apiEndpoints, "fudus-api", "1.0.0")
 
-  val httpApp: HttpApp[FudusServerEnv, Throwable] =
-    ZioHttpInterpreter().toHttp(apiEndpoints ++ docEndpoints)
+  def myFailureDecodeHandler: DecodeFailureHandler =
+    DefaultDecodeFailureHandler.default.response(myFailureResponse)
+
+  def myFailureResponse(m: String): ValuedEndpointOutput[_] =
+    ValuedEndpointOutput(jsonBody[FudusApiError], FudusApiError(m))
+
+  val httpApp: HttpApp[FudusServerEnv, Throwable] = {
+    ZioHttpInterpreter(
+      ZioHttpServerOptions
+        .customiseInterceptors[FudusServerEnv]
+        .decodeFailureHandler(myFailureDecodeHandler)
+        .options
+    ).toHttp(apiEndpoints ++ docEndpoints)
+  }
 
   val corsConfig: CorsConfig = CorsConfig(
     anyOrigin = true,
