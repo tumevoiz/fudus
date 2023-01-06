@@ -5,7 +5,8 @@
     color: #323141;
     border: 4px solid transparent;
     text-decoration: none;
-
+    max-width: 15em;
+    min-height: 100%;
 }
 
 .restaurantCardStyle:hover {
@@ -32,8 +33,19 @@ h2 {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
     margin: 10px;
+    font-size: 14px;
+    color: #656565;
 }
+
+/*.restaurantDescription {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: space-around;*/
+/*    align-items: center;*/
+/*    margin: 10px;*/
+/*}*/
 
 .restaurantDetails {
     display: flex;

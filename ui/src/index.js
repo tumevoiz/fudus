@@ -11,6 +11,8 @@ import Menu from './pages/Menu/Menu';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Order from "./pages/Order/Order";
+import Error from "./pages/Error/Error";
+import AddRestaurant from "./pages/AddRestaurant/AddRestaurant";
 import {createBrowserHistory} from "history";
 import {ConnectedRouter, connectRouter, routerMiddleware} from "connected-react-router";
 import {configureStore} from "@reduxjs/toolkit";
@@ -47,6 +49,8 @@ const routes = (
         <Route path='/login' component={Login}/>
         <Route path='/register' component={Register}/>
         <Route path='/order' component={Order}/>
+        <Route path='/add/restaurant' component={AddRestaurant}/>
+        <Route path='*' component={Error} />
     </Switch>
 )
 

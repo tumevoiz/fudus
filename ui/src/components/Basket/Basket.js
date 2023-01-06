@@ -5,7 +5,7 @@ import React from 'react';
 import * as R from "ramda";
 import BasketItem from "./BasketItem";
 
-function Basket({menuItems}) {
+function Basket({}) {
     const basketItems = useSelector(state => state.basket.basket);
 
     return (

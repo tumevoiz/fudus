@@ -4,7 +4,7 @@ import starIcon from './../../assets/icons/star.png'
 
 function RestaurantCard({restaurant}) {
     const linkParams = {
-        pathname: `/menu/${restaurant.name}`,
+        pathname: `/menu/${restaurant.slug}`,
         state: {restaurant: restaurant},
     }
 

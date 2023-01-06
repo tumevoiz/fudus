@@ -1,0 +1,11 @@
+.actionButtons {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.actionButtons button {
+    width: 30%;
+}

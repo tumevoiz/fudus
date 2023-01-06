@@ -46,11 +46,6 @@ function Navigation() {
         }
     }
 
-    const addRestaurant = () => {
-        let restaurant = {}
-        dispatch(allActions.restaurantActions.addRestaurant(restaurant))
-    }
-
     return (
         <div className={"navigationBar"}>
             <Link to={{pathname: `/`}}>
@@ -60,8 +55,9 @@ function Navigation() {
                 {handleRedirectToOrder()}
                 {isLoggedIn && isAdmin &&
                     <div>
-                        {getUsername()}
-                        <Button text={"Dodaj restraurację"} style={"ActionButton"} onClick={addRestaurant}/>
+                        <Link to={{pathname: `/add/restaurant`}}>
+                            <Button text={"Dodaj restaurację"} style={"ActionButton"} component={Link} to="/add/restaurant"/>
+                        </Link>
                     </div>
                 }
                 {isLoggedIn ? (
