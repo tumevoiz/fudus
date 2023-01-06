@@ -39,14 +39,6 @@ h2 {
     color: #656565;
 }
 
-/*.restaurantDescription {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    justify-content: space-around;*/
-/*    align-items: center;*/
-/*    margin: 10px;*/
-/*}*/
-
 .restaurantDetails {
     display: flex;
     flex-direction: row;
