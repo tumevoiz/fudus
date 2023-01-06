@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from "react-redux";
 import allActions from "../../actions/actions";
 import {Redirect, useHistory, useLocation} from "react-router-dom";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import * as R from "ramda";
 import App from "../App";
 
 const AddRestaurant = () => {
@@ -40,11 +39,9 @@ const AddRestaurant = () => {
         //check the size of image
         if (file?.size / 1024 / 1024 < 2) {
             const base64 = await convertToBase64(file)
-            let lol = base64.replace(/^(.*;base64,)/, "")
-            console.log(lol)
-            setField(lol)
+            setField(base64.replace(/^(.*;base64,)/, ""))
         } else {
-            console.log('Image size must be of 2MB or less')
+            setErrorMsg('Image size must be of 2MB or less')
         }
     }
 
@@ -76,7 +73,6 @@ const AddRestaurant = () => {
                                     return errors;
                                 }}
                                 onSubmit={async (values, {setSubmitting}) => {
-                                    console.log(values)
                                     setErrorMsg("")
                                     setSubmitting(true)
                                     let outcome = {
@@ -87,7 +83,6 @@ const AddRestaurant = () => {
                                         imageBase64: field,
                                         rating: 0,
                                     }
-                                    console.log(outcome)
                                     const errorResponse = await dispatch(allActions.restaurantActions.addRestaurant(token, outcome))
                                     if (!errorResponse) {
                                         location.state.push("/")

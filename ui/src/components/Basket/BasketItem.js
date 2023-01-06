@@ -8,7 +8,7 @@ function BasketItem({basketItem}) {
 
     const removeItemFromBasket = (event) => {
         event.preventDefault()
-        dispatch(allActions.basketActions.removeMenuItemFromBasket(basketItem.id))
+        dispatch(allActions.basketActions.removeMenuItemFromBasket(basketItem.uuid))
     }
 
     const addItemToBasket = (event) => {
@@ -18,7 +18,7 @@ function BasketItem({basketItem}) {
 
     return (
         <div className={'BasketItem'}>
-            <div><img src={basketItem.imageBase64}/></div>
+            <div><img src={`data:image/png;base64,${basketItem.imageBase64}`}/></div>
             <div><p>{basketItem.name}</p></div>
             <div className={"itemsCount"}>
                 <p>{basketItem.count}</p>

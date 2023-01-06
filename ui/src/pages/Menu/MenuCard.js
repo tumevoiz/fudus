@@ -15,14 +15,12 @@ function MenuCard({menuItem}) {
         } else {
             dispatch(allActions.basketActions.addMenuItemToBasket(menuItem))
         }
-
-        console.log("Added to cart!")
     }
 
     return (
         <div className={"menuCardStyle"}>
             <div>
-                <img src={menuItem.img} className={"menuCardImg"} alt={"food menu"}/>
+                <img src={`data:image/png;base64,${menuItem.imageBase64}`} className={"menuCardImg"} alt={"food menu"}/>
             </div>
             <div>
                 <h2>{menuItem.name}</h2>

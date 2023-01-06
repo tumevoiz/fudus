@@ -27,7 +27,6 @@ function Order() {
 
     const handleConfirm = async () => {
         let order = R.map(transformBasketItemToOrder, itemsInBasket);
-        console.log(order)
         const errorResponse = await dispatch(allActions.orderActions.placeOrder(token, order))
         if (!errorResponse) {
             dispatch(allActions.basketActions.cleanBasket())
@@ -55,7 +54,7 @@ function Order() {
     const order = itemsInBasket.map((basketItem, index) => {
         return <div key={index} className={"orderItem shadow-sm"}>
             <div>
-                <img src={basketItem.imageBase64}/>
+                <img src={`data:image/png;base64,${basketItem.imageBase64}`} alt={`${basketItem.name}`}/>
             </div>
             <div className={"orderItemDetails"}>
                 <div className={"upperOrderRow"}>
