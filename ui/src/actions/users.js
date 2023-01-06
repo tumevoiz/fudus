@@ -34,14 +34,14 @@ const logoutUser = () => dispatch => {
     dispatch({type: LOG_OUT_USER_SUCCESS})
 }
 
-const registerUser = (username, password, email, address, city) => async dispatch => {
+const registerUser = (newUser) => async dispatch => {
     try{
         dispatch({type: REGISTER_USER_START})
 
-        const response = await registerUserApi(username, password, email, address, city)
+        const response = await registerUserApi(newUser)
         dispatch({
             type: REGISTER_USER_SUCCESS,
-            payload: response,
+            payload: response.data,
         })
 
     } catch (err) {

@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
 import './Register.css';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import allActions from "../../actions/actions";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useHistory, useLocation} from "react-router-dom";
 
 function Register() {
-    const isLoggedIn = useSelector(state => state.user.isLoggedIn);
     const dispatch = useDispatch()
-    const location = useLocation()
+    const history = useHistory()
     const [errorMsg, setErrorMsg] = useState("")
 
     return (
@@ -47,9 +46,10 @@ function Register() {
                     onSubmit={async (values, {setSubmitting}) => {
                         setErrorMsg("")
                         setSubmitting(true)
-                        const errorResponse = await dispatch(allActions.userActions.registerUser(values.username, values.password))
+                        console.log(values)
+                        const errorResponse = await dispatch(allActions.userActions.registerUser(values))
                         if (!errorResponse) {
-                            location.state.push("/")
+                            history.push("/login")
                         } else {
                             setSubmitting(false)
                             setErrorMsg(errorResponse.toString())
