@@ -2,6 +2,8 @@ package fudus.api.endpoints
 
 import fudus.api.FudusServer.FudusServerEnv
 import fudus.api.errors.FudusApiError
+import fudus.api.model.Domain._
+import fudus.api.repository.OrderingRepository
 import fudus.api.services.{AuthenticationService, OrderingService}
 import sttp.tapir.json.zio.jsonBody
 import sttp.tapir.ztapir._
@@ -23,4 +25,10 @@ object OrderingEndpoint {
             .create(orderCreateRequest.basket, customerUUID)
             .mapBoth(e => FudusApiError(e.getMessage), _ => "OK")
       )
+
+  val listOrdering: ZServerEndpoint[FudusServerEnv, Any] =
+    secureEndpoint.get
+      .in("ordering")
+      .out(jsonBody[List[Ordering]])
+      .serverLogic(_ => _ => OrderingRepository.findAll.mapError(e => FudusApiError(e.getMessage)))
 }

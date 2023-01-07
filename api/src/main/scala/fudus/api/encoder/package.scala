@@ -30,6 +30,11 @@ package object encoder {
   implicit val foodUuidEncoder: JsonEncoder[FoodUUID] =
     JsonEncoder[String].contramap(_.value)
 
+  implicit val orderingUuidDecoder: JsonDecoder[OrderingUUID] =
+    JsonDecoder[String].map(OrderingUUID)
+  implicit val orderingUuidEncoder: JsonEncoder[OrderingUUID] =
+    JsonEncoder[String].contramap(_.value)
+
   implicit val foodUuidCodec: Encoder[FoodUUID] =
     Encoder.encodeString.contramap(s => s.value)
 
@@ -63,13 +68,18 @@ package object encoder {
   implicit val restaurantZioDecoder: zio.json.JsonDecoder[Restaurant] =
     DeriveJsonDecoder.gen[Restaurant]
 
-  implicit val tokenContentEncoder: zio.json.JsonEncoder[TokenContent] =
-    DeriveJsonEncoder.gen[TokenContent]
-  implicit val tokenContentDecoder: zio.json.JsonDecoder[TokenContent] =
-    DeriveJsonDecoder.gen[TokenContent]
-
   implicit val basketEncoder: zio.json.JsonEncoder[BasketEntry] =
     DeriveJsonEncoder.gen[BasketEntry]
   implicit val basketDecoder: zio.json.JsonDecoder[BasketEntry] =
     DeriveJsonDecoder.gen[BasketEntry]
+
+  implicit val orderingZioEncoder: zio.json.JsonEncoder[Ordering] =
+    DeriveJsonEncoder.gen[Ordering]
+  implicit val orderingZioDecoder: zio.json.JsonDecoder[Ordering] =
+    DeriveJsonDecoder.gen[Ordering]
+
+  implicit val tokenContentEncoder: zio.json.JsonEncoder[TokenContent] =
+    DeriveJsonEncoder.gen[TokenContent]
+  implicit val tokenContentDecoder: zio.json.JsonDecoder[TokenContent] =
+    DeriveJsonDecoder.gen[TokenContent]
 }

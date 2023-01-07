@@ -34,4 +34,7 @@ final case class OrderingRepository(quillCtx: DatabaseService.QuillContext) {
 object OrderingRepository {
   val layer: ZLayer[DatabaseService.QuillContext, Throwable, OrderingRepository] =
     ZLayer.fromFunction(OrderingRepository.apply _)
+
+  def findAll: ZIO[OrderingRepository, Throwable, List[Ordering]] =
+    ZIO.serviceWithZIO[OrderingRepository](_.findAll)
 }

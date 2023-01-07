@@ -41,6 +41,7 @@ final case class FudusServer(
       RestaurantEndpoints.getRestaurantBySlugFood,
       RestaurantEndpoints.createRestaurant,
       OrderingEndpoint.createOrdering,
+      OrderingEndpoint.listOrdering,
       SearchEndpoints.search
     )
 
@@ -99,6 +100,7 @@ object FudusServer {
 
   type FudusServerEnv = CustomerService
     with CategoryRepository
+    with OrderingRepository
     with RestaurantRepository
     with RestaurantFoodService
     with AuthenticationService
