@@ -50,6 +50,7 @@
 .orderItemDetails {
     display: flex;
     flex-direction: column;
+    width: 80%
 }
 
 .orderItemDetails p {
@@ -66,13 +67,15 @@
 .lowerOrderRow {
     width: 100%;
     flex-direction: column;
-    align-items: center
+    align-items: center;
+    margin: 0.3em;
 }
 
 .lowerOrderRow textarea {
     width: 100%;
     flex-direction: column;
-    align-items: center
+    align-items: center;
+    border-radius: 0.5em;
 }
 
 .orderItem .countChanger {
