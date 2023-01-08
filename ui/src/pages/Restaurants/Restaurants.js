@@ -10,13 +10,12 @@ import App from "./../App"
 import Sidebar from "../../components/Sidebar/Sidebar";
 
 const Restaurants = () => {
-    const filters = useSelector(state => state.categories.filters);
     const restaurants = useSelector(state => state.restaurants);
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(allActions.restaurantActions.fetchRestaurants())
-    }, [dispatch, filters])
+    }, [dispatch])
 
     return (
         <App>

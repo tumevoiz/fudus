@@ -64,3 +64,13 @@
 .orderBtnEmpty:active {
     color: rgba(248, 72, 114, 1);
 }
+
+.actionNavRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.actionNavRow .ActionButton, .addRestaurantBtnWrapper .ActionButton {
+    border: none;
+}

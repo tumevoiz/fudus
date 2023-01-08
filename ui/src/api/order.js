@@ -10,3 +10,12 @@ export const placeOrder = async (token, order) => {
     instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
     return await instance.post(orderEndpoint, {basket: order})
 }
+
+export const fetchOrder = async (token) => {
+    const instance = axios.create({
+        baseURL: 'http://localhost:8080'
+    });
+
+    instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    return await instance.get(orderEndpoint)
+}

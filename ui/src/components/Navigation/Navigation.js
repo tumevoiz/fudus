@@ -9,7 +9,7 @@ import {OverlayTrigger, Popover} from "react-bootstrap";
 function Navigation() {
     const isLoggedIn = useSelector(state => state.user.isLoggedIn);
     const isAdmin = useSelector(state => state.user.user.role);
-    const username = useSelector(state => state.user.user.username);
+    const username = useSelector(state => state.user.user.email);
     const basket = useSelector(state => state.basket.basket);
     const dispatch = useDispatch()
 
@@ -40,7 +40,7 @@ function Navigation() {
                 </button>
             </OverlayTrigger>
         } else {
-            return <Link to={{pathname: `/order`}}>
+            return <Link to={{pathname: `/add/order`}}>
                 <i className={"bi bi-basket3-fill"} style={{fontSize: 25}}/>
             </Link>
         }
@@ -54,14 +54,17 @@ function Navigation() {
             <div className={"loggedInNav"}>
                 {handleRedirectToOrder()}
                 {isLoggedIn && isAdmin &&
-                    <div>
+                    <div className={"addRestaurantBtnWrapper"}>
                         <Link to={{pathname: `/add/restaurant`}}>
                             <Button text={"Dodaj restaurację"} style={"ActionButton"} component={Link} to="/add/restaurant"/>
                         </Link>
                     </div>
                 }
                 {isLoggedIn ? (
-                    <div>
+                    <div className={"actionNavRow"}>
+                        <Link to={{pathname: `/orders`}}>
+                            <Button text={"Twoje zamówienia"} style={"ActionButton"} component={Link} to="/orders"/>
+                        </Link>
                         {getUsername()}
                         <Button text={"Wyloguj"} style={"ActionButton"} onClick={handleLogout}/>
                     </div>
