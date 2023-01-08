@@ -42,7 +42,7 @@ function Order() {
     }
 
     function removeItemFromBasket(basketItem) {
-        dispatch(allActions.basketActions.removeMenuItemFromBasket(basketItem.id))
+        dispatch(allActions.basketActions.removeMenuItemFromBasket(basketItem.uuid))
     }
 
     function addItemToBasket(basketItem) {
@@ -96,11 +96,11 @@ function Order() {
                                     <p>Do zapłaty:</p><p className={"value"}>{Math.round(totalPrice)} zł</p>
                                 </div>
                                 <div>
-                                    <p>Rabat: </p><p className={"value"}>-{Math.round(totalPrice * 0.2)} zł</p>
+                                    <p>Rabat: </p><p className={"value"}>-{20} zł</p>
                                 </div>
                                 <div>
                                     <p>Całość do zapłaty: </p>
-                                    <h4 className={"value"}>{Math.round(totalPrice) - Math.round(totalPrice * 0.2)} zł</h4>
+                                    <h4 className={"value"}>{Math.round(totalPrice) - 20} zł</h4>
                                 </div>
                             </div>
                         </div>

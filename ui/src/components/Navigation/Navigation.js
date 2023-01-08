@@ -8,7 +8,7 @@ import {OverlayTrigger, Popover} from "react-bootstrap";
 
 function Navigation() {
     const isLoggedIn = useSelector(state => state.user.isLoggedIn);
-    const isAdmin = useSelector(state => state.user.user.role);
+    const isAdmin = useSelector(state => state.user.isAdmin);
     const username = useSelector(state => state.user.user.email);
     const basket = useSelector(state => state.basket.basket);
     const dispatch = useDispatch()

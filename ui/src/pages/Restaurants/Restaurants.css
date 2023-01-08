@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 .banner {
@@ -40,4 +41,11 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.noRestaurants {
+    display: flex;
+    padding: 2em;
+    color: rgba(248, 72, 114);
+    font-weight: 500;
 }

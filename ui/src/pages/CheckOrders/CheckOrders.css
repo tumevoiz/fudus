@@ -37,3 +37,10 @@
     margin-bottom: 0.3em;
     margin-top: 0.3em;
 }
+
+.noOrders {
+    display: flex;
+    padding: 2em;
+    color: rgba(248, 72, 114);
+    font-weight: 500;
+}

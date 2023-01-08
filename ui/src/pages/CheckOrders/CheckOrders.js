@@ -33,7 +33,7 @@ function CheckOrders() {
                 <div className={"orderHistoryContainer"}>
                     <div className="orderHistoryWrapper">
                         <h1>Historia zamówień:</h1>
-                        {!R.isEmpty(orders) ? orders.orders.map((orderItem, index) => <CheckOrdersItem item={orderItem} key={index}/>) : <p>"Brak zamówień w historii.</p>}
+                        {!R.isEmpty(orders.orders) ? orders.orders.map((orderItem, index) => <CheckOrdersItem item={orderItem} key={index}/>) : <div className={"noOrders"}><p>Brak zamówień w historii miau...</p></div>}
                         <p className={"errorMessage"}>{errorMsg}</p>
                         <div className={"otherDetailsWrapper"}>
                             <div className={"totalPriceWrapper"}>
