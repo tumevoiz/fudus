@@ -73,4 +73,13 @@
 
 .actionNavRow .ActionButton, .addRestaurantBtnWrapper .ActionButton {
     border: none;
+    color: rgba(248, 129, 70);
+}
+
+.actionNavRow .ActionButton:hover, .addRestaurantBtnWrapper .ActionButton:hover {
+    color: rgb(245, 151, 112);
+}
+
+.actionNavRow .ActionButton:active, .addRestaurantBtnWrapper .ActionButton:active {
+    color: rgba(248, 72, 114, 1);
 }

@@ -26,7 +26,9 @@ function Order() {
     }
 
     const handleConfirm = async () => {
-        let order = R.map(transformBasketItemToOrder, itemsInBasket);
+        let order = R.map(transformBasketItemToOrder, itemsInBasket)
+        // let orderWithNotes = R.map((x) => x.notes = orders[R.findIndex()], order)
+        console.log(order)
         const errorResponse = await dispatch(allActions.orderActions.placeOrder(token, order))
         if (!errorResponse) {
             dispatch(allActions.basketActions.cleanBasket())
@@ -51,6 +53,10 @@ function Order() {
 
     let totalPrice = R.reduce((x, y) => x + parseInt(y.count) * parseInt(y.price), 0, itemsInBasket)
 
+    function setNotes(event, index) {
+        itemsInBasket[index].notes = event.target.value
+    }
+
     const order = itemsInBasket.map((basketItem, index) => {
         return <div key={index} className={"orderItem shadow-sm"}>
             <div>
@@ -67,8 +73,7 @@ function Order() {
                     <h2>{basketItem.price} zł</h2>
                 </div>
                 <div className={"lowerOrderRow"}>
-                    <p>{basketItem.description}</p>
-                    <p>{basketItem.notes}</p>
+                    <textarea value={basketItem.value} onChange={(e) => setNotes(e, index)} />
                 </div>
             </div>
         </div>
