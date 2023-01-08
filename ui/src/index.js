@@ -13,6 +13,7 @@ import Register from './pages/Register/Register';
 import Order from "./pages/Order/Order";
 import Error from "./pages/Error/Error";
 import AddRestaurant from "./pages/AddRestaurant/AddRestaurant";
+import CheckOrders from "./pages/CheckOrders/CheckOrders";
 import {createBrowserHistory} from "history";
 import {ConnectedRouter, connectRouter, routerMiddleware} from "connected-react-router";
 import {configureStore} from "@reduxjs/toolkit";
@@ -23,6 +24,7 @@ import restaurantsReducer from "./reducers/restaurants";
 import menuReducer from "./reducers/menu";
 import basketReducer from "./reducers/basket";
 import categoriesReducer from "./reducers/categories";
+import ordersReducer from "./reducers/orders";
 
 const history = createBrowserHistory()
 
@@ -32,6 +34,7 @@ const rootReducer = (history) => ({
     menu: menuReducer,
     basket: basketReducer,
     categories: categoriesReducer,
+    orders: ordersReducer,
     router: connectRouter(history)
 });
 
@@ -48,7 +51,8 @@ const routes = (
         <Route path='/menu/:restaurantSlug' component={Menu}/>
         <Route path='/login' component={Login}/>
         <Route path='/register' component={Register}/>
-        <Route path='/order' component={Order}/>
+        <Route path='/add/order' component={Order}/>
+        <Route path='/orders' component={CheckOrders}/>
         <Route path='/add/restaurant' component={AddRestaurant}/>
         <Route path='*' component={Error} />
     </Switch>

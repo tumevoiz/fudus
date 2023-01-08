@@ -12,7 +12,7 @@ function Basket({}) {
         <div className={'Basket'}>
             {!R.isEmpty(basketItems) ? basketItems.map((basketItem, index) => <BasketItem key={index} basketItem={basketItem}/>) : <p>Twój koszyk jest pusty.</p>}
             {!R.isEmpty(basketItems) ?
-                <Link to='/order'>
+                <Link to='/add/order'>
                     <button className={"btn btn-dark ActionButtonReversed"}>Przejdź do kasy</button>
                 </Link> : ""
             }

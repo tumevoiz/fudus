@@ -11,15 +11,17 @@ function RestaurantCard({restaurant}) {
     return (
         <Link to={linkParams}>
             <div className={"restaurantCardStyle"}>
-                <img src={`data:image/png;base64,${restaurant.imageBase64}`} className={"restaurantCardImg"} alt={"Restaurant exemplary food photo"}/>
-                <h2>{restaurant.name}</h2>
-                <div className={"restaurantDescription"}>
-                    <p>{restaurant.description}</p>
-                </div>
+                <img src={`data:image/png;base64,${restaurant.imageBase64}`} className={"restaurantCardImg"} alt={"Restaurant exemplary food"}/>
                 <div className={"restaurantDetails"}>
                     <div>
-                        <img src={starIcon}/><p className={"starsTag"}>{restaurant.rating}</p>
+                <h2>{restaurant.name}</h2>
                     </div>
+                <div>
+                    <img src={starIcon} alt={"stars icon"}/><p className={"starsTag"}>{restaurant.rating}</p>
+                </div>
+                </div>
+                <div className={"restaurantDescription"}>
+                    <p>{restaurant.description}</p>
                 </div>
             </div>
         </Link>

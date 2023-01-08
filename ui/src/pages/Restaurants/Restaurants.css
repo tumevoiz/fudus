@@ -3,6 +3,7 @@
     justify-items: center;
     flex-direction: column;
     height: 100%;
+    background-color: ghostwhite;
 }
 
 .Restaurant {
@@ -40,4 +41,11 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.noRestaurants {
+    display: flex;
+    padding: 2em;
+    color: rgba(248, 72, 114);
+    font-weight: 500;
 }

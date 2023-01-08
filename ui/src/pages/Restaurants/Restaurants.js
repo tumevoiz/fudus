@@ -10,13 +10,12 @@ import App from "./../App"
 import Sidebar from "../../components/Sidebar/Sidebar";
 
 const Restaurants = () => {
-    const filters = useSelector(state => state.categories.filters);
     const restaurants = useSelector(state => state.restaurants);
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(allActions.restaurantActions.fetchRestaurants())
-    }, [dispatch, filters])
+    }, [dispatch])
 
     return (
         <App>
@@ -34,8 +33,8 @@ const Restaurants = () => {
                     </div>
                     <Filters/>
                     <div className={"restaurantsCardsWrapper"}>
-                        {!R.isEmpty(restaurants) ? restaurants.restaurants.map((restaurant, index) => <RestaurantCard
-                            key={index} restaurant={restaurant}/>) : <p>Waiting...</p>}
+                        {!R.isEmpty(restaurants.restaurants) ? restaurants.restaurants.map((restaurant, index) => <RestaurantCard
+                            key={index} restaurant={restaurant}/>) : <div className={"noRestaurants"}><p>Brak restauracji spełniających kryteria miau...</p></div>}
                     </div>
                 </div>
             </div>

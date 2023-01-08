@@ -42,10 +42,22 @@ h2 {
 .restaurantDetails {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin: 10px;
     height: 24px;
+}
+
+
+.restaurantDetails div {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.restaurantDetails div {
+
 }
 
 .restaurantDetails img {
@@ -58,13 +70,6 @@ h2 {
     height: 30px;
 }
 
-.restaurantDetails div {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
 .restaurantDetails div p {
-    margin-left: 0.2em;
+    margin: 0 0 0 0.2em;
 }

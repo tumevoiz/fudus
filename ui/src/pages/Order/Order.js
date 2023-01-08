@@ -26,7 +26,9 @@ function Order() {
     }
 
     const handleConfirm = async () => {
-        let order = R.map(transformBasketItemToOrder, itemsInBasket);
+        let order = R.map(transformBasketItemToOrder, itemsInBasket)
+        // let orderWithNotes = R.map((x) => x.notes = orders[R.findIndex()], order)
+        console.log(order)
         const errorResponse = await dispatch(allActions.orderActions.placeOrder(token, order))
         if (!errorResponse) {
             dispatch(allActions.basketActions.cleanBasket())
@@ -42,7 +44,7 @@ function Order() {
     }
 
     function removeItemFromBasket(basketItem) {
-        dispatch(allActions.basketActions.removeMenuItemFromBasket(basketItem.id))
+        dispatch(allActions.basketActions.removeMenuItemFromBasket(basketItem.uuid))
     }
 
     function addItemToBasket(basketItem) {
@@ -50,6 +52,10 @@ function Order() {
     }
 
     let totalPrice = R.reduce((x, y) => x + parseInt(y.count) * parseInt(y.price), 0, itemsInBasket)
+
+    function setNotes(event, index) {
+        itemsInBasket[index].notes = event.target.value
+    }
 
     const order = itemsInBasket.map((basketItem, index) => {
         return <div key={index} className={"orderItem shadow-sm"}>
@@ -67,8 +73,7 @@ function Order() {
                     <h2>{basketItem.price} zł</h2>
                 </div>
                 <div className={"lowerOrderRow"}>
-                    <p>{basketItem.description}</p>
-                    <p>{basketItem.notes}</p>
+                    <textarea value={basketItem.value} onChange={(e) => setNotes(e, index)} />
                 </div>
             </div>
         </div>
@@ -96,11 +101,11 @@ function Order() {
                                     <p>Do zapłaty:</p><p className={"value"}>{Math.round(totalPrice)} zł</p>
                                 </div>
                                 <div>
-                                    <p>Rabat: </p><p className={"value"}>-{Math.round(totalPrice * 0.2)} zł</p>
+                                    <p>Rabat: </p><p className={"value"}>-{20} zł</p>
                                 </div>
                                 <div>
                                     <p>Całość do zapłaty: </p>
-                                    <h4 className={"value"}>{Math.round(totalPrice) - Math.round(totalPrice * 0.2)} zł</h4>
+                                    <h4 className={"value"}>{Math.round(totalPrice) - 20} zł</h4>
                                 </div>
                             </div>
                         </div>
